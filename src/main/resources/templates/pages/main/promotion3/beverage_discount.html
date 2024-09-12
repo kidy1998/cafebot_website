@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin2 </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../../../static/assets/vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../../../static/assets/css/style.css">
+    <link rel="stylesheet" href="../../../../static/assets/css/beverageDiscountpage.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../../../static/assets/images/favicon.png"/>
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+            <div class="me-3">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+            <div>
+                <a class="navbar-brand brand-logo" href="../../index.html">
+                    <img src="../../../../static/assets/images/logo.svg" alt="logo"/>
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="../../index.html">
+                    <img src="../../../../static/assets/images/logo-mini.svg" alt="logo"/>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-top">
+            <!--<ul class="navbar-nav">
+                <li class="nav-item fw-semibold d-none d-lg-block ms-0">
+                    <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+                    <h3 class="welcome-sub-text">Your performance summary this week </h3>
+                </li>
+            </ul>-->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown"
+                       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
+                        <span class="selectedItem"> 한국어 </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="messageDropdown">
+                        <!--                <a class="dropdown-item py-3">-->
+                        <!--                  <p class="mb-0 fw-medium float-start">한국어</p>-->
+                        <!--                </a>-->
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-item-content flex-grow py-2">
+                                <p class="preview-subject ellipsis fw-medium text-dark">한국어</p>
+                                <!--                    <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>-->
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-item-content flex-grow py-2">
+                                <p class="preview-subject ellipsis fw-medium text-dark">English</p>
+                                <!--                    <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>-->
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <p id="login-user-info">원더풀바게트(양재) <strong>구다솜(점주)</strong></p>
+                </li>
+                <!--<li class="nav-item">
+                    <form class="search-form" action="#">
+                        <i class="icon-search"></i>
+                        <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+                    </form>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                        <i class="icon-bell"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="notificationDropdown">
+                        <a class="dropdown-item py-3 border-bottom">
+                            <p class="mb-0 fw-medium float-start">You have 4 new notifications </p>
+                            <span class="badge badge-pill badge-primary float-end">View all</span>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-alert m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
+                                <p class="fw-light small-text mb-0"> Just now </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-lock-outline m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">Settings</h6>
+                                <p class="fw-light small-text mb-0"> Private message </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-airballoon m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">New user registration</h6>
+                                <p class="fw-light small-text mb-0"> 2 days ago </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>-->
+                <!-- <li class="nav-item dropdown">
+                     <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                         <i class="icon-mail icon-lg"></i>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                          aria-labelledby="countDropdown">
+                         <a class="dropdown-item py-3">
+                             <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
+                             <span class="badge badge-pill badge-primary float-end">View all</span>
+                         </a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face10.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face12.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face1.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                     </div>
+                 </li>-->
+                <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="img-xs rounded-circle" src="../../../../static/assets/images/faces/face8.jpg"
+                             alt="Profile image"> </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                        <div class="dropdown-header text-center">
+                            <img class="img-md rounded-circle" src="../../../../static/assets/images/faces/face8.jpg"
+                                 alt="Profile image">
+                            <p class="mb-1 mt-3 fw-semibold">Allen Moreno</p>
+                            <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                        </div>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile
+                            <span class="badge badge-pill badge-danger">1</span></a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i>
+                            Activity</a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+                        <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign
+                            Out</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../index.html">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">관리자 페이지</span>
+                    </a>
+                </li>
+                <!--            <li class="nav-item nav-category">UI Elements</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                       aria-controls="ui-basic">
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">영업 데이터 통계 </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../ui-features/buttons.html">Buttons</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../ui-features/dropdowns.html">Dropdowns</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../ui-features/typography.html">Typography</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
+                       aria-controls="form-elements">
+                        <i class="menu-icon mdi mdi-card-text-outline"></i>
+                        <span class="menu-title">재고관리</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="form-elements">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../forms/basic_elements.html">Basic
+                                Elements</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false"
+                       aria-controls="charts">
+                        <i class="menu-icon mdi mdi-chart-line"></i>
+                        <span class="menu-title">다솜 홍보 등록</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="charts">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/auto_promo1.html">자동영업</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/product_discount2.html">제품할인</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/event_promo3.html">프로모션</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../../main/promotion3/announcement4.html">공지사항</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false"
+                       aria-controls="tables">
+                        <i class="menu-icon mdi mdi-table"></i>
+                        <span class="menu-title">매장정보</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="tables">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../tables/basic-table.html">Basic
+                                table</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!--            <li class="nav-item">-->
+                <!--              <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">-->
+                <!--                <i class="menu-icon mdi mdi-layers-outline"></i>-->
+                <!--                <span class="menu-title">Icons</span>-->
+                <!--                <i class="menu-arrow"></i>-->
+                <!--              </a>-->
+                <!--              <div class="collapse" id="icons">-->
+                <!--                <ul class="nav flex-column sub-menu">-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../icons/font-awesome.html">Font Awesome</a></li>-->
+                <!--                </ul>-->
+                <!--              </div>-->
+                <!--            </li>-->
+                <!--            <li class="nav-item">-->
+                <!--              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">-->
+                <!--                <i class="menu-icon mdi mdi-account-circle-outline"></i>-->
+                <!--                <span class="menu-title">User Pages</span>-->
+                <!--                <i class="menu-arrow"></i>-->
+                <!--              </a>-->
+                <!--              <div class="collapse" id="auth">-->
+                <!--                <ul class="nav flex-column sub-menu">-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../samples/blank-page.html"> Blank Page </a></li>-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../samples/error-404.html"> 404 </a></li>-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../samples/error-500.html"> 500 </a></li>-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../samples/login.html"> Login </a></li>-->
+                <!--                  <li class="nav-item"> <a class="nav-link" href="../../user/register.html"> Register </a></li>-->
+                <!--                </ul>-->
+                <!--              </div>-->
+                <!--            </li>-->
+                <!--            <li class="nav-item">-->
+                <!--              <a class="nav-link" href="../../../../static/docs/documentation.html">-->
+                <!--                <i class="menu-icon mdi mdi-file-document"></i>-->
+                <!--                <span class="menu-title">Documentation</span>-->
+                <!--              </a>-->
+                <!--            </li>-->
+            </ul>
+
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin">
+
+
+                        <div class="card discount-list">
+                            <h4>제품할인</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>상태</th>
+                                        <th>품목</th>
+                                        <th>제품</th>
+                                        <th>정가</th>
+                                        <th>할인가</th>
+                                        <th>행사기간</th>
+                                        <th>행사시간</th>
+                                        <th>멘트발화시간</th>
+                                        <th>빈도수</th>
+                                        <th>조건 및 멘트</th>
+                                        <th>편집</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><div class="badge badge-opacity-warning">진행중</div></td>
+                                        <td>음료</td>
+                                        <td>수박주스</td>
+                                        <td>6,000원</td>
+                                        <td>(-10%)5,400원</td>
+                                        <td>2024.07.05 ~ 2024.07.12</td>
+                                        <td>14:00 ~ 17:00</td>
+                                        <td>12:00 ~ 17:00</td>
+                                        <td>20회</td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">보기</button></td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">수정</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="badge badge-opacity-success">완료</div></td>
+                                        <td>음료</td>
+                                        <td>콜드부르 라떼</td>
+                                        <td>5,500원</td>
+                                        <td>(-500)5,000원</td>
+                                        <td>2024.07.13 ~ 2024.07.20</td>
+                                        <td>14:00 ~ 17:00</td>
+                                        <td>12:00 ~ 16:30</td>
+                                        <td>20회</td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">보기</button></td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">수정</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="badge badge-opacity-warning">진행중</div></td>
+                                        <td>세트</td>
+                                        <td>아메리카노, 샌드위치</td>
+                                        <td>8,000원</td>
+                                        <td>(-500)7,500원</td>
+                                        <td>상시</td>
+                                        <td>08:00 ~ 11:00</td>
+                                        <td>08:00 ~ 11:00</td>
+                                        <td>28회</td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">보기</button></td>
+                                        <td><button type="button" onclick="change_color_btn(event)" class="btn btn-primary btn-sm">수정</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div class="card discount-register">
+                            <div class="card-body">
+                                <h4 class="card-title">제품할인 등록</h4>
+                                <div class="table-responsive first-table">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>품목</th>
+                                            <th>제품</th>
+                                            <th>정가</th>
+                                            <th>할인가(원)</th>
+                                            <th>행사기간</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <ul class="navbar-nav custom-input form-control">
+                                                    <li class="nav-item dropdown d-lg-block">
+                                                        <a class="dropdown-bordered dropdown-toggle"
+                                                           data-bs-toggle="dropdown"
+                                                           aria-expanded="false">
+                                                            <span id="selectedItem"> 선택 </span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                                             aria-labelledby="messageDropdown">
+                                                            <a class="dropdown-item preview-item" data-value="음료">
+                                                                <div class="preview-item-content flex-grow">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        음료</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="베이커리">
+                                                                <div class="preview-item-content flex-grow">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        베이커리</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="케이크">
+                                                                <div class="preview-item-content flex-grow">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        케이크</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="세트상품">
+                                                                <div class="preview-item-content flex-grow">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        세트상품</p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                            </td>
+                                            <td>
+                                                <div class="input-container">
+                                                    <!--<input type="text" class="custom-input form-control search" disabled>-->
+                                                    <button class="search-button custom-input form-control"
+                                                            id="product_search_btn"><i
+                                                            class="icon-search"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="discount-section">
+                                                    <p id="productPrice">6,000원</p>
+                                                    <p id="discountPrice"></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="discount-section">
+                                                    <input type="number" class="custom-input form-control"
+                                                           id="discountPriceInput">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm"
+                                                            id="confirmDiscountPriceBtn">확인
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="discount-section date">
+                                                    <input type="date" class="custom-input form-control" id="startDate">
+
+                                                    &nbsp~&nbsp
+                                                    <input type="date" class="custom-input form-control" id="endDate">
+                                                    <label class="custom-label">
+                                                        <input type="checkbox">
+                                                        &nbsp상시
+                                                    </label>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="table-responsive second-table">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>행사시간</th>
+                                            <th>멘트 발화시간</th>
+                                            <th>발화 횟수</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="discount-section time">
+                                                    <input type="time" class="custom-input form-control" id="eventStartTime" name="eventStartTime">
+
+                                                    &nbsp~&nbsp
+                                                    <input type="time" class="custom-input form-control" id="eventEndTime" name="eventEndTime">
+                                                    <label class="custom-label" for="sameTimeCheckbox">
+                                                        <input type="checkbox" id="sameTimeCheckbox" name="sameTimeCheckbox">
+                                                        &nbsp영업시간과 동일
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="discount-section time">
+                                                    <input type="time" class="custom-input form-control" id="speechStartTime">
+
+                                                    &nbsp~&nbsp
+                                                    <input type="time" class="custom-input form-control">
+                                                    <label class="custom-label">
+                                                        <input type="checkbox">
+                                                        &nbsp행사시간과 동일
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <ul class="navbar-nav custom-input form-control">
+                                                    <li class="nav-item dropdown d-lg-block">
+                                                        <a class="dropdown-bordered dropdown-toggle"
+                                                           data-bs-toggle="dropdown"
+                                                           aria-expanded="false">
+                                                            <span class="selectedItem"> 선택 </span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                                             aria-labelledby="messageDropdown">
+                                                            <a class="dropdown-item preview-item" data-value="5분 간격">
+                                                                <div class="preview-item-content flex-grow py-2">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        5분 간격</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="10분 간격">
+                                                                <div class="preview-item-content flex-grow py-2">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        10분 간격</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="15분 간격">
+                                                                <div class="preview-item-content flex-grow py-2">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        15분 간격</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="20분 간격">
+                                                                <div class="preview-item-content flex-grow py-2">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        20분 간격</p>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item preview-item" data-value="30분 간격">
+                                                                <div class="preview-item-content flex-grow py-2">
+                                                                    <p class="preview-subject ellipsis fw-medium text-dark">
+                                                                        30분 간격</p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+
+
+                                                    </li>
+                                                </ul>
+
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="table-responsive third-table">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>할인 조건 추가</th>
+                                            <th>제품 소개</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="discount-section radio">
+                                                    <label class="custom-label first-label" for="discountOptionNone">
+                                                        <input type="radio" name="discountCondition"
+                                                               id="discountOptionNone" value="none" checked>
+                                                        없음
+                                                    </label>
+                                                    <label class="custom-label" for="discountOptionYes">
+                                                        <input type="radio" name="discountCondition"
+                                                               id="discountOptionYes" value="yes">
+                                                        있음
+                                                    </label>
+                                                    <input type="text" class="custom-input form-control" name="discountConditionText" disabled>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="discount-section radio">
+                                                    <label class="custom-label first-label" for="descriptionNone">
+                                                        <input type="radio" name="description" id="descriptionNone" value="none" checked>없음
+                                                    </label>
+                                                    <label class="custom-label" for="descriptionYes">
+                                                        <input type="radio" name="description" id="descriptionYes" value="yes">있음
+                                                    </label>
+                                                    <input type="text" class="custom-input form-control" name="descriptionText" disabled>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="table-responsive fourth-tableg">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>AI 다솜 멘트 생성<span class="info">* AI 멘트는 하루에 3번까지만 가능합니다. (0/3)</span>
+                                            </th>
+                                            <th>테스트 진행<span class="info">* 다솜이 어떻게 말하는지 확인해보세요!</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <textarea></textarea>
+                                                <div class="button-container">
+                                                    <button type="button" class="btn btn-outline-light btn-sm">멘트생성
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-light btn-sm">불러오기
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-light btn-sm">수정
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="test">
+                                                <button type="button" class="btn btn-primary">다솜 홍보 테스트
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="form-buttons">
+                                    <!-- 삭제 버튼은 제품 할인 영역에서 "수정" 버튼 눌렀을 시 생김
+                                    <button type="button" class="btn btn-outline-primary">삭제
+                                    </button>-->
+                                    <button type="button" class="btn btn-primary">등록
+                                    </button>
+                                </div>
+
+                            </div>
+                            <!-- Product Search Modal -->
+                            <div id="productModal" class="modal" tabindex="-1" aria-labelledby="productModalLabel"
+                                 role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title"><strong>제품 검색</strong></h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="search-box">
+                                                <form action="" method="get">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="검색" name="" id="searchInput"><i
+                                                        class="icon-search"></i>
+                                                    <!--<button class="search-button" type="submit"><i class="icon-search"></i>-->
+                                                    <button class="modal-search-button" type="submit"></button>
+                                                </form>
+                                            </div>
+                                            <ul class="grid-container" id="itemList">
+                                                <li class="item" id="item1">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName1">음료1</p>
+                                                    <p id="productPrice1">3,000원</p>
+                                                </li>
+                                                <li class="item" id="item2">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName2">음료2</p>
+                                                    <p id="productPrice2">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item3">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName3">수박주스</p>
+                                                    <p id="productPrice3">6,000원</p>
+                                                </li>
+                                                <li class="item" id="item4">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName4">음료4</p>
+                                                    <p id="productPrice4">3,000원</p>
+                                                </li>
+                                                <li class="item" id="item5">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName5">음료5</p>
+                                                    <p id="productPrice5">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item6">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName6">음료6</p>
+                                                    <p id="productPrice6">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item7">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName7">음료7</p>
+                                                    <p id="productPrice7">3,000원</p>
+                                                </li>
+                                                <li class="item" id="item8">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName8">음료8</p>
+                                                    <p id="productPrice8">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item9">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName9">음료9</p>
+                                                    <p id="productPrice9">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item10">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName10">음료10</p>
+                                                    <p id="productPrice10">3,500원</p>
+                                                </li>
+                                                <li class="item" id="item11">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName11">음료11</p>
+                                                    <p id="productPrice11">3,000원</p>
+                                                </li>
+                                                <li class="item" id="item12">
+                                                    <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                                    <p class="title" id="productName12">음료12</p>
+                                                    <p id="productPrice12">3,500원</p>
+                                                </li>
+                                            </ul>
+                                            <button type="button" class="btn btn-light" id="loadMoreBtn">더보기</button>
+                                            <button type="button" class="btn btn-light" id="selectBtn"
+                                                    style="display:none;">선택
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Beverage Search Modal ends -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- content-wrapper ends -->
+<!-- partial:../../partials/_footer.html -->
+<footer class="footer">
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a
+                            href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+        <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2023. All rights reserved.</span>
+    </div>
+</footer>
+<!-- partial -->
+</div>
+<!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="../../../../static/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="../../../../static/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="../../../../static/assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="../../../../static/assets/vendors/select2/select2.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="../../../../static/assets/js/off-canvas.js"></script>
+<script src="../../../../static/assets/js/template.js"></script>
+<script src="../../../../static/assets/js/settings.js"></script>
+<script src="../../../../static/assets/js/hoverable-collapse.js"></script>
+<script src="../../../../static/assets/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../../../../static/assets/js/file-upload.js"></script>
+<script src="../../../../static/assets/js/typeahead.js"></script>
+<script src="../../../../static/assets/js/select2.js"></script>
+<script src="../../../../static/assets/js/beverageDiscount.js"></script>
+<!-- End custom js for this page-->
+</body>
+</html>

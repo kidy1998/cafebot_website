@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}" />-->
+</head>
+<body>
+<div th:fragment="content1">
+    <h2>All Promotions</h2>
+    <div th:each="promotion : ${listAll}">
+        <p>Promotion Description: <span th:text="${promotion.menu}"></span></p>
+    </div>
+<!--    <p th:text="${promotion.menu}">Promotion Description</p>-->
+</div>
+</body>
+</html>
+

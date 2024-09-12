@@ -1,0 +1,577 @@
+.show {
+    display: block;
+}
+
+.timepicker{
+    width: 90px;
+}
+
+.my_dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #ffffff;
+    color: black;
+    padding: 0px 10px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #462200;
+    color: white;
+}
+
+/* 드롭다운 메뉴 보이기 */
+.my_dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.my_dropdown:hover .dropbtn {
+    background-color: #ffffff;
+}
+
+/*.active {
+    background-color: yellow;
+}
+
+.event-term-1 {
+    margin: 1em;
+}
+
+.event-term-2{
+    border: 1em;
+}*/
+
+.modal{
+    align: center;
+    width: 300px;
+    height: 250px;
+    font-size: 1em;
+    background-color: white;
+}
+
+/*제품할인 리스트*/
+
+.discount-list{
+    margin: 1rem;
+}
+
+/* 모달 전체 배경을 어둡게 처리 */
+.modal-addc {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+    overflow: auto; /* 화면 넘칠 경우 스크롤 */
+}
+
+/* 모달 내용 */
+.modal-popup-addc {
+    background-color: #ffffff; /* 하얀색 배경 */
+    margin: 15% auto; /* 화면 중앙에 위치 */
+    padding: 20px;
+    border-radius: 15px; /* 둥근 모서리 */
+    width: 80%;
+    max-width: 500px; /* 최대 너비 설정 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+
+/* 리스트 항목 스타일 */
+.modal-popup-addc ul {
+    list-style-type: none; /* 리스트 점 제거 */
+    padding: 10;
+}
+
+.modal-popup-addc li {
+    margin: 15px 0; /* 각 항목 사이 여백 */
+    color: #000000; /* 검은색 글자 */
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 정렬 중앙 */
+}
+
+/* 제목 스타일 */
+.modal-popup-addc li span:first-child {
+    min-width: 100px; /* 제목 최소 너비 설정 */
+    text-align: left; /* 왼쪽 정렬 */
+    margin-right: 10px; /* 제목과 내용 사이 간격 */
+    font-weight: bold;
+}
+
+/* 내용 스타일 */
+.modal-popup-addc li span:last-child {
+    text-align: left; /* 내용 왼쪽 정렬 */
+}
+
+/* 닫기 버튼 스타일 */
+.close-btn-addc {
+    background-color: #462200; /* 파란색 배경 */
+    color: white; /* 흰색 글자 */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto 0; /* 버튼을 아래 가운데 정렬 */
+}
+
+.close-btn-addc:hover {
+    background-color: #462200; /* 호버 시 더 진한 파란색 */
+}
+
+/* 모달 보이기/숨기기 제어 */
+.show-modal {
+    display: block;
+}
+
+
+
+
+.table td{
+    padding: 1.125rem 0.7rem;
+}
+
+.modal-addc.on{
+    display: block;
+}
+
+/*제품할인 등록*/
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.rotated-arrow{
+    display: inline-block;
+    background-color: white;
+    border: 0;
+}
+
+.discount-register .custom-input{
+    max-width: 7.1rem;
+    width: 100%;
+    height:1.8rem;
+    box-sizing: border-box;
+    font-size:1em;
+    padding: 0 0.625rem;
+
+    margin-right:0;
+}
+
+.discount-register .preview-item .preview-item-content p {
+    margin-bottom: 0rem;
+}
+
+.discount-register .navbar-nav{
+    max-width: 6rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.discount-register .dropdown-menu {
+    transform: translate(-0.6875rem, 1.625rem) !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+
+.dropdown-menu {
+    display: none; /* 기본적으로 숨김 */
+}
+
+.dropdown-menu.show {
+    display: block; /* show 클래스가 있을 때만 표시 */
+}
+
+
+.discount-register .navbar-nav .nav-item a{
+    text-decoration: none;
+    color: #000;
+    vertical-align:middle;
+    cursor:pointer;
+}
+
+.discount-register .first-table .search {
+   padding-right: 1.875rem;
+}
+
+.discount-register .icon-search {
+    position: absolute;
+    right: 0.5rem;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.discount-register .search-button {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    min-width:3.5rem;
+}
+
+/* 각 열의 너비 설정 */
+.discount-register th:nth-child(1) {
+    width: 15%; /* 품목 열 */
+}
+
+.discount-register th:nth-child(2) {
+    width: 15%; /* 제품 열 */
+}
+
+.discount-register th:nth-child(3) {
+    width: 13%; /* 정가 열 */
+}
+
+.discount-register th:nth-child(4) {
+    width: 18%; /* 할인가 열 */
+}
+
+.discount-register th:nth-child(5) {
+    width: 41%; /* 행사기간 열 */
+}
+
+.discount-register .third-table th:nth-child(1) {
+    width:20%;  !important;
+}
+
+.discount-register .table-responsive.first-table {
+     margin-top: 0.625rem;
+}
+
+.discount-register .table-responsive {
+    margin-top: 4.375rem;
+}
+
+.discount-register .discount-section{
+    display: flex;
+    align-items: center;
+}
+
+.discount-register .discount-section .btn {
+  margin-left:0.3rem;
+}
+
+.discount-register .btn-outline-primary {
+  border: 1px solid #462200;
+}
+
+.discount-register input[type="checkbox"] {
+    color: #462200;
+}
+
+.discount-register .custom-label {
+    color : #462200;
+    margin-left:0.5rem;
+}
+
+.discount-register .card-body {
+  overflow-x: auto;
+}
+
+.discount-register .table-responsive{
+  overflow-x: visible;
+}
+
+.discount-register input[type=radio] {
+    accent-color: #000;
+}
+
+.discount-register .first-label {
+    margin-left: 0;
+}
+
+.discount-register .table-responsive .info {
+    margin-left:0.6rem;
+    font-size:0.7rem;
+    font-weight:300;
+}
+
+.discount-register .table-responsive textarea{
+    resize: none;
+    width: 28.125rem;
+    height: 8.125rem;
+    border-radius: 0.25rem;
+    border: 1px solid #462200;
+    padding: 0.625rem;
+}
+
+.discount-register .button-container {
+    margin-top: 0.625rem; /* 버튼과 텍스트 영역 사이의 간격 조정 */
+}
+
+.discount-register .button-container button:nth-child(1) {
+    margin-right: 0.625rem;
+}
+
+.discount-register .button-container button:nth-child(3) {
+    margin-left : 13.8rem;
+}
+
+.button-container .btn-outline-light {
+    border: 1px solid #462200;
+}
+
+.button-container .btn-outline-light:hover {
+    background: #462200;
+}
+
+.discount-register .test {
+    vertical-align: baseline;
+}
+
+.discount-register .button-container .test button {
+    width: 17.5rem;
+}
+
+.discount-register .form-buttons {
+    text-align:center;
+    margin-top: 5.625rem;
+}
+
+.discount-register .form-buttons button {
+    width: 17.5rem;
+}
+
+.discount-register .form-buttons .btn-outline-primary {
+    margin-right:1rem;
+}
+
+.discount-register input[type="number"],
+.discount-register input[type="text"] {
+     min-width: 7.1rem;
+}
+
+.discount-register input[type="date"],
+.discount-register input[type="time"],
+.discount-register input[type="checkbox"]{
+     cursor:pointer;
+}
+
+.discount-register .discount-section input[type="text"]{
+    margin-left:0.5rem;
+    max-width:30rem;
+}
+
+/*상단 navbar 레이아웃 수정*/
+.navbar-nav {
+     margin-right:5.625rem;
+}
+
+
+
+.custom-modal{
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 1000;
+}
+
+.custom-modal::-webkit-scrollbar{
+    border-radius: 15px;
+}
+
+#allListModal .all-list-modal-content{
+    position: relative;
+    padding: 20px;
+    border-color: none;
+    border-radius: 15px;
+    background-color: white;
+    align: center;
+    margin: 0 auto;
+    top: 110px;
+    width: 1200px;
+    height: 78%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    order-radius: 15px;
+
+}
+
+#productModal .modal-content{
+    position: relative;
+    padding: 20px;
+    border-color: none;
+    border-radius: 15px;
+    background-color: white;
+    align: center;
+    margin: 0 auto;
+    top: 90px;
+    width: 600px;
+    height: 50%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    overflow-y: auto;
+}
+
+#productModal .search-box{
+    position:relative;
+    border-radius: 15px;
+}
+#productModal .modal-search-button {
+    position: absolute;
+    top: 0.5625rem;
+    right: 0rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background:none;
+    border:none;
+}
+
+#productModal .modal-dialog{
+    max-width:620px; !important
+}
+
+.modal-header{
+    padding:10px;
+    border-bottom:none;
+    padding-bottom:0rem;
+    order-radius: 15px;
+}
+
+/*제품 검색 버튼 모달*/
+
+#productModal{
+    background-color : rgba(0,0,0,0.7);
+}
+
+#productModal .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    order-radius: 15px;
+}
+
+#productModal .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem;
+}
+#productModal .item img {
+    width: 6.5rem;
+    height: 8.25rem;
+    cursor:pointer;
+}
+
+#productModal .input-container{
+    position:relative;
+    order-radius: 15px;
+}
+
+.close{
+    font-size:1.875rem;
+    border:none;
+    background:none;
+}
+
+#productModal .title{
+    margin-top:0.3rem;
+    margin-bottom:0rem;
+}
+
+#productModal .btn-light{
+    margin-top:0.8rem;
+    margin-bottom:0.6rem;
+    max-width:200px;
+    width:100%
+}
+
+
+#productModal .btn-light:hover {
+    background: #462200;
+}
+
+#productModal .modal-body{
+    text-align:center;
+}
+
+#productModal .grid-container{
+     max-height: calc(100vh - 17.5rem);
+     overflow-y: auto;
+}
+
+
+
+
+/*제품검색 모달 스크롤바 예쁘게*/
+#productModal .grid-container::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+#productModal .grid-container::-webkit-scrollbar-button {
+    display: none;
+}
+
+#productModal .grid-container::-webkit-scrollbar-track {
+    background: none;
+}
+
+#productModal .grid-container::-webkit-scrollbar-thumb {
+    border-radius: 3.125rem;
+    background: #462200;
+}
+
+#productModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #462200;
+}
+
+#discountPrice {
+    color: red;
+    margin-left:0.3rem;
+}
+
+.test-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+

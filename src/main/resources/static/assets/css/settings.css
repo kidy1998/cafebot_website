@@ -1,0 +1,367 @@
+/* 모달 전체 배경을 어둡게 처리 */
+.modal-addc {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 배경 */
+    overflow: auto; /* 화면 넘칠 경우 스크롤 */
+}
+
+.modal-addc.on{
+    display: block;
+}
+
+/* 모달 내용 */
+.modal-popup-addc {
+    background-color: #ffffff; /* 하얀색 배경 */
+    margin: 15% auto; /* 화면 중앙에 위치 */
+    padding: 20px;
+    border-radius: 15px; /* 둥근 모서리 */
+    width: 80%;
+    max-width: 500px; /* 최대 너비 설정 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+}
+
+/* 리스트 항목 스타일 */
+.modal-popup-addc ul {
+    list-style-type: none; /* 리스트 점 제거 */
+    padding: 10;
+}
+
+.modal-popup-addc li {
+    margin: 15px 0; /* 각 항목 사이 여백 */
+    color: #000000; /* 검은색 글자 */
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center; /* 세로 정렬 중앙 */
+}
+
+/* 제목 스타일 */
+.modal-popup-addc li span:first-child {
+    min-width: 100px; /* 제목 최소 너비 설정 */
+    text-align: left; /* 왼쪽 정렬 */
+    margin-right: 10px; /* 제목과 내용 사이 간격 */
+    font-weight: bold;
+}
+
+/* 내용 스타일 */
+.modal-popup-addc li span:last-child {
+    text-align: left; /* 내용 왼쪽 정렬 */
+}
+
+/* 닫기 버튼 스타일 */
+.close-btn-addc {
+    background-color: #462200; /* 파란색 배경 */
+    color: white; /* 흰색 글자 */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto 0; /* 버튼을 아래 가운데 정렬 */
+}
+
+.close-btn-addc:hover {
+    background-color: #462200; /* 호버 시 더 진한 파란색 */
+}
+
+/* 모달 보이기/숨기기 제어 */
+.show-modal {
+    display: block;
+}
+
+/*********************************************************************************8*/
+
+.show{
+    display: block;
+}
+
+.showlist{
+    display: inline-block;
+}
+
+.hidden{
+    display: hidden;
+}
+
+.sub-sub-menu{
+    list-style-type: none;
+}
+
+.dasomLocation p, button, label{
+     font-size: 0.812rem;
+}
+
+.dasomLocation ul{
+    list-style:none;
+}
+
+.dasomLocation .location-list{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    width: 100%;
+    max-width: 450px;
+    position:relative;
+}
+
+.dasomLocation .location-list i{
+   font-size:48px;
+}
+
+.dasomLocation .location-list  li:nth-child(2){
+    background:#c8c8c8;
+    pointer-events: none; /* 클릭 이벤트를 무시함 */
+
+}
+
+.dasomLocation .location-list li{
+    border: 1px solid #c8c8c8;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dasomLocation .location-list li > p {
+    margin-bottom:4px;
+}
+
+.dasom-location-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; /* 화면 크기가 작아지면 줄 바꿈 */
+    margin-top:60px;
+}
+
+.dasom-location-register,
+.dasom-location-input {
+    flex: 1; /* 각 섹션이 동일한 크기를 가지도록 설정 */
+  /*  margin-right: 1.5%; *//* 두 섹션 사이에 약간의 간격 추가 */
+    /*min-width: 100px; *//* 최소 너비 설정 */
+}
+
+.dasom-location-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  /*  margin-left: 4%;*/
+}
+
+.dasomLocation .location-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #acacac;
+}
+
+
+.dasomLocation .location-group label {
+    width: 110px;
+}
+
+.dasomLocation .location-group input {
+        max-width: 24rem;
+        width: 100%;
+        height: 1.8rem;
+        box-sizing: border-box;
+        font-size: 1em;
+        padding: 0 0.625rem;
+    }
+
+.dasomLocation .form-buttons {
+    margin-top: 3em;
+    text-align: center;
+}
+
+/* 미디어 쿼리 화면 너비가 600px 이하일 때 */
+@media (max-width: 600px) {
+    .dasom-location-container {
+        flex-direction: column; /* 세로로 정렬 */
+    }
+
+    .dasom-location-register,
+    .dasom-location-input {
+        margin-right: 0; /* 세로 정렬 시 오른쪽 마진 제거 */
+        margin-left: 0; /* 세로 정렬 시 왼쪽 마진 제거 */
+    }
+}
+
+.dasomLocation .selected {
+   background-color: #462200;
+}
+
+.dasomLocation .selected p {
+   color: #fff;
+}
+
+
+.dasomLocation .dropdown-menu{
+
+    max-width: 24rem;
+    width: 100%;
+    transform: translate(736px, 270px);
+
+}
+.dasomLocation .dropdown-options{
+    padding:0.5rem;
+    margin-bottom:0;
+}
+
+
+.dasomLocation .dropdown-options li{
+   list-style:none;
+    border-radius: 3rem;
+    border: 1px solid #b5b5b5;
+    padding: 0 10px;
+    cursor:pointer;
+    display:inline-block;
+    text-align:center;
+    color:#808080;
+    margin-right:3px;
+}
+
+
+.dasomLocation .dropdown-menu .dropdown-options li:nth-child(n+6) {
+  margin-top: 8px;
+}
+
+.dasomLocation input[type=radio] {
+    accent-color: #000;
+    margin-right: 1px;
+}
+
+.dasomLocation .location-info{
+    // display : inline-block;
+    border: 1px solid #c8c8c8;
+    width: 28%;
+    border-radius: 0.75rem;
+    padding: 26px 25px 35px;
+    position: relative;
+    margin-left: 30px;
+}
+
+.dasomLocation .location-info i{
+    font-size: 14px;
+    margin-top: 3.2px;
+    left:5px;
+    position: absolute;
+}
+
+.dasomLocation .location-info h6{
+    margin-bottom: 10px;
+}
+
+.dasomLocation .location-info > label{
+    width: 100px;
+    font-size: 0.9rem;
+    font-weight:600;
+    color:#909090;
+
+}
+
+.dasomLocation .location-info li{
+    margin-top:10px;
+    border: 1px solid #909090;
+    color:#4b4b4b;
+    font-weight:600;
+    padding: 0 10px;
+    margin-right:5px;
+}
+
+.dasomLocation .location-info p{
+    margin-bottom: 0;
+}
+
+.dasomLocation .location-info button{
+   height: 25px;
+   position: absolute;
+   right:14px;
+   top:18px;
+   border-radius: 0.3rem;
+   padding-left:22px;
+}
+
+.dasom-location-radio label {
+    margin-left: 3rem;
+}
+
+.dasomLocation .first-label {
+    margin-left: 0.9rem;
+}
+
+.dasom-location-register-wrapper {
+    padding-left: 50px;
+    margin-top: 35px;
+}
+
+.dasom-location-register-wrapper .dasom-location-input .title {
+    font-size:0.9rem;
+}
+
+.dasom-location-register-wrapper .title {
+    font-weight: 600;
+    font-size:0.86rem;
+    margin-bottom: 12px;
+}
+
+.dasom-location-register .main-content {
+    margin-top: 16px;
+}
+
+.dasomLocation .form-buttons button {
+    width: 17.5rem;
+}
+
+.toggleSwitch {
+  width: 40px;
+  height: 25px;
+  display: block;
+  position: relative;
+  border-radius: 30px;
+  background-color: #c8c8c8;
+  cursor: pointer;
+}
+
+ /* 토글 버튼 */
+.toggleSwitch .toggleButton {
+  /* 버튼은 토글보다 작아야함  */
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.toggleSwitch.active {
+  background: #462200;
+}
+
+.toggleSwitch.active .toggleButton {
+  left: calc(100% - 22px);
+  background: #fff;
+}
+
+.toggleSwitch, .toggleButton {
+  transition: all 0.2s ease-in;
+}
+
+.toggle{
+    position:absolute;
+    right:12px;
+}
+
+.navbar-nav {
+    margin-right: 0.625rem;
+}

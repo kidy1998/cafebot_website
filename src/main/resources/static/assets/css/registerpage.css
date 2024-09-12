@@ -1,0 +1,18 @@
+/*.match {
+color: green;
+margin-left: 10px;
+}
+.no-match{
+color: red;
+margin-left: 10px;
+}*/
+.register .modal .close{
+    font-size:1.875rem;
+    border:none;
+    background:none;
+}
+
+.register .modal .title{
+    margin-top:0.3rem;
+    margin-bottom:0rem;
+}

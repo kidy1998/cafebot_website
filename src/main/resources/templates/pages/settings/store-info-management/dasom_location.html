@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin2 </title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../../../static/assets/vendors/feather/feather.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="../../../../static/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/font-awesome/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../../../static/assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../../../static/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../../../static/assets/css/style.css">
+    <link rel="stylesheet" href="../../../../static/assets/css/beverageDiscountpage.css">
+    <link rel="stylesheet" href="../../../../static/assets/css/settings.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../../../static/assets/images/favicon.png"/>
+</head>
+<body>
+<div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+            <div class="me-3">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+            <div>
+                <a class="navbar-brand brand-logo" href="../../index.html">
+                    <h3 style=color:#462200> cafeBot</h3>
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="../../index.html">
+                    <h4 style=color:#462200> cafeBot</h4>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-top">
+            <!--<ul class="navbar-nav">
+                <li class="nav-item fw-semibold d-none d-lg-block ms-0">
+                    <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+                    <h3 class="welcome-sub-text">Your performance summary this week </h3>
+                </li>
+            </ul>-->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown"
+                       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
+                        <span class="selectedItem"> 한국어 </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="messageDropdown">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item preview-item" href="#">
+                            <div class="preview-item-content flex-grow py-2">
+                                <p class="preview-subject ellipsis fw-medium text-dark">한국어</p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item" href="#">
+                            <div class="preview-item-content flex-grow py-2">
+                                <p class="preview-subject ellipsis fw-medium text-dark">English</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                    <p id="login-user-info">원더풀플랫폼(양재) <strong>${sessionScope.userId.name}(사장)</strong></p>
+                </li>
+                <!--<li class="nav-item">
+                    <form class="search-form" action="#">
+                        <i class="icon-search"></i>
+                        <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+                    </form>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                        <i class="icon-bell"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="notificationDropdown">
+                        <a class="dropdown-item py-3 border-bottom">
+                            <p class="mb-0 fw-medium float-start">You have 4 new notifications </p>
+                            <span class="badge badge-pill badge-primary float-end">View all</span>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-alert m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
+                                <p class="fw-light small-text mb-0"> Just now </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-lock-outline m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">Settings</h6>
+                                <p class="fw-light small-text mb-0"> Private message </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item py-3">
+                            <div class="preview-thumbnail">
+                                <i class="mdi mdi-airballoon m-auto text-primary"></i>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject fw-normal text-dark mb-1">New user registration</h6>
+                                <p class="fw-light small-text mb-0"> 2 days ago </p>
+                            </div>
+                        </a>
+                    </div>
+                </li>-->
+                <!-- <li class="nav-item dropdown">
+                     <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                         <i class="icon-mail icon-lg"></i>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                          aria-labelledby="countDropdown">
+                         <a class="dropdown-item py-3">
+                             <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
+                             <span class="badge badge-pill badge-primary float-end">View all</span>
+                         </a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face10.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face12.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                         <a class="dropdown-item preview-item">
+                             <div class="preview-thumbnail">
+                                 <img src="../../../static/assets/images/faces/face1.jpg" alt="image"
+                                      class="img-sm profile-pic">
+                             </div>
+                             <div class="preview-item-content flex-grow py-2">
+                                 <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
+                                 <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
+                             </div>
+                         </a>
+                     </div>
+                 </li>-->
+                <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="img-xs rounded-circle" src="../../../../static/assets/images/faces/face8.jpg"
+                             alt="Profile image"> </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                        <div class="dropdown-header text-center">
+                            <img class="img-md rounded-circle" src="../../../../static/assets/images/faces/face8.jpg"
+                                 alt="Profile image">
+                            <p class="mb-1 mt-3 fw-semibold">Allen Moreno</p>
+                            <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                        </div>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile
+                            <span class="badge badge-pill badge-danger">1</span></a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i>
+                            Activity</a>
+                        <a class="dropdown-item"><i
+                                class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+                        <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign
+                            Out</a>
+                    </div>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../index.html">
+                        <i class="mdi mdi-grid-large menu-icon"></i>
+                        <span class="menu-title">관리자 페이지</span>
+                    </a>
+                </li>
+                <!--            <li class="nav-item nav-category">UI Elements</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                       aria-controls="ui-basic">
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title">영업 데이터 통계 </span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../ui-features/buttons.html">Buttons</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../ui-features/dropdowns.html">Dropdowns</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../ui-features/typography.html">Typography</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
+                       aria-controls="form-elements">
+                        <i class="menu-icon mdi mdi-card-text-outline"></i>
+                        <span class="menu-title">재고관리</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="form-elements">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../forms/basic_elements.html">Basic
+                                Elements</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false"
+                       aria-controls="charts">
+                        <i class="menu-icon mdi mdi-chart-line"></i>
+                        <span class="menu-title">다솜 홍보 등록</span>
+                        <i class="menu-arrow"></i>``
+                    </a>
+                    <div class="collapse" id="charts">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/auto_promo1.html">자동영업</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/product_discount2.html">제품할인</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="../../main/promotion3/event_promo3.html">프로모션</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../../main/promotion3/announcement4.html">공지사항</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false"
+                       aria-controls="tables">
+                        <i class="menu-icon mdi mdi-table"></i>
+                        <span class="menu-title">설정</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="tables">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="../../tables/basic-table.html">내 정보 관리</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="../../tables/basic-table.html">매장정보 관리</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="../../tables/basic-table.html">다솜기기 관리</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <!-- partial -->
+
+        <div class="main-panel">
+            <div class="content-wrapper dasomLocation">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">다솜 위치 목록</h4>
+                        <ul class="location-info dropdown-options">
+                            <h5><strong>입구 근처</strong></h5>
+                            <label>다솜 왼쪽</label>
+                            <li>베이커리</li>
+                            <li>샐러드</li>
+                            <br>
+                            <label>다솜 왼쪽 앞</label>
+                            <li>베이커리</li>
+                            <br>
+                            <label>다솜 앞</label>
+                            <li>베이커리</li>
+                            <br>
+                            <label>다솜 오른쪽</label>
+                            <li>베이커리</li>
+                            <br>
+                            <label>다솜 오른쪽 앞</label>
+                            <li>베이커리</li>
+                            <button class="btn-primary"><i class="material-symbols-outlined">pin_drop</i>
+                                위치수정
+                            </button>
+                            <div class="toggle">
+                                <input type="checkbox" id="toggle" hidden>
+                                <label for="toggle" class="toggleSwitch">
+                                    <span class="toggleButton"></span>
+                                </label>
+                            </div>
+                        </ul>
+
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">다솜 위치 등록</h4>
+                        <form action="/api/robotLocation/register" method="post">
+                            <div class="dasom-location-register-wrapper">
+                                <div class="dasom-location-radio">
+                                    <p class="title">1. 카페 안에서 다솜이 있는 위치를 설정해 주세요.</p>
+                                    <label class="custom-label first-label" for="entrance">
+                                        <input type="radio" name="location"
+                                               id="entrance" value="입구 근처" checked>
+                                        입구 근처
+                                    </label>
+                                    <label class="custom-label" for="counter">
+                                        <input type="radio" name="location"
+                                               id="counter" value="계산대 근처">
+                                        계산대 근처
+                                    </label>
+                                    <label class="custom-label" for="pickupTable">
+                                        <input type="radio" name="location"
+                                               id="pickupTable" value="픽업테이블 근처">
+                                        픽업테이블 근처
+                                    </label>
+                                    <label class="custom-label" for="goodsDisplay">
+                                        <input type="radio" name="location"
+                                               id="goodsDisplay" value="굿즈 매대 근처">
+                                        굿즈 매대 근처
+                                    </label>
+                                    <label class="custom-label" for="other">
+                                        <input type="radio" name="location"
+                                               id="other" value="기타">
+                                        기타
+                                    </label>
+                                </div>
+
+                                <div class="dasom-location-container">
+                                    <div class="dasom-location-register">
+                                        <p class="title">2. 다솜 주변에 판매제품이 전개되어 있다면 번호를 선택해 주세요</p>
+                                        <div class="main-content">
+                                            <ul class="location-list">
+                                                <li>
+                                                    <p>①</p>
+                                                    <p>다솜왼쪽</p>
+                                                </li>
+                                                <li>
+                                                    <i class="material-symbols-outlined">robot_2</i>
+                                                    <p>다솜</p>
+                                                </li>
+                                                <li>
+                                                    <p>④</p>
+                                                    <p>다솜 오른쪽</p>
+                                                </li>
+                                                <li>
+                                                    <p>②</p>
+                                                    <p>다솜 왼 앞</p>
+                                                </li>
+                                                <li>
+                                                    <p>③</p>
+                                                    <p>다솜 앞</p>
+                                                </li>
+                                                <li>
+                                                    <p>⑤</p>
+                                                    <p>다솜 오른 앞</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dasom-location-input">
+                                        <p class="title">3. 어떤 제품이 전개되어 있는지 선택해 주세요.<br> (최대 2개까지 선택)</p>
+                                        <div class="location-group">
+                                            <label for="input1">① 다솜 왼쪽</label>
+
+                                            <input type="text"
+                                                   class="custom-input form-control dropdown-bordered dropdown-toggle"
+                                                   id="input1" name="leftSide" disabled
+                                                   data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                                 aria-labelledby="messageDropdown">
+                                                <!-- <a class="dropdown-item preview-item">-->
+                                                <ul class="dropdown-options">
+                                                    <li class="nav-item dropdown" data-value="베이커리">베이커리</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">디저트</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">샌드위치</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">샐러드</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">계산대</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">유제품</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">병음료</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">케이크</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">창가자리</li>
+                                                    <li class="nav-item dropdown" data-value="베이커리">직접입력</li>
+                                                </ul>
+                                                <!--  </a>-->
+                                            </div>
+
+
+                                        </div>
+                                        <div class="location-group">
+                                            <label for="input4">② 다솜 왼쪽 앞</label>
+                                            <input type="text" class="custom-input form-control" id="input4"
+                                                   name="leftFront"
+                                                   disabled>
+                                        </div>
+                                        <div class="location-group">
+                                            <label for="input5">③ 다솜 앞</label>
+                                            <input type="text" class="custom-input form-control" id="input5"
+                                                   name="front"
+                                                   disabled>
+                                        </div>
+                                        <div class="location-group">
+                                            <label for="input3">④ 다솜 오른쪽</label>
+                                            <input type="text" class="custom-input form-control" id="input3"
+                                                   name="rightSide"
+                                                   disabled>
+                                        </div>
+                                        <div class="location-group">
+                                            <label for="input6">⑤ 다솜 오른쪽 앞</label>
+                                            <input type="text" class="custom-input form-control" id="input6"
+                                                   name="rightFront"
+                                                   disabled>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-buttons">
+                                    <!-- 삭제 버튼은 제품 할인 영역에서 "수정" 버튼 눌렀을 시 생김
+                                    <button type="button" class="btn btn-outline-primary">삭제
+                                    </button>-->
+                                    <button type="submit" class="btn btn-primary">저장
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Product Search Modal -->
+                <div id="productModal" class="modal" tabindex="-1" aria-labelledby="productModalLabel"
+                     role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><strong>제품 검색</strong></h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="search-box">
+                                    <form action="" method="get">
+                                        <input type="text" class="form-control"
+                                               placeholder="검색" name="" id="searchInput"><i
+                                            class="icon-search"></i>
+                                        <!--<button class="search-button" type="submit"><i class="icon-search"></i>-->
+                                        <button class="modal-search-button" type="submit"></button>
+                                    </form>
+                                </div>
+                                <ul class="grid-container" id="itemList">
+                                    <li class="item" id="item1">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName1">음료1</p>
+                                        <p id="productPrice1">3,000원</p>
+                                    </li>
+                                    <li class="item" id="item2">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName2">음료2</p>
+                                        <p id="productPrice2">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item3">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName3">수박주스</p>
+                                        <p id="productPrice3">6,000원</p>
+                                    </li>
+                                    <li class="item" id="item4">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName4">음료4</p>
+                                        <p id="productPrice4">3,000원</p>
+                                    </li>
+                                    <li class="item" id="item5">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName5">음료5</p>
+                                        <p id="productPrice5">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item6">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName6">음료6</p>
+                                        <p id="productPrice6">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item7">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName7">음료7</p>
+                                        <p id="productPrice7">3,000원</p>
+                                    </li>
+                                    <li class="item" id="item8">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName8">음료8</p>
+                                        <p id="productPrice8">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item9">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName9">음료9</p>
+                                        <p id="productPrice9">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item10">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName10">음료10</p>
+                                        <p id="productPrice10">3,500원</p>
+                                    </li>
+                                    <li class="item" id="item11">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName11">음료11</p>
+                                        <p id="productPrice11">3,000원</p>
+                                    </li>
+                                    <li class="item" id="item12">
+                                        <img src="https://via.placeholder.com/150" alt="샘플이미지">
+                                        <p class="title" id="productName12">음료12</p>
+                                        <p id="productPrice12">3,500원</p>
+                                    </li>
+                                </ul>
+                                <button type="button" class="btn btn-light" id="loadMoreBtn">더보기</button>
+                                <button type="button" class="btn btn-light" id="selectBtn"
+                                        style="display:none;">선택
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beverage Search Modal ends -->
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- content-wrapper ends -->
+<!-- partial:../../partials/_footer.html -->
+<footer class="footer">
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a
+                            href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+        <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2023. All rights reserved.</span>
+    </div>
+</footer>
+<!-- partial -->
+
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="../../../../static/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="../../../../static/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="../../../../static/assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="../../../../static/assets/vendors/select2/select2.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="../../../../static/assets/js/off-canvas.js"></script>
+<script src="../../../../static/assets/js/template.js"></script>
+<script src="../../../../static/assets/js/settings.js"></script>
+<script src="../../../../static/assets/js/hoverable-collapse.js"></script>
+<script src="../../../../static/assets/js/todolist.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="../../../../static/assets/js/file-upload.js"></script>
+<script src="../../../../static/assets/js/typeahead.js"></script>
+<script src="../../../../static/assets/js/select2.js"></script>
+<script src="../../../../static/assets/js/dasom_location.js"></script>
+<!-- End custom js for this page-->
+</body>
+</html>
