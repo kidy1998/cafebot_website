@@ -45,7 +45,16 @@
                     </div>
                 </li>-->
                 <li class="nav-item d-none d-lg-block">
-                    <p id="login-user-info"><strong>반갑습니다. ${sessionScope.userId.name}님!</strong></p>
+                    <c:choose>
+                       
+                        <c:when test="${sessionScope.userId == null}">
+                            <p id="login-user-info"><strong>반갑습니다. 게스트님!</strong></p>
+                        </c:when>
+
+                        <c:otherwise>
+                            <p id="login-user-info"><strong>반갑습니다. ${sessionScope.userName}님!</strong></p>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
 
                 <!--<li class="nav-item">

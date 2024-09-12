@@ -41,6 +41,8 @@ public class LoginController {
             session.setAttribute("userId", user);
             session.setAttribute("storeId", storeId);
             session.setAttribute("robotId", robotId);
+            session.setAttribute("userName", user.getName());
+            
             return "redirect:/page/main";
         }
         else{

@@ -26,10 +26,19 @@ public class DasomLocationController {
 
         System.out.println("DasomLocationController.mainPage");
         HttpSession session = request.getSession(false);
-        if (session==null){
-            return "redirect:/page/user/login";
+        
+        
+     // 세션이 없으면 로그인 페이지로 리다이렉트
+        if (session == null || session.getAttribute("userId") == null) {
+        	
+        	return "redirect:/page/user/login?message=login_required";
+        	
+        }else {
+        	System.out.println("세션정보 : " + session.getAttribute("userName") + ", " + session.getAttribute("storeId") + ", " 
+        	+  session.getAttribute("robotId")  );	
         }
-
+        
+        
         Long storeId = (Long) session.getAttribute("storeId");
         Long robotId = (Long) session.getAttribute("robotId");
         List<DasomLocationResponseDTO> allRobotLocationCategories = dasomLocationService.findAllRobotLocation(robotId, storeId);
