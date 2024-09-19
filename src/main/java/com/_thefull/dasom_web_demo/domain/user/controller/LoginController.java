@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class LoginController {
                 Long robotId = user.getStoreList().get(0).getRobotList().get(0).getId();
 
                 HttpSession session = request.getSession();
-                session.setAttribute("userId", user);
+                session.setAttribute("userId", user.getUserId());
                 session.setAttribute("storeId", storeId);
                 session.setAttribute("robotId", robotId);
                 session.setAttribute("userName", user.getName());
@@ -59,6 +60,16 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("error", "전화번호 또는 비밀번호가 일치하지 않습니다.");
             return "redirect:/page/user/login";
         }
+    }
+    
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        return "redirect:/page/main";
     }
 
 }

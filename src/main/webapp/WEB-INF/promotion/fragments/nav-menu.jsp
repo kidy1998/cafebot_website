@@ -65,8 +65,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../page/user/login">로그인</a>
-                    <a class="nav-link" href="../../page/user/register">회원가입</a>
+                    <a class="nav-link" href="/page/user/login">로그인</a>
+                    <a class="nav-link" href="/page/user/register">회원가입</a>
+
+                    <c:choose>
+                        <c:when test="${sessionScope.userId != null}">
+                            <a class="nav-link" href="/api/user/logout">로그아웃</a>
+                        </c:when>
+                    </c:choose>
+
                 </li>
             </ul>
         </nav>
