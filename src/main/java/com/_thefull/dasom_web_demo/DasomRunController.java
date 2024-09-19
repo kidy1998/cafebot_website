@@ -10,6 +10,6 @@ public class DasomRunController {
 
     @GetMapping
     public String redirectToMainPage() {
-        return "redirect:/page/main";  // /page/main 경로로 리다이렉트
+        return "redirect:page/main";  // /page/main 경로로 리다이렉트
     }
 }

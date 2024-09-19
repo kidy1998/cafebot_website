@@ -19,17 +19,8 @@ public class LoginService {
     public User login(LoginRequestDto dto) {
         Optional<User> optionalUser = userRepository.findByPhoneNum(dto.getPhoneNum());
 
-        // store와 phoneNum에 일치하는 User가 없으면 null return
-        if (optionalUser.isEmpty()) {
-            return null;
-        }
-
         User user = optionalUser.get();
-        // 찾아온 User의 password와 입력된 password가 다르면 null return
-        if (!user.getPassword().equals(dto.getPassword())) {
-            return null;
-        }
-
+      
         return user;
     }
 

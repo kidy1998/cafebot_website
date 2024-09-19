@@ -113,10 +113,10 @@
 
                                 <input id="eventEndTime" name="endTime" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
 
-                                <label class="custom-label" for="sameTimeCheckbox">
+                                <!-- <label class="custom-label" for="sameTimeCheckbox">
                                     <input type="checkbox" id="sameTimeCheckbox" name="boolEqlStoreOpr">
                                     &nbsp영업시간과 동일
-                                </label>
+                                </label> -->
                             </div>
                         </td>
                         <td>
@@ -127,10 +127,10 @@
                                 &nbsp~&nbsp
 
                                 <input name="mentEndTime" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-                                <label class="custom-label">
+                                <!-- <label class="custom-label">
                                     <input type="checkbox" name="boolEqlEventStart">
                                     &nbsp행사시간과 동일
-                                </label>
+                                </label> -->
                             </div>
                         </td>
                         <td>

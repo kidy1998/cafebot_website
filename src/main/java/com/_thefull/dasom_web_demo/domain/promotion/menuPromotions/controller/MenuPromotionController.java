@@ -56,7 +56,7 @@ public class MenuPromotionController {
         List<MenuPromotionResponseDTO> completedPromotionList = menuPromotionService.findCompletedPromotionList(storeId);
         model.addAttribute("completed_promotion_list",completedPromotionList);
 
-        return "promotion/main";
+        return "promotion/promotion_main";
     }
 
     @PostMapping("/register")
@@ -67,6 +67,13 @@ public class MenuPromotionController {
         if (session==null){
             return "redirect:/page/user/login";
         }
+        
+        
+        if(requestDTO.getBoolIsAlways() == null) {
+        	requestDTO.setBoolIsAlways(false);
+        }
+        
+        System.out.println(requestDTO.toString());
 
         Long storeId = (Long)session.getAttribute("storeId");
         menuPromotionService.registerMenuPromotion(storeId, requestDTO);

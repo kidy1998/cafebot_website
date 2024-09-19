@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>제품 할인</title>
+    <title>제품 할인 등록/수정페이지</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">

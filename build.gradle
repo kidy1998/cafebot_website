@@ -42,7 +42,12 @@ dependencies {
 //	compileOnly 'javax.servlet:javax.servlet-api:6.0.0'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '3.3.2'
+	
+	 // Spring Security Core 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    // Optional: 테스트할 때 Spring Security를 위한 테스트 의존성
+    testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'jakarta.servlet:jakarta.servlet-api'
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
