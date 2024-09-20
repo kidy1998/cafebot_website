@@ -131,6 +131,8 @@ public class MenuPromotionController {
         model.addAttribute("menu_list",menuList);
 
         MenuPromotionResponseDTO dto = menuPromotionService.findOneMenuPromotion(id);
+        
+        System.out.println("수정 메뉴정보 : " + dto.toString());
         model.addAttribute("thepromo",dto);
 
         return "promotion/fragments/contentupdate";
@@ -156,6 +158,7 @@ public class MenuPromotionController {
         	requestDTO.setBoolIsAlways(false);
         }
         
+        System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
         
         menuPromotionService.updatePromotionContent(requestDTO);
 
@@ -174,7 +177,7 @@ public class MenuPromotionController {
 
     }
 
-    @ResponseStatus(HttpStatus.SEE_OTHER)
+   
     @DeleteMapping("/delete")
     public String deleteMenuPromotion(@RequestParam(name = "id")Long id,
                                       HttpServletRequest request){

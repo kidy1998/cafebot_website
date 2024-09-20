@@ -125,10 +125,12 @@
                         <td>
                             <div class="discount-section time">
 
-                                <input id="eventStartTime" name="startTime" value="${thepromo.startTime}" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                                <input id="eventStartTime" name="startTime" value="${thepromo.startTime}" class="timepicker text-center">
 
                                 &nbsp~&nbsp
-                                <input id="eventEndTime" name="endTime" value="${thepromo.endTime}" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+
+                                <input id="eventEndTime" name="endTime" value="${thepromo.endTime}" class="timepicker text-center">
+                                
 
                                 <!-- <label class="custom-label" for="sameTimeCheckbox">
                                     <input type="checkbox" id="sameTimeCheckbox" name="boolEqlStoreOpr" ${thepromo.boolEqlStoreOpr eq 'true' ? 'checked' : ''}>
@@ -138,11 +140,12 @@
                         </td>
                         <td>
                             <div class="discount-section time">
-                                <input id="speechStartTime" name="mentStartTime" value="${thepromo.mentStartTime}" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+
+                                <input id="mentStartTime" name="mentStartTime" value="${thepromo.startTime}" class="timepicker text-center">
 
                                 &nbsp~&nbsp
 
-                                <input name="mentEndTime" value="${thepromo.mentEndTime}" class="timepicker text-center" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                                <input id="mentStartTime" name="mentEndTime" value="${thepromo.startTime}" class="timepicker text-center">
 
                                 <!-- <label class="custom-label">
                                     <input type="checkbox" name"boolEqlEventStart" ${thepromo.boolEqlEventStart eq 'true' ? 'checked' : ''}>
@@ -272,9 +275,30 @@
 
     <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    
+    <script>
+
+        $(document).ready(function() {
+            // Timepicker initialization with 30-minute interval and 24-hour format
+            console.log("timepicker 실행");
+            $('.timepicker').timepicker({
+                timeFormat: 'HH:mm',      // 24-hour format
+                interval: 30,             // 30-minute intervals
+                minTime: '00:00',         // Start time
+                maxTime: '23:59',         // End time
+                defaultTime: '00:00',     // Default start time
+                startTime: '00:00',       // Timepicker start time
+                dynamic: false,           // Don't adjust for dynamic input
+                dropdown: true,           // Use dropdown menu
+                scrollbar: true           // Allow scroll in dropdown
+            });
+        });
+
+    
+    </script>
 
 
-    <script src="${pageContext.request.contextPath}/assets/js/beverageDiscount.js"></script>
+ 
 
 
 

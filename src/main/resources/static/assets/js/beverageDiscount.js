@@ -658,7 +658,9 @@ function deletePromotion(menuPromoId){
         xhr.open('DELETE','/api/promotion-discount/delete?id='+menuPromoId,true);
         xhr.onload=function(){
             if(xhr.status >= 200 && xhr.status<400){
-                console.error("제품할인 삭제에 성공하였습니다.");
+                alert("제품 삭제에 성공했습니다");
+                window.location.href = '/api/promotion-discount/main';
+
             }else{
                 console.error("제품할인 삭제에 실패하였습니다");
             }
@@ -821,16 +823,7 @@ function loadUpdateContent(menuPromoId){
                 }
             });
 
-            $('.timepicker').timepicker({
-                timeFormat: 'HH:mm',
-                interval: 30 ,
-                minTime: '00',
-                maxTime: '23:30pm',
-                startTime: '00:00',
-//                dynamic: false,
-//                dropdown: true,
-//                scrollbar: true
-            });
+          
 
             // 검색 input 박스에 입력된 값으로 리스트를 필터링합니다.
             function filterProductList(query) {

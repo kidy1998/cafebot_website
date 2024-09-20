@@ -6,9 +6,13 @@ import com._thefull.dasom_web_demo.domain.user.domain.dto.LoginRequestDto;
 import com._thefull.dasom_web_demo.domain.user.domain.User;
 import com._thefull.dasom_web_demo.domain.user.service.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.io.IOException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -31,7 +35,8 @@ public class LoginController {
     public String login(@ModelAttribute LoginRequestDto requestDTO,
                         BindingResult bindingResult,
                         HttpServletRequest request,
-                        RedirectAttributes redirectAttributes){
+                        HttpServletResponse response,
+                        RedirectAttributes redirectAttributes) throws IOException{
 
         // 로그인 서비스 호출 (비밀번호 검증 포함)
         User user = loginService.login(requestDTO);
@@ -52,13 +57,15 @@ public class LoginController {
                 return "redirect:/page/main";
             } else {
                 // 비밀번호 불일치
-                redirectAttributes.addFlashAttribute("error", "전화번호 또는 비밀번호가 일치하지 않습니다.");
-                return "redirect:/page/user/login";
+            	System.out.println("비밀번호 불일치");
+            	
+                return "redirect:/page/user/login?error=password_incorrect";
             }
         } else {
             // 사용자 없음
-            redirectAttributes.addFlashAttribute("error", "전화번호 또는 비밀번호가 일치하지 않습니다.");
-            return "redirect:/page/user/login";
+        	System.out.println("회원정보 불일치");
+        	
+            return "redirect:/page/user/login?error=password_incorrect";
         }
     }
     

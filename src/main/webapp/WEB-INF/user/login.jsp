@@ -122,6 +122,15 @@
 <% } %>
 
 
+<% String error = request.getParameter("error"); %>
+<% if ("password_incorrect".equals(error)) { %>
+    <script>
+        alert("매장번호, 혹은 비밀번호를 확인하세요");
+    </script>
+<% } %>
+
+
+
 
 <!-- container-scroller -->
 <!-- plugins:js -->
