@@ -119,9 +119,9 @@ public class DasomLocationService {
 
         if (!dasomLocation.getRobot().getStore().getId().equals(storeId))
             throw new AppException(ErrorCode.UNAUTHORIZED_USER, "해당 카페봇에 대한 현 위치 설정에 대한 권한이 없어 내용을 변경할 수 없습니다");
-
+        
         dasomLocation.update(dto);
-
+       
         dasomLocationRepository.save(dasomLocation);
     }
 

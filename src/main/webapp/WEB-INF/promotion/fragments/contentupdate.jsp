@@ -256,12 +256,18 @@
                 </table>
             </div>
             <div class="form-buttons">
-                <button type="button" id="menupromotion-delete-btn" onclick="deletePromotion(${thepromo.menuPromoId})" class="btn btn-outline-primary">
-                    삭제
-                </button>
+                
                 <button type="submit" class="btn btn-primary">
                     수정
                 </button>
+
+                <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
+                    <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}" 
+                        onclick="return confirm('이 프로모션을 정말 삭제하시겠습니까?');" style="text-decoration: none; ">
+                        삭제
+                    </a>
+                </button>
+
             </div>
         </form>
         </div>
@@ -273,8 +279,6 @@
 
     </div>
 
-    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     
     <script>
 

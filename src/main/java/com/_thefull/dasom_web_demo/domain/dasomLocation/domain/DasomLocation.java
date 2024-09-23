@@ -7,11 +7,13 @@ import com._thefull.dasom_web_demo.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -65,6 +67,7 @@ public class DasomLocation extends BaseEntity {
         this.leftFront=dto.getLeftFront();
         this.rightFront=dto.getRightFront();
         this.location= dto.getLocation();
+        this.front = dto.getFront();
 
     }
 }

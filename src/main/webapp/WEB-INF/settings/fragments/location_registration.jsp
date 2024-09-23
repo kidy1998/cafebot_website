@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">카페봇 위치 등록</h4>
-                <form action="/settings/dasom-locations" method="post" name="updateForm">
+                <form action="/settings/dasom-locations/register" method="post" name="updateForm">
                  <div class = "dasom-location-register-wrapper">
                     <div class="dasom-location-radio">
                         <p class="title">1. 카페 안에서 카페봇이 있는 위치를 설정해 주세요.</p>

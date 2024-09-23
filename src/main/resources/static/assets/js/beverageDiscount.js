@@ -650,34 +650,6 @@ $('.custom-select-option').on('click', function() {
   });
 });
 
-function deletePromotion(menuPromoId){
-
-    if(confirm("이 프로모션을 정말 삭제하시겠습니까?") == true){
-        var xhr = new XMLHttpRequest();
-
-        xhr.open('DELETE','/api/promotion-discount/delete?id='+menuPromoId,true);
-        xhr.onload=function(){
-            if(xhr.status >= 200 && xhr.status<400){
-                alert("제품 삭제에 성공했습니다");
-                window.location.href = '/api/promotion-discount/main';
-
-            }else{
-                console.error("제품할인 삭제에 실패하였습니다");
-            }
-        };
-        xhr.onerror = function(){
-            console.error("[Menu Promotion - DELETE] Connection Error");
-        }
-
-        xhr.send();
-
-        reload();
-
-    }else{
-        return false;
-    }
-
-}
 
 function changeAdditionalOption(boolValue, radioYesId, inputName){
 

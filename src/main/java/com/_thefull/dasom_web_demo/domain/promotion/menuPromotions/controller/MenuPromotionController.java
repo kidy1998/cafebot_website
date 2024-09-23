@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -62,14 +63,16 @@ public class MenuPromotionController {
         }
     }
 
+   
     /**
      * 프로모션 메인 페이지 : 할인 항목, 할인 완료 항목들 나열 
      * @param request
+     * @param message
      * @param model
      * @return
      */
     @GetMapping("/main")
-    public String mainPage(HttpServletRequest request,
+    public String mainPage(HttpServletRequest request,@ModelAttribute(name = "message", binding = false) String message,
                            Model model) {
         HttpSession session = request.getSession(false);
        
@@ -84,6 +87,10 @@ public class MenuPromotionController {
 
         List<MenuPromotionResponseDTO> completedPromotionList = menuPromotionService.findCompletedPromotionList(storeId);
         model.addAttribute("completed_promotion_list",completedPromotionList);
+        
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
 
         return "promotion/promotion_main";
     }
@@ -99,7 +106,8 @@ public class MenuPromotionController {
     @PostMapping("/register")
     public String registerMenuPromotion(@ModelAttribute MenuPromotionRequestDTO requestDTO,
                                         BindingResult bindingResult,
-                                        HttpServletRequest request){
+                                        HttpServletRequest request,
+                                        RedirectAttributes redirectAttribute){
         HttpSession session = request.getSession(false);
         
         if(requestDTO.getBoolIsAlways() == null) {
@@ -110,12 +118,13 @@ public class MenuPromotionController {
 
         Long storeId = (Long)session.getAttribute("storeId");
         menuPromotionService.registerMenuPromotion(storeId, requestDTO);
-
+        redirectAttribute.addFlashAttribute("message", "register");
+        
         return "redirect:/api/promotion-discount/main";
     }
 
     /**
-     * 업데이트 페이지로 이동
+     * 업데이트 페이지로 이동, 수정하려는 메뉴의 정보를 조회해서 가져옴
      * @param request
      * @param id
      * @param model
@@ -150,7 +159,8 @@ public class MenuPromotionController {
     @PostMapping("/update")
     public String updatePromotionContent(@ModelAttribute MenuPromotionRequestDTO requestDTO,
                                          BindingResult bindingResult,
-                                         HttpServletRequest request){
+                                         HttpServletRequest request,
+                                         RedirectAttributes redirectAttribute){
 
         HttpSession session = request.getSession(false);
       
@@ -161,6 +171,8 @@ public class MenuPromotionController {
         System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
         
         menuPromotionService.updatePromotionContent(requestDTO);
+        
+        redirectAttribute.addFlashAttribute("message", "update");
 
         return "redirect:/api/promotion-discount/main";
     }
@@ -178,12 +190,22 @@ public class MenuPromotionController {
     }
 
    
-    @DeleteMapping("/delete")
+    /**
+     * 메뉴 id 받아와서 삭제
+     * @param id
+     * @param request
+     * @param redirectAttribute
+     * @return
+     */
+    @GetMapping("/delete")
     public String deleteMenuPromotion(@RequestParam(name = "id")Long id,
-                                      HttpServletRequest request){
+                                      HttpServletRequest request,
+                                      RedirectAttributes redirectAttribute){
     
         menuPromotionService.deleteMenuPromotion(id);
-
+        
+        redirectAttribute.addFlashAttribute("message", "delete");
+        
         return "redirect:/api/promotion-discount/main";
 
     }

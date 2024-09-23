@@ -380,51 +380,38 @@ function inputEventListener() {
    });
 }
 
-// 토글
-const toggleList = document.querySelectorAll(".toggleSwitch");
+function handleToggleClick(index, locationId, isChecked) {
+    // 현재 클릭한 radio 버튼을 가져옴
+    const radio = document.getElementById('toggle' + index);
 
-toggleList.forEach(($toggle) => {
-$toggle.onclick = () => {
-  const locationId = $toggle.getAttribute("data-id");
+    if (radio) {
+        radio.checked = true;  // 클릭된 radio 버튼을 체크
+        console.log("Radio button state updated: " + radio.checked);  // 디버깅용 체크 상태 확인
+    } else {
+        console.error("Radio button not found for index: " + index);
+    }
 
-  var xhr = new XMLHttpRequest();
+    // AJAX 요청으로 서버에 상태 전송
+    const newState = radio.checked;  // 새로운 radio 버튼 상태
+    var url = '/settings/dasom-locations/use?use=' + newState + '&id=' + locationId;
 
-  if ($toggle.classList.contains('active')){
-    $toggle.classList.remove('active')
-    var url = '/settings/dasom-locations/use?use='+false+'&id='+locationId;
+    var xhr = new XMLHttpRequest();
     xhr.open('PATCH', url, true);
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
-            console.error("카페봇 위치 설정 상태 변경에 성공하였습니다.");
-        }else{
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            console.log("카페봇 위치 설정 상태 변경에 성공하였습니다.");
+        } else {
             console.error("카페봇 위치 설정 상태 변경에 실패하였습니다");
         }
     };
-    xhr.onerror = function(){
+    xhr.onerror = function () {
         console.error("[Location Settings Change Status- PATCH] Connection Error");
-    }
-
-    xhr.send();
-
-  }
-  else{
-    $toggle.classList.toggle('active');
-    var url = '/settings/dasom-locations/use?use='+true+'&id='+locationId;
-    xhr.open('PATCH', url, true);
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
-            console.error("카페봇 위치 설정 상태 변경에 성공하였습니다.");
-        }else{
-            console.error("카페봇 위치 설정 상태 변경에 실패하였습니다");
-        }
     };
-    xhr.onerror = function(){
-        console.error("[Location Settings Change Status- PATCH] Connection Error");
-    }
     xhr.send();
-  }
-};
-});
+}
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -471,24 +458,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function deleteLocation(locationId){
-    var xhr = new XMLHttpRequest();
-
-    var url = '/settings/dasom-locations?id='+locationId;
-    xhr.open('DELETE', url, true);
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
-            console.error("카페봇 위치 설정 삭제에 성공하였습니다.");
-        }else{
-            console.error("카페봇 위치 설정 삭제에 실패하였습니다");
-        }
-    };
-    xhr.onerror = function(){
-        console.error("[Location Settings DELETE - DELETE] Connection Error");
-    }
-    xhr.send();
-
-}
 
 
 function loadUpdateLocationContent(locationId){

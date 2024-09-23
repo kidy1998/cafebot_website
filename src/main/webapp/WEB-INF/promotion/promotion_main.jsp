@@ -72,6 +72,25 @@
     </div>
 
 
+    <% String message = (String) request.getAttribute("message"); %>
+    <% if ("register".equals(message)) { %>
+        <script>
+            alert("메뉴가 등록되었습니다.");
+        </script>
+    <% } else if ("update".equals(message)) { %>
+        <script>
+            alert("메뉴가 수정되었습니다.");
+        </script>
+    <% } else if ("delete".equals(message)) { %>
+        <script>
+            alert("메뉴가 삭제되었습니다.");
+        </script>
+    <% } else { %>
+
+    <% } %>
+
+
+
 <!-- content-wrapper ends -->
 <!-- partial:../../partials/_footer.html -->
 <footer class="footer">

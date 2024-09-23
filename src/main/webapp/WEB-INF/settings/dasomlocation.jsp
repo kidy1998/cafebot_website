@@ -109,22 +109,20 @@
                                     위치수정
                                 </button>
                                 <br>
+                                
                                 <div class="toggle">
-                                    <c:choose>
-                                        <c:when test="${robot_location.use eq 'true'}">
-                                            <input type="checkbox" id="toggle${status.index}" hidden checked>
-                                            <label for="toggle${status.index}" class="toggleSwitch active" data-id="${robot_location.id}">
-                                                <span class="toggleButton"></span>
-                                            </label>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <input type="checkbox" id="toggle${status.index}" hidden>
-                                            <label for="toggle${status.index}" class="toggleSwitch" data-id="${robot_location.id}">
-                                                <span class="toggleButton"></span>
-                                            </label>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <div>
+                                       <!-- 활성화 선택을 위한 radio 버튼 -->
+                                        <label>
+                                            <input type="radio" name="locationToggle${status.index}" id="toggleOn${status.index}" value="true"
+                                                <c:if test="${robot_location.use eq 'true'}">checked</c:if>
+                                                onclick="handleToggleClick('${status.index}', '${robot_location.id}', true)">
+                                            활성화
+                                        </label>
+                                    </div>
+                                    
                                 </div>
+                                
                             </ul>
                         </c:forEach>
                     <span><button id="nextButton" class="hidden" onclick="showNextItems()" style="border: none; background-color:white;"><image style="width: 40px; height: 100%" src="${pageContext.request.contextPath}/assets/images/free-icon-arrow-right-6423875.svg"/></button></span>
@@ -140,6 +138,25 @@
         </div>
     </div>
 </div>
+
+
+    <% String message = (String) request.getAttribute("message"); %>
+    <% if ("register".equals(message)) { %>
+        <script>
+            alert("메뉴가 등록되었습니다.");
+        </script>
+    <% } else if ("update".equals(message)) { %>
+        <script>
+            alert("메뉴가 수정되었습니다.");
+        </script>
+    <% } else if ("delete".equals(message)) { %>
+        <script>
+            alert("메뉴가 삭제되었습니다.");
+        </script>
+    <% } else { %>
+
+    <% } %>
+
 
 
 <!-- content-wrapper ends -->

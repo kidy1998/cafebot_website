@@ -275,12 +275,18 @@
                         </div>
                     </div>
                     <div class="form-buttons">
-                        <button type="button" class="btn btn-outline-primary" onclick="deleteLocation(${theLocation.id})">
-                            삭제
-                        </button>
+                       
                         <button type="submit" class="btn btn-primary">
                             수정
                         </button>
+
+                        <button type="button" class="btn btn-outline-primary">
+                            <a href="/settings/dasom-locations/delete?id=${theLocation.id}" 
+                                onclick="return confirm('해당 위치를 삭제하시겠습니까?');" style="text-decoration: none;">
+                                삭제
+                            </a>
+                        </button>
+
                     </div>
                 </div>
                </form>

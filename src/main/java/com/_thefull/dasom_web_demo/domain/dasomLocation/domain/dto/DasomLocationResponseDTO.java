@@ -3,6 +3,7 @@ package com._thefull.dasom_web_demo.domain.dasomLocation.domain.dto;
 import com._thefull.dasom_web_demo.domain.dasomLocation.domain.DasomLocation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter @Builder
 @AllArgsConstructor
+@Data
 public class DasomLocationResponseDTO {
 
     private Long id;

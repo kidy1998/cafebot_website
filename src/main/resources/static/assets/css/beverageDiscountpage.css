@@ -371,6 +371,14 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-right:1rem;
 }
 
+.btn-outline-primary a {
+    color: black;
+}
+
+.btn-outline-primary:hover a {
+    color: white;
+}
+
 .discount-register input[type="number"],
 .discount-register input[type="text"] {
      min-width: 7.1rem;
