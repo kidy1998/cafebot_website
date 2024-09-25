@@ -51,14 +51,14 @@
                                 <td>${promotion.category}</td>
                                 <td>${promotion.menu}</td>
                                 <td>${promotion.price}원</td>
-                                <td><span style="color: red">(-${promotion.discVal})&nbsp</span>${promotion.discPrice}원</td>
+                                <td><!--<span style="color: red">(-${promotion.discVal})&nbsp</span>-->${promotion.discPrice}원</td>
                                 <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                 <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                 <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
                                 <td>${promotion.freq}회</td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},
                                 '${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">보기</button></td>
-                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId})">편집</button></td>
+                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId},`kor`)">편집</button></td>
                             </tr>
                         </c:if>
                     </c:forEach>
@@ -125,13 +125,13 @@
                                         <td>${promotion.category}</td>
                                         <td>${promotion.menu}</td>
                                         <td>${promotion.price}원</td>
-                                        <td><span style="color: red">(-${promotion.discVal})&nbsp</span>${promotion.discPrice}원</td>
+                                        <td><!--<span style="color: red">(-${promotion.discVal})&nbsp</span>-->${promotion.discPrice}원</td>
                                         <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                         <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                         <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
                                         <td>${promotion.freq}회</td>
                                         <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">보기</button></td>
-                                        <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId})">편집</button></td>
+                                        <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId},`kor`)">편집</button></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -163,14 +163,21 @@
 
     <script>
 
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const allListModal = document.querySelector('#allListModal');
+            const allListBtn = document.querySelector('#all_list_btn');
 
-
-        const allListModal = document.querySelector('#allListModal');
-        const allListBtn = document.querySelector('#all_list_btn');
-
-        allListBtn.addEventListener('click', function() {
-            $('#allListModal').show();
+            if (allListBtn && allListModal) {  // 두 요소가 모두 존재하는지 확인
+                allListBtn.addEventListener('click', function() {
+                    $('#allListModal').show();
+                });
+            } else {
+                console.error('Element #all_list_btn or #allListModal not found');
+            }
         });
+
+
     </script>
 </body>
 </html>

@@ -380,35 +380,40 @@ function inputEventListener() {
    });
 }
 
+function confirmToggleClick(index, locationId, isChecked) {
+    
+    // 위치 변경을 확인하는 창을 띄움
+    const isConfirmed = confirm("위치를 변경하시겠습니까?");
+    
+    if (isConfirmed) {
+        // 사용자가 확인을 누르면 handleToggleClick 함수 실행
+        handleToggleClick(index, locationId, isChecked);
+    } else {
+        console.log("위치 변경이 취소되었습니다.");
+    }
+}
+
 function handleToggleClick(index, locationId, isChecked) {
     // 현재 클릭한 radio 버튼을 가져옴
-    const radio = document.getElementById('toggle' + index);
+    const radio = document.getElementById('toggleOn' + index);
 
     if (radio) {
         radio.checked = true;  // 클릭된 radio 버튼을 체크
         console.log("Radio button state updated: " + radio.checked);  // 디버깅용 체크 상태 확인
     } else {
         console.error("Radio button not found for index: " + index);
+        return;
     }
 
-    // AJAX 요청으로 서버에 상태 전송
+    // 리다이렉트 URL 생성
     const newState = radio.checked;  // 새로운 radio 버튼 상태
-    var url = '/settings/dasom-locations/use?use=' + newState + '&id=' + locationId;
+    const url = '/settings/dasom-locations/use?use=' + newState + '&id=' + locationId;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('PATCH', url, true);
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 400) {
-            console.log("카페봇 위치 설정 상태 변경에 성공하였습니다.");
-        } else {
-            console.error("카페봇 위치 설정 상태 변경에 실패하였습니다");
-        }
-    };
-    xhr.onerror = function () {
-        console.error("[Location Settings Change Status- PATCH] Connection Error");
-    };
-    xhr.send();
+    // 페이지 리다이렉트
+    window.location.href = url;
 }
+
+
 
 
 

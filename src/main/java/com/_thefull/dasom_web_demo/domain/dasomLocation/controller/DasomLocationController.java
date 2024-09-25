@@ -50,7 +50,8 @@ public class DasomLocationController {
     @GetMapping("/main")
     public String mainPage(Model model,
                            HttpServletRequest request,
-                           @ModelAttribute(name = "message", binding = false) String message){
+                           @ModelAttribute(name = "message", binding = false) String message,
+                           @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         HttpSession session = request.getSession(false);
      
@@ -66,9 +67,14 @@ public class DasomLocationController {
         if (message != null) {
             model.addAttribute("message", message);
         }
-
-
-        return "settings/dasomlocation";
+        
+        if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+        	 return "settings/dasomlocation_eng";
+        } else {
+            // 기본값으로 한국어 페이지 반환
+        	 return "settings/dasomlocation";
+        }
     }
 
     @GetMapping("/updatepage")
@@ -115,10 +121,11 @@ public class DasomLocationController {
      * @return
      */
     @ResponseStatus(HttpStatus.SEE_OTHER)
-    @PatchMapping("/use")
+    @GetMapping("/use")
     public String changeWhetherUse(@RequestParam(name = "use")Boolean use,
                                    @RequestParam(name = "id")Long id,
-                                   HttpServletRequest request){
+                                   HttpServletRequest request,
+                                   RedirectAttributes redirectAttribute){
 
         HttpSession session = request.getSession(false);
         if(session==null){
@@ -128,6 +135,8 @@ public class DasomLocationController {
         Long robotId = (Long) session.getAttribute("robotId");
 
         dasomLocationService.changeUse(robotId, use, id);
+        
+        redirectAttribute.addFlashAttribute("message", "location");
 
         return "redirect:/settings/dasom-locations/main";
     }

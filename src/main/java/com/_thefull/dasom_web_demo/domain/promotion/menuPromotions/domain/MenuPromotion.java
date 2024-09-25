@@ -185,7 +185,7 @@ public class MenuPromotion extends BaseEntity {
         this.isEqlPromoTime=dto.getBoolEqlEventStart();
         this.mentStartTime=dto.getMentStartTime();
         this.mentEndTime=dto.getMentEndTime();
-        this.mentInterval=dto.getInterval();
+        this.mentInterval=Math.abs(dto.getInterval());
         this.isAddDiscCond=dto.getBoolAddCond();
         this.addDiscCond=dto.getAddDiscCond();
         this.isAddMenuDesc=dto.getBoolAddDesc();

@@ -8,7 +8,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>제품 할인 등록/수정페이지</title>
+    <title>promotion rigister/update</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/feather/feather.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -52,15 +52,15 @@
                 <div class="col-lg-12 grid-margin">
                     <div id ="test">
                         <div class="card discount-register">
-                            <%@ include file="fragments/content1.jsp" %>
+                            <%@ include file="fragments/content1_eng.jsp" %>
                         </div>
 
                         <div id="content2" class="card discount-register">
-                            <%@ include file="fragments/content2.jsp" %>
+                            <%@ include file="fragments/content2_eng.jsp" %>
                         </div>
 
                         <div class="card discount-register">
-                            <%@ include file="fragments/content3.jsp" %>
+                            <%@ include file="fragments/content3_eng.jsp" %>
                         </div>
                     </div>
 
@@ -74,15 +74,15 @@
     <% String message = (String) request.getAttribute("message"); %>
     <% if ("register".equals(message)) { %>
         <script>
-            alert("메뉴가 등록되었습니다.");
+            alert("Menu has been registered.");
         </script>
     <% } else if ("update".equals(message)) { %>
         <script>
-            alert("메뉴가 수정되었습니다.");
+            alert("Menu has been updated.");
         </script>
     <% } else if ("delete".equals(message)) { %>
         <script>
-            alert("메뉴가 삭제되었습니다.");
+            alert("Menu has been deleted.");
         </script>
     <% } else { %>
 
@@ -111,7 +111,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/beverageDiscount.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>

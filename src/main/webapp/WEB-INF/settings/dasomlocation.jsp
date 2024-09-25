@@ -49,6 +49,20 @@
                             <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}">
                                 <h5><strong>${robot_location.location}</strong></h5>
                                 <br>
+
+                             
+                                
+                                <!-- 활성화 선택을 위한 radio 버튼 -->
+                                <label style="display: inline-block; margin-right: 10px;">
+                                    위치 활성화
+                                </label>
+
+                                <input type="radio" name="locationToggle" id="toggleOn${status.index}"
+                                        <c:if test="${robot_location.use eq 'true'}">checked</c:if>
+                                        onclick="confirmToggleClick('${status.index}', '${robot_location.id}')">
+                              
+                                <br><br>
+
                                 <label style="display: inline-block; margin-right: 10px;">왼쪽</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftSide}">
@@ -109,19 +123,7 @@
                                     위치수정
                                 </button>
                                 <br>
-                                
-                                <div class="toggle">
-                                    <div>
-                                       <!-- 활성화 선택을 위한 radio 버튼 -->
-                                        <label>
-                                            <input type="radio" name="locationToggle${status.index}" id="toggleOn${status.index}" value="true"
-                                                <c:if test="${robot_location.use eq 'true'}">checked</c:if>
-                                                onclick="handleToggleClick('${status.index}', '${robot_location.id}', true)">
-                                            활성화
-                                        </label>
-                                    </div>
-                                    
-                                </div>
+                              
                                 
                             </ul>
                         </c:forEach>
@@ -152,6 +154,10 @@
     <% } else if ("delete".equals(message)) { %>
         <script>
             alert("메뉴가 삭제되었습니다.");
+        </script>
+    <% }  else if ("location".equals(message)) { %>
+        <script>
+            alert("위치가 변경되었습니다.");
         </script>
     <% } else { %>
 

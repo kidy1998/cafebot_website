@@ -15,18 +15,18 @@
 </head>
 <body>
     <div class="card-body">
-        <h4 class="card-title">제품할인 수정</h4>
+        <h4 class="card-title">Edit Promotion</h4>
 
-        <form action="/api/promotion-discount/update?lang=kor" method="post">
+        <form action="/api/promotion-discount/update?lang=eng" method="post">
             <div class="table-responsive first-table">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>품목</th>
-                        <th>제품</th>
-                        <th>정가(할인가)</th>
-                        <th>할인값(원)</th>
-                        <th>행사기간</th>
+                        <th>Category</th>
+                        <th>Product</th>
+                        <th>Regular Price (Discounted Price)</th>
+                        <th>Discount Value (KRW)</th>
+                        <th>Promotion Period</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,10 +35,10 @@
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem"> ${thepromo.category} </span></a>
                                 <div class="dropdown-content">
-                                    <a class ="dropdown-item" data-value="음료" >음료</a>
-                                    <a class ="dropdown-item" data-value="베이커리">베이커리</a>
-                                    <a class ="dropdown-item" data-value="케이크" >케이크</a>
-                                    <a class ="dropdown-item" data-value="세트상품">세트상품</a>
+                                    <a class="dropdown-item" data-value="Beverage">Beverage</a>
+                                    <a class="dropdown-item" data-value="Bakery">Bakery</a>
+                                    <a class="dropdown-item" data-value="Cake">Cake</a>
+                                    <a class="dropdown-item" data-value="Set Product">Set Product</a>
                                 </div>
                             </div>
 
@@ -51,7 +51,7 @@
                         <td>
                             <div class="input-container">
                                 <button type="button" class="search-button custom-input form-control"
-                                        id="product_search_btn" >${thepromo.menu}
+                                        id="product_search_btn">${thepromo.menu}
                                         <i class="icon-search" onclick="openMenuModal()"></i>
                                 </button>
                                 <input type="hidden" id="menunameInput" name="menu" value="${thepromo.menu}">
@@ -60,10 +60,10 @@
                         </td>
                         <td>
                             <div class="discount-section">
-                                <p id="productPrice">${thepromo.price}원</p>
+                                <p id="productPrice">${thepromo.price} KRW</p>
                                 <input type="hidden" id="priceInput" name="price" value="${thepromo.price}">
 
-                                <p id="discountPrice">(${thepromo.discPrice}원)</p>
+                                <p id="discountPrice">(${thepromo.discPrice} KRW)</p>
                                 <input type="hidden" id="discPriceInput" name="discPrice" value="${thepromo.discPrice}">
 
                             </div>
@@ -74,7 +74,7 @@
                                        id="discountPriceInput" name="discVal" value="${thepromo.discVal}" placeholder="${thepromo.discVal}">
 
                                 <button type="button" class="btn btn-outline-primary btn-sm"
-                                        id="confirmDiscountPriceBtn" onclick="onclickConfirmDiscountPriceBtn()">확인
+                                        id="confirmDiscountPriceBtn" onclick="onclickConfirmDiscountPriceBtn()">Confirm
                                 </button>
                             </div>
                         </td>
@@ -85,21 +85,9 @@
                                 &nbsp~&nbsp
                                 <input type="date" class="custom-input form-control" id="endDate" name="endDate" value="${thepromo.endDate}">
                                 <label class="custom-label">
-                                    <!-- <c:choose>
-                                        <c:when test="${thepromo.boolIsAlways eq 'true'}">
-                                            <input type="checkbox" name="boolIsAlways" id="isAlwaysCheckbox" checked=true>
-                                            ${thepromo.boolIsAlways}
-                                            &nbsp상시
-                                        </c:when>
-                                        <c:when test="${thepromo.boolIsAlways eq 'false'}">
-                                            <input type="checkbox" name="boolIsAlways" id="isAlwaysCheckbox" checked=false>
-                                            ${thepromo.boolIsAlways}
-                                            &nbsp상시
-                                        </c:when>
-                                    </c:choose> -->
 
                                     <input type="checkbox" name="boolIsAlways" is="isAlwaysCheckbox" ${thepromo.boolIsAlways eq 'true' ? 'checked' : ''}>
-                                    &nbsp상시
+                                    &nbspAlways
                                 </label>
                             </div>
                         </td>
@@ -115,9 +103,9 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>행사시간</th>
-                        <th>멘트 발화시간</th>
-                        <th>발화 횟수</th>
+                        <th>Event Time</th>
+                        <th>Speech Time</th>
+                        <th>Frequency</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -132,7 +120,7 @@
 
                                 <!-- <label class="custom-label" for="sameTimeCheckbox">
                                     <input type="checkbox" id="sameTimeCheckbox" name="boolEqlStoreOpr" ${thepromo.boolEqlStoreOpr eq 'true' ? 'checked' : ''}>
-                                    &nbsp영업시간과 동일
+                                    &nbspSame as store hours
                                 </label> -->
                             </div>
                         </td>
@@ -147,19 +135,19 @@
 
                                 <!-- <label class="custom-label">
                                     <input type="checkbox" name"boolEqlEventStart" ${thepromo.boolEqlEventStart eq 'true' ? 'checked' : ''}>
-                                    &nbsp행사시간과 동일
+                                    &nbspSame as event time
                                 </label> -->
                             </div>
                         </td>
                         <td>
                             <div class="my_dropdown">
-                                <a class="dropbtn"><span id="selectedItem">${thepromo.interval}분 간격</span></a>
+                                <a class="dropbtn"><span id="selectedItem">${thepromo.interval}-min Interval</span></a>
                                 <div class="dropdown-content">
-                                    <a class ="dropdown-item" data-value="5분 간격">5분 간격</a>
-                                    <a class ="dropdown-item" data-value="10분 간격">10분 간격</a>
-                                    <a class ="dropdown-item" data-value="15분 간격">15분 간격</a>
-                                    <a class ="dropdown-item" data-value="20분 간격">20분 간격</a>
-                                    <a class ="dropdown-item" data-value="30분 간격">30분 간격</a>
+                                    <a class="dropdown-item" data-value="5-min Interval">5-min Interval</a>
+                                    <a class="dropdown-item" data-value="10-min Interval">10-min Interval</a>
+                                    <a class="dropdown-item" data-value="15-min Interval">15-min Interval</a>
+                                    <a class="dropdown-item" data-value="20-min Interval">20-min Interval</a>
+                                    <a class="dropdown-item" data-value="30-min Interval">30-min Interval</a>
                                 </div>
                             </div>
 
@@ -177,8 +165,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>할인 조건 추가</th>
-                            <th>제품 소개</th>
+                            <th>Add Discount Condition</th>
+                            <th>Product Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -190,14 +178,14 @@
                                                id="discountOptionNone"
                                                onchange="changeAdditionalOption(false, 'addCondId')" 
                                                value="false" ${thepromo.boolAddCond eq 'false' ? 'checked' : ''}>
-                                        없음
+                                        None
                                     </label>
                                     <label class="custom-label" for="discountOptionYes">
                                         <input type="radio" name="boolAddCond"
                                                id="discountOptionYes"
                                                onchange="changeAdditionalOption(true, 'addCondId')" 
                                                value="true" ${thepromo.boolAddCond eq 'true' ? 'checked' : ''}>
-                                        있음
+                                        Yes
                                     </label>
                                     <!-- <input type="hidden" id="isAddCondInput" value="false" name="boolAddCond"> -->
                                     <input type="text" class="custom-input form-control" id="addCondId" value="${thepromo.addDiscCond}" name="addDiscCond" ${thepromo.boolAddCond eq 'true' ? '' : 'disabled'}>
@@ -210,14 +198,14 @@
                                                id="descriptionNone"
                                                onchange="changeAdditionalOption(false, 'addMenuDescId')" 
                                                value="false" ${thepromo.boolAddDesc eq 'false' ? 'checked' : ''}>
-                                        없음
+                                        None
                                     </label>
                                     <label class="custom-label" for="descriptionYes">
                                         <input type="radio" name="boolAddDesc"
                                                id="descriptionYes"
                                                onchange="changeAdditionalOption(true, 'addMenuDescId')" 
                                                value="true" ${thepromo.boolAddDesc eq 'true' ? 'checked' : ''}>
-                                        있음
+                                        Yes
                                     </label>
                                     <!-- <input type="hidden" id="isAddDescInput" value="false" name="boolAddDesc"> -->
                                     <input type="text" class="custom-input form-control" id="addMenuDescId" value="${thepromo.addMenuDesc}" name="addMenuDesc" ${thepromo.boolAddDesc eq 'true' ? '' : 'disabled'}>
@@ -233,9 +221,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>AI 카페봇 멘트 생성
-                            </th>
-                            <th>테스트 진행<span class="info">* 카페봇이 어떻게 말하는지 확인해보세요!</span>
+                            <th>Generate AI CafeBot Message</th>
+                            <th>Test Progress<span class="info">* Check how the CafeBot speaks!</span>
                             </th>
                         </tr>
                     </thead>
@@ -246,16 +233,16 @@
                              <!-- textarea with actual content, not using 'value' attribute -->
                             <textarea id="ment-textarea" name="ment">${thepromo.ment}</textarea>
                             <div class="button-container">
-                                <button type="button" onclick="createMent()" class="btn btn-outline-light btn-sm">멘트생성
+                                <button type="button" onclick="createMent()" class="btn btn-outline-light btn-sm">Generate Message
                                 </button>
-                                <!-- <button type="button" class="btn btn-outline-light btn-sm">불러오기
+                                <!-- <button type="button" class="btn btn-outline-light btn-sm">Load
                                 </button> -->
-                                <button type="button" class="btn btn-outline-light btn-sm">수정
+                                <button type="button" class="btn btn-outline-light btn-sm">Edit
                                 </button>
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary">카페봇 홍보 테스트
+                            <button type="button" class="btn btn-primary">CafeBot Promotion Test
                             </button>
                         </td>
 
@@ -266,13 +253,13 @@
             <div class="form-buttons">
                 
                 <button type="submit" class="btn btn-primary">
-                    수정
+                    Edit
                 </button>
 
                 <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
-                    <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=kor" 
-                        onclick="return confirm('이 프로모션을 정말 삭제하시겠습니까?');" style="text-decoration: none; ">
-                        삭제
+                    <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=eng" 
+                        onclick="return confirm('Are you sure you want to delete this promotion?');" style="text-decoration: none;">
+                        Delete
                     </a>
                 </button>
 
@@ -287,12 +274,11 @@
 
     </div>
 
-    
     <script>
 
         $(document).ready(function() {
             // Timepicker initialization with 30-minute interval and 24-hour format
-            console.log("timepicker 실행");
+            console.log("timepicker initialized");
             $('.timepicker').timepicker({
                 timeFormat: 'HH:mm',      // 24-hour format
                 interval: 30,             // 30-minute intervals
@@ -308,11 +294,6 @@
 
     
     </script>
-
-
- 
-
-
 
 </body>
 </html>

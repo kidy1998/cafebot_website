@@ -138,7 +138,7 @@ public class MenuPromotionService {
     private int calculateFreq(int interval, LocalTime mentEndTime, LocalTime mentStartTime){
         Duration duration;
         Long minutes = Duration.between(mentStartTime,mentEndTime).toMinutes();
-        return (int)(minutes/interval);
+        return Math.abs((int)(minutes/interval));
     }
 
     private Status decideStatus(LocalDate endDate, LocalDate startDate, Boolean isAlways){

@@ -72,9 +72,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/dasom_location.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/beverageDiscount.js"></script>
-
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>

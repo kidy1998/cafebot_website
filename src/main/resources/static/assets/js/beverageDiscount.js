@@ -1,5 +1,7 @@
-document.querySelector('.dropbtn').addEventListener('click', function() {
-    document.querySelector('.dropdown-content').classList.toggle('show');
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.dropbtn').addEventListener('click', function() {
+        document.querySelector('.dropdown-content').classList.toggle('show');
+    });
 });
 
 
@@ -42,8 +44,8 @@ function testFunc(){
 document.addEventListener('DOMContentLoaded', function() {
 
 
-    // 드롭다운 메뉴를 클릭할 때 show 클래스를 토글하는 함수
-    function toggleDropdown(event) {
+      // 드롭다운 메뉴를 클릭할 때 show 클래스를 토글하는 함수
+      function toggleDropdown(event) {
 
         const dropdownToggle = event.target.closest('.dropdown-toggle');
         if (!dropdownToggle) return;
@@ -54,28 +56,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // dropdownMenu가 존재하고, classList를 사용할 수 있는지 확인
         if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+            
+            // 다른 열려있는 드롭다운 메뉴를 닫기 (optional: 페이지에서 하나만 열리도록 할 때)
+            document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                if (menu !== dropdownMenu) {
+                    menu.classList.remove('show');
+                }
+            });
 
-            // dropdownMenu.classList.add('show');
+            // dropdownMenu에 show 클래스를 추가하거나 제거
+            dropdownMenu.classList.toggle('show');
 
         } else {
             console.error('Dropdown menu not found or does not have the correct class.');
         }
 
+        // 이벤트가 전파되지 않도록 방지 (드롭다운 외부를 클릭하면 닫히도록)
+        event.stopPropagation();
     }
 
-    // 모든 .dropdown-toggle 요소에 클릭 이벤트 리스너 추가
-    document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
-        toggle.addEventListener('click', toggleDropdown);
+
+
+    // 전역 클릭 핸들러 (드롭다운 외부 클릭 시 닫기)
+    document.addEventListener('click', function(event) {
+        const isClickInside = event.target.closest('.dropdown-toggle, .dropdown-menu');
+        if (!isClickInside) {
+            document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                menu.classList.remove('show');
+            });
+        }
     });
 
-    // 드롭다운 외부 클릭 시 열려있는 모든 드롭다운 닫기
-//    document.addEventListener('click', function (event) {
-//        if (!event.target.closest('.dropdown')) {
-//            document.querySelectorAll('.dropdown-menu.show').forEach(function (menu) {
-//                menu.classList.remove('show');
-//            });
-//        }
-//    });
+    // 드롭다운 토글 요소에 클릭 이벤트 추가
+    document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
+        dropdown.addEventListener('click', toggleDropdown);
+    });
 
     // 드롭다운 항목 클릭 시 선택된 텍스트로 업데이트하는 코드
     document.querySelectorAll('.dropdown-item').forEach(function(item) {
@@ -651,14 +666,17 @@ $('.custom-select-option').on('click', function() {
 });
 
 
-function changeAdditionalOption(boolValue, radioYesId, inputName){
+function changeAdditionalOption(isEnabled, inputId) {
 
-    console.log("changeAdditionalOption function start");
-    if (bool){
-        document.querySelector(`input[name='${inputName}']`).disabled = false;
-        document.getElementById('${radioYesId}').checked=true;
+    const inputField = document.getElementById(inputId);
+    if (isEnabled) {
+        inputField.disabled = false;  // 입력 필드를 활성화
+    } else {
+        inputField.disabled = true;   // 입력 필드를 비활성화
+        inputField.value = '';        // 비활성화될 때 필드의 값을 초기화
     }
 }
+
 
 
 
@@ -692,10 +710,10 @@ function toggleInput(radioName, inputName) {
 
 }
 
-function loadUpdateContent(menuPromoId){
+function loadUpdateContent(menuPromoId, lang){
     var xhr = new XMLHttpRequest();
     // 어떤 요청을 보내는지 객체 초기화
-    xhr.open('GET','/api/promotion-discount/updatepage?id='+menuPromoId,true);
+    xhr.open('GET','/api/promotion-discount/updatepage?id='+menuPromoId +'&lang='+lang ,true);
 
     // 요청 성공할 경우 onload 설정
     xhr.onload=function(){
@@ -879,7 +897,7 @@ function createMent(){
         },
         success: function (response) {
             console.log(response.ment);
-            document.getElementById("ment-text").value=response.ment;
+            // document.getElementById("ment-text").value=response.ment;
             document.getElementById("ment-textarea").value=response.ment;
         },
         error: function () {
@@ -888,4 +906,34 @@ function createMent(){
     });
 
 }
+
+
+
+/*  제품 등록 시 유효성을 검사하는 함수   */
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('promotionForm');
+
+    form.addEventListener('submit', function (event) {
+        // 필수 입력 요소들 (name으로 접근)
+        const category = document.querySelector('input[name="category"]').value;
+        const menu = document.querySelector('input[name="menu"]').value;
+        const discPrice = document.querySelector('input[name="discPrice"]').value;
+        const startTime = document.querySelector('input[name="startTime"]').value;
+        const endTime = document.querySelector('input[name="endTime"]').value;
+        const mentStartTime = document.querySelector('input[name="mentStartTime"]').value;
+        const mentEndTime = document.querySelector('input[name="mentEndTime"]').value;
+        const interval = document.querySelector('input[name="interval"]').value;
+        const discVal = document.querySelector('input[name="discVal"]').value;
+
+        // 검증 로직
+        if (!category || !menu || !discPrice || !startTime || !endTime || !mentStartTime || !mentEndTime || !interval || !ment || !discVal) {
+            alert("제출 양식을 지켜주세요! 모든 필수 항목을 입력해야 합니다.");
+            event.preventDefault(); // 제출을 막음
+            return;
+        }
+
+        // 추가적인 검증이 필요한 경우 여기에 추가 가능
+    });
+});
 

@@ -7,22 +7,22 @@
 </head>
 <body>
     <div class="card-body">
-        <h4 class="card-title">제품홍보 완료</h4>
+        <h4 class="card-title">Completed Promotion</h4>
         <div class="completed-table">
             <table class="table completed-promotion-list">
                 <thead>
                     <tr>
-                        <th>상태</th>
-                        <th>품목</th>
-                        <th>제품</th>
-                        <th>정가</th>
-                        <th>할인가</th>
-                        <th>행사기간</th>
-                        <th>행사시간</th>
-                        <th>멘트발화시간</th>
-                        <th>빈도수</th>
-                        <th>조건 및 멘트</th>
-                        <th>편집</th>
+                        <th>Status</th>
+                        <th>Category</th>
+                        <th>Product</th>
+                        <th>Regular Price</th>
+                        <th>Discounted Price</th>
+                        <th>Promotion Period</th>
+                        <th>Promotion Time</th>
+                        <th>Speech Time</th>
+                        <th>Frequency</th>
+                        <th>Conditions</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,14 +32,14 @@
                                 <td>${promotion.status}</td>
                                 <td>${promotion.category}</td>
                                 <td>${promotion.menu}</td>
-                                <td>${promotion.price}원</td>
-                                <td><!--<span style="color: red">(-${promotion.discVal})&nbsp</span>-->${promotion.discPrice}원</td>
+                                <td>${promotion.price} KRW</td>
+                                <td><!--<span style="color: red">(-${promotion.discVal})&nbsp</span>-->${promotion.discPrice}KRW</td>
                                 <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                 <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                 <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
-                                <td>${promotion.freq}회</td>
-                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">보기</button></td>
-                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `kor`)">편집</button></td>
+                                <td>${promotion.freq} times</td>
+                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">View</button></td>
+                                <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `eng`)">Edit</button></td>
                             </tr>
                         </c:if>
                     </c:forEach>
@@ -59,11 +59,11 @@
         <div id="additionalContentModal" class="modal-addc">
             <div class="modal-popup-addc">
                 <ul>
-                    <li><span>할인 조건 추가</span><span id="modal-additional-cond">내용1</span></li>
-                    <li><span>제품 소개</span><span id="modal-product-desc">내용2</span></li>
-                    <li><span>AI 멘트 생성</span><span id="modal-ment">내용3</span></li>
+                    <li><span>Condition</span><span id="modal-additional-cond">Content 1</span></li>
+                    <li><span>Description</span><span id="modal-product-desc">Content 2</span></li>
+                    <li><span>AI Message</span><span id="modal-ment">Content 3</span></li>
                 </ul>
-                <button type="button" class="close-btn-addc" onclick="closeAdditionalContent()">닫기</button>
+                <button type="button" class="close-btn-addc" onclick="closeAdditionalContent()">Close</button>
             </div>
         </div>
     </div>

@@ -73,7 +73,7 @@ public class MenuPromotionController {
      */
     @GetMapping("/main")
     public String mainPage(HttpServletRequest request,@ModelAttribute(name = "message", binding = false) String message,
-                           Model model) {
+                           Model model, @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) {
         HttpSession session = request.getSession(false);
        
         Long storeId= (Long)session.getAttribute("storeId");
@@ -91,8 +91,15 @@ public class MenuPromotionController {
         if (message != null) {
             model.addAttribute("message", message);
         }
-
-        return "promotion/promotion_main";
+           
+        if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+            return "promotion/promotion_main_eng";
+        } else {
+            // 기본값으로 한국어 페이지 반환
+            return "promotion/promotion_main";
+        }
+       
     }
 
     
@@ -107,20 +114,21 @@ public class MenuPromotionController {
     public String registerMenuPromotion(@ModelAttribute MenuPromotionRequestDTO requestDTO,
                                         BindingResult bindingResult,
                                         HttpServletRequest request,
-                                        RedirectAttributes redirectAttribute){
+                                        RedirectAttributes redirectAttribute,
+                                        @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
         HttpSession session = request.getSession(false);
         
         if(requestDTO.getBoolIsAlways() == null) {
         	requestDTO.setBoolIsAlways(false);
         }
         
-        System.out.println(requestDTO.toString());
+        System.out.println("등록 메뉴정보 : " + requestDTO.toString());
 
         Long storeId = (Long)session.getAttribute("storeId");
         menuPromotionService.registerMenuPromotion(storeId, requestDTO);
         redirectAttribute.addFlashAttribute("message", "register");
         
-        return "redirect:/api/promotion-discount/main";
+        return "redirect:/api/promotion-discount/main?lang=" + lang;
     }
 
     /**
@@ -132,7 +140,8 @@ public class MenuPromotionController {
      */
     @GetMapping("/updatepage")
     public String loadUpdatePage(HttpServletRequest request,
-            @RequestParam(name = "id") Long id, Model model){
+            @RequestParam(name = "id") Long id, Model model,
+            @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
         HttpSession session = request.getSession(false);
       
         Long storeId = (Long)session.getAttribute("storeId");
@@ -141,10 +150,17 @@ public class MenuPromotionController {
 
         MenuPromotionResponseDTO dto = menuPromotionService.findOneMenuPromotion(id);
         
-        System.out.println("수정 메뉴정보 : " + dto.toString());
+        System.out.println("해당 메뉴정보 : " + dto.toString());
         model.addAttribute("thepromo",dto);
-
-        return "promotion/fragments/contentupdate";
+        
+        if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+        	return "promotion/fragments/contentupdate_eng";
+        } else {
+            // 기본값으로 한국어 페이지 반환
+        	return "promotion/fragments/contentupdate";
+        }
+        
     }
 
     
@@ -160,7 +176,8 @@ public class MenuPromotionController {
     public String updatePromotionContent(@ModelAttribute MenuPromotionRequestDTO requestDTO,
                                          BindingResult bindingResult,
                                          HttpServletRequest request,
-                                         RedirectAttributes redirectAttribute){
+                                         RedirectAttributes redirectAttribute,
+                                         @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         HttpSession session = request.getSession(false);
       
@@ -173,8 +190,8 @@ public class MenuPromotionController {
         menuPromotionService.updatePromotionContent(requestDTO);
         
         redirectAttribute.addFlashAttribute("message", "update");
-
-        return "redirect:/api/promotion-discount/main";
+        
+        return "redirect:/api/promotion-discount/main?lang=" + lang;
     }
 
     @ResponseStatus(HttpStatus.SEE_OTHER)
@@ -200,13 +217,14 @@ public class MenuPromotionController {
     @GetMapping("/delete")
     public String deleteMenuPromotion(@RequestParam(name = "id")Long id,
                                       HttpServletRequest request,
-                                      RedirectAttributes redirectAttribute){
+                                      RedirectAttributes redirectAttribute,
+                                      @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
     
         menuPromotionService.deleteMenuPromotion(id);
         
         redirectAttribute.addFlashAttribute("message", "delete");
         
-        return "redirect:/api/promotion-discount/main";
+        return "redirect:/api/promotion-discount/main?lang=" + lang;
 
     }
 
