@@ -19,21 +19,28 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class MenuPromotionMent {
+public class MenuPromotionMentController {
 	
 	  private final MenuPromotionService menuPromotionService;
 	
- /* 로봇 발화 멘트 전송 - 제품 홍보 */
+ 
     
+    /**
+     * 로봇 => 서버로 홍보 멘트 요청 왔을 때 시간과 storeID 받아서 홍보 멘트 return
+     * @param time
+     * @param storeID
+     * @return
+     */
     @GetMapping("/robot/ment")
     @ResponseBody
-    public ResponseEntity<String> MenuPromotionRobotMent(@RequestParam(name = "time") String time) {
+    public ResponseEntity<String> MenuPromotionRobotMent(@RequestParam(name = "time") String time,
+    		@RequestParam(name="storeID") Long storeID) {
     	
     	// String으로 받은 시간을 LocalTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime localTime = LocalTime.parse(time, formatter);
 
-        String response = menuPromotionService.checkMent(localTime);
+        String response = menuPromotionService.checkMent(localTime, storeID);
         return ResponseEntity.ok().body(response);
     }
 

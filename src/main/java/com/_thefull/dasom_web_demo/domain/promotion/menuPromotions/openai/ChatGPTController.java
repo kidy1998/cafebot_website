@@ -18,6 +18,7 @@ import java.util.Collections;
 @RequestMapping("/openai")
 @RequiredArgsConstructor
 public class ChatGPTController {
+	
     @Value("${openai.model}")
     private String model;
 
@@ -27,6 +28,11 @@ public class ChatGPTController {
     @Autowired
     private RestTemplate template;
 
+    /**
+     * 홍보 멘트 테스트 버튼 클릭시 작동 => 현재 구현 X
+     * @param prompt
+     * @return
+     */
     @PostMapping("/testchat")
     public String chat(@RequestParam(name = "prompt")String prompt){
         ChatGPTRequestDTO req = new ChatGPTRequestDTO(model, prompt);
@@ -34,6 +40,11 @@ public class ChatGPTController {
         return res.getChoices().get(0).getMessage().getContent();
     }
 
+    /**
+     * 홍보 메뉴 등록 시 홍보 멘트 chatgpt 작성
+     * @param dto
+     * @return
+     */
     @PostMapping("/ment")
     public ResponseEntity<?> createAiMent(@ModelAttribute ForMentOfMenuPromotionDTO dto){
 
@@ -44,6 +55,12 @@ public class ChatGPTController {
 
     }
 
+    /**
+     * createAiMent 에서의 프롬프트 생성
+     * @param dto
+     * @param menuName
+     * @return
+     */
     private String createPrompt(ForMentOfMenuPromotionDTO dto, String menuName){
 
         String prompt = "카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 "+menuName+"이고,"
@@ -62,7 +79,17 @@ public class ChatGPTController {
     }
     
     
+    /*=====================================================================================================================*/
     
+    
+    /**
+     * chatgpt 에서 시나리오에 따른 멘트 생성
+     * @param dto
+     * @param storeName
+     * @param localTime
+     * @param people
+     * @return
+     */
     public String createScenarioMent(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people){
 
         String prompt = createScenario(dto, storeName, localTime, people);
@@ -80,6 +107,14 @@ public class ChatGPTController {
     
     
 
+	/**
+	 * createScenarioMent 에서의 프롬프트 생성
+	 * @param dto
+	 * @param storeName
+	 * @param localTime
+	 * @param people
+	 * @return
+	 */
 	private String createScenario(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people) {
 		
 		String prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야할 일은 인원, 시간 등에 관한 정보를 받고 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 돼."

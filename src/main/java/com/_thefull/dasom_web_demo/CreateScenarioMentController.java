@@ -19,13 +19,21 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class CreateMentController {
+public class CreateScenarioMentController {
 	
 	private final DasomLocationService dasomLocationService;
 	private final StoreService dasomStoreService;
 	private final ChatGPTController chatGPTController;
 	
 	
+	/**
+	 * 로봇 에서 사람 파악 후 서버에 요청 => 서버에서 시나리오에 따른 멘트 발화
+	 * @param robotID
+	 * @param storeID
+	 * @param people
+	 * @param time
+	 * @return
+	 */
 	@GetMapping("/createment")
     public String createMeeting(
             @RequestParam(name = "robotID") int robotID,

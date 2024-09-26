@@ -157,11 +157,11 @@ public class MenuPromotionService {
     }
     
     
-    public String checkMent(LocalTime localTime) {
-        
-  
-        // STATUS가 1(진행중)인 데이터 조회
-        List<MenuPromotion> activePromotions = menuPromotionsRepository.findByStatus(Status.IN_PROGRESS);
+    public String checkMent(LocalTime localTime, Long storeId) {
+
+        // 해당 storeId의 STATUS가 1(진행중)인 데이터 조회
+        List<MenuPromotion> activePromotions = menuPromotionsRepository.findByStoreIdAndStatus(storeId, Status.IN_PROGRESS);
+
 
         // STATUS가 1(진행중)인 데이터 중 mentStartTime과 mentEndTime 사이에 있는 경우 ment 반환
         for (MenuPromotion promotion : activePromotions) {

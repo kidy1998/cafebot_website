@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface MenuPromotionsRepository extends JpaRepository<MenuPromotion, Long> {
     List<MenuPromotion> findByStore(Store store);
-    List<MenuPromotion> findByStatus(Status status);
+	List<MenuPromotion> findByStoreIdAndStatus(Long storeId, Status inProgress);
 }
