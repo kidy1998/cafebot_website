@@ -124,5 +124,14 @@ public class DasomLocationService {
        
         dasomLocationRepository.save(dasomLocation);
     }
+    
+    public DasomLocationResponseDTO findFirstRobotLocation(int robotId) {
+        // robotId와 use가 true인 첫 번째 DasomLocation을 조회
+        DasomLocation location = dasomLocationRepository.findFirstByRobotIdAndUseTrueOrderByUseDesc(robotId)
+                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_DASOM_LOCATION, "해당 로봇의 위치를 찾을 수 없습니다."));
+
+        // 결과를 DTO로 변환하여 반환
+        return DasomLocationResponseDTO.of(location);
+    }
 
 }
