@@ -23,9 +23,12 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Slf4j
@@ -152,4 +155,26 @@ public class MenuPromotionService {
         else if(now.isBefore(startDate)) return Status.SCHEDULED;
         else return Status.IN_PROGRESS;
     }
+    
+    
+    public String checkMent(LocalTime localTime) {
+        
+  
+        // STATUS가 1(진행중)인 데이터 조회
+        List<MenuPromotion> activePromotions = menuPromotionsRepository.findByStatus(Status.IN_PROGRESS);
+
+        // STATUS가 1(진행중)인 데이터 중 mentStartTime과 mentEndTime 사이에 있는 경우 ment 반환
+        for (MenuPromotion promotion : activePromotions) {
+            if (localTime.isAfter(promotion.getMentStartTime()) && localTime.isBefore(promotion.getMentEndTime())) {
+                return promotion.getMent();
+            }
+        }
+
+        // 해당하는 경우가 없으면 빈 문자열 반환
+        return "";
+    }
+
+    
+    
+    
 }
