@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <div style="padding: 20px;"><a href="../../?lang=eng" style="text-decoration : none; text-color: black;"><h2>Admin Page</h2></a></div>
+            <div style="padding: 20px;"><a href="/?lang=eng" style="text-decoration : none; text-color: black;"><h2>Admin Page</h2></a></div>
 
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="../../page/main" aria-expanded="false"
+                    <a class="nav-link" data-bs-toggle="collapse" href="/page/main" aria-expanded="false"
                         aria-controls="form-elements">
                         <i class="material-symbols-outlined">bar_chart_4_bars</i>
                         <span class="menu-title">Sales Data Statistics</span>
@@ -28,7 +28,7 @@
                     <div class="collapse" id="promotions">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link"
-                                                    href="../../api/promotion-discount/main?lang=eng">Product Promotion</a></li>
+                                                    href="/api/promotion-discount/main?lang=eng">Product Promotion</a></li>
                             <li class="nav-item"><a class="nav-link"
                                                     href="#">Promotion</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Notice</a>
@@ -53,8 +53,8 @@
                                 </a>
                                 <div class="show" id="cafebotlocations">
                                     <ul class="nav flex-column sub-menu" style="padding-left: 10px;">
-                                        <li style="list-style-type: none;" ><a class="nav-link" href="#"><span class="selectedMenuIcon">></span> &nbsp CafeBot Promotion Status</a></li>
-                                        <li style="list-style-type: none;" ><a class="nav-link" href="../../settings/dasom-locations/main?lang=eng"><span class="selectedMenuIcon" id="cafebotLocation_icon">></span> &nbsp CafeBot Location Settings</a></li>
+                                        <li style="list-style-type: none;" ><a class="nav-link" href="#"><span class="selectedMenuIcon">></span> &nbsp Promotion Status</a></li>
+                                        <li style="list-style-type: none;" ><a class="nav-link" href="/settings/dasom-locations/main?lang=eng"><span class="selectedMenuIcon" id="cafebotLocation_icon">></span> &nbsp Location Settings</a></li>
                                         <li style="list-style-type: none;" ><a class="nav-link" href="#"><span class="selectedMenuIcon">></span> &nbsp Unlink</a></li>
                                     </ul>
                                 </div>
@@ -65,12 +65,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/page/user/login">Login</a>
-                    <a class="nav-link" href="/page/user/register">Sign Up</a>
-
                     <c:choose>
+
+                        <c:when test="${sessionScope.userId == null}">
+                            <a class="nav-link" href="/page/user/login?lang=eng">Login</a>
+                            <a class="nav-link" href="/page/user/register?lang=eng">Sign Up</a>
+                        </c:when>
+
                         <c:when test="${sessionScope.userId != null}">
-                            <a class="nav-link" href="/api/user/logout">Logout</a>
+                            <a class="nav-link" href="/api/user/logout?lang=eng">Logout</a>
                         </c:when>
                     </c:choose>
 

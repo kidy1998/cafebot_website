@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -36,7 +37,9 @@ public class LoginController {
                         BindingResult bindingResult,
                         HttpServletRequest request,
                         HttpServletResponse response,
-                        RedirectAttributes redirectAttributes) throws IOException{
+                        RedirectAttributes redirectAttributes,
+                        @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang
+                        ) throws IOException{
 
         // 로그인 서비스 호출 (비밀번호 검증 포함)
         User user = loginService.login(requestDTO);
@@ -54,29 +57,34 @@ public class LoginController {
                 session.setAttribute("robotId", robotId);
                 session.setAttribute("userName", user.getName());
 
-                return "redirect:/page/main";
+                if ("eng".equals(lang)) {
+                    // 영어 페이지 반환
+                	 return "redirect:/page/main?lang=" + lang;
+                } else {
+                    // 기본값으로 한국어 페이지 반환
+                	 return "redirect:/page/main";
+                }
+               
             } else {
-                // 비밀번호 불일치
-            	System.out.println("비밀번호 불일치");
             	
-                return "redirect:/page/user/login?error=password_incorrect";
+                // 비밀번호 불일치
+                return "redirect:/page/user/login?lang=" + lang + "&error=password_incorrect";
             }
         } else {
             // 사용자 없음
-        	System.out.println("회원정보 불일치");
-        	
-            return "redirect:/page/user/login?error=password_incorrect";
+        	return "redirect:/page/user/login?lang=" + lang + "&error=password_incorrect";
         }
     }
     
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout(HttpServletRequest request,
+    		@RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate(); // 세션 무효화
         }
-        return "redirect:/page/main";
+        return "redirect:/page/main?lang="+lang;
     }
 
 }

@@ -30,51 +30,89 @@
 </head>
 <body>
  <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="register container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth px-0">
-            <div class="row w-100 mx-0">
-                <div class="col-lg-4 mx-auto">
-                    <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <div class="brand-logo">
-                            <h3 style="color:#462200"> cafeBot</h3>
-                        </div>
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <h4>Sign up</h4>
+                <h6 class="fw-light"></h6>
+                <form action="../../api/user/register?lang=eng" method="post" class="pt-3" id="registerForm">
+                  <div class="form-group">
 
-                        <!-- lang 값이 'eng'일 때 영어 메시지, 그렇지 않으면 한국어 메시지 -->
-                        <c:choose>
-                            <c:when test="${lang == 'eng'}">
-                                <c:if test="${not empty name}">
-                                    <h4>Welcome, ${name}! Your registration was successful.</h4>
-                                </c:if>
-                                <h6 class="fw-light">Log in to access our services</h6>
-                            </c:when>
-                            <c:otherwise>
-                                <c:if test="${not empty name}">
-                                    <h4>${name}님 환영합니다! 회원가입이 성공적으로 처리되었습니다</h4>
-                                </c:if>
-                                <h6 class="fw-light">로그인하여 서비스를 이용해보세요</h6>
-                            </c:otherwise>
-                        </c:choose>
-
-                        <form class="pt-3">
-                            <div class="text-center mt-4 fw-light">
-                                <!-- 링크 텍스트도 lang 값에 따라 다르게 설정 -->
-                                <c:choose>
-                                    <c:when test="${lang == 'eng'}">
-                                        Go to login <a href="/page/user/login?lang=eng" class="text-primary">Login</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        로그인 하러가기 <a href="/page/user/login?lang=kor" class="text-primary">Login</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </form>
+                    <div>
+                      <label for="exampleInputStoreCode1">Store code</label>
                     </div>
-                </div>
-            </div>
-        </div>
-      </div>
+                    <input name="code" type="text" class="form-control form-control-lg"
+                           id="exampleInputStoreCode1" placeholder="1">
+                    <br>
 
-       <!-- page-body-wrapper ends -->
+                    <div>
+                      <label for="exampleInputUsername1">Name</label>
+                    </div>
+                    <input name="name" type="text" class="form-control form-control-lg"
+                           id="exampleInputUsername1" placeholder="ex) 홍길동">
+                    <br>
+
+                    <div>
+                      <label for="exampleInputPhonenum1">Phone number</label>
+                    </div>
+                    <input name="phoneNum" type="text" class="form-control form-control-lg"
+                           id="exampleInputPhonenum1" placeholder="Enter your phone number">
+                    <br>
+
+                    <div>
+                      <label for="exampleInputEmail1">Email</label>
+                    </div>
+                    <input name="email" type="email" class="form-control form-control-lg"
+                           id="exampleInputEmail1" placeholder="Enter your email">
+                    <br>
+
+                    <div>
+                      <label for="exampleInputPassword1">Password</label>
+                    </div>
+                    <input name="password" type="password" class="form-control form-control-lg"
+                           id="exampleInputPassword1" placeholder="Enter at least 6 characters">
+                    <br>
+
+                    <div>
+                      <label for="exampleInputPasswordConfirm1">Confirm Password</label>
+                    </div>
+                    <input type="password" class="form-control form-control-lg" id="exampleInputPasswordConfirm1" placeholder="Enter at least 6 characters">
+                    <span id="passwordMatchStatus"></span>
+
+                  </div>
+                </form>
+                <br>
+
+                <!-- Error Modal -->
+                <div id="errorModal" class="modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title"><strong>Error</strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Please fill in all fields correctly.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-3 d-grid gap-2">
+                  <button onclick="validateAndSubmit()" form="registerForm" type="button" class="btn btn-primary btn-lg fw-medium auth-form-btn">Sign Up</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
     </div>
 
 
@@ -99,6 +137,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/register-submit.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/register-passwordconfirm.js"></script>
 
 
 

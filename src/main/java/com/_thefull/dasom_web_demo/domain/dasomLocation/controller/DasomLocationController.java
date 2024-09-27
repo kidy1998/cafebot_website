@@ -33,13 +33,24 @@ public class DasomLocationController {
      * @throws IOException
      */
     @ModelAttribute
-    public String checkLogin(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public String checkLogin(HttpServletRequest request, HttpServletResponse response, Model model,
+    		@RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) throws IOException {
         HttpSession session = request.getSession(false);
         
         System.out.println("userId : " + session.getAttribute("userId"));
         
         if (session == null || session.getAttribute("userId") == null) {
-           return "redirect:/page/user/login?message=login_required";
+        	
+        	
+        	if ("eng".equals(lang)) {
+                // 영어 페이지 반환
+        		 return "user/login_eng?message=login_required";
+            } else {
+                // 기본값으로 한국어 페이지 반환
+            	return "user/login?message=login_required";
+            }
+        	
+           
         } else {
             model.addAttribute("userId", session.getAttribute("userId"));
             return null;

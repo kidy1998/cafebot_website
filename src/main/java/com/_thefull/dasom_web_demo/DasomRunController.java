@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/")
 public class DasomRunController {
 
@@ -14,10 +17,10 @@ public class DasomRunController {
     	
     	 if ("eng".equals(lang)) {
              // 영어 페이지 반환
-    		 return "main/main_eng";  // /page/main 경로로 리다이렉트
+    		 return "main/main_eng"; 
          } else {
              // 기본값으로 한국어 페이지 반환
-        	 return "main/main";  // /page/main 경로로 리다이렉트
+        	 return "main/main"; 
          }
     	 
         
