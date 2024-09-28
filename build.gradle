@@ -14,9 +14,34 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(20)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
+
+// JavaCompile 및 Test 태스크가 Java 17을 사용하도록 강제 설정
+tasks.withType(JavaCompile).configureEach {
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(Test).configureEach {
+    javaLauncher.set(
+        javaToolchains.launcherFor {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    )
+}
+
+
+bootWar {
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+}
+
 
 configurations {
 	compileOnly {
