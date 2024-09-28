@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class MenuPromotionMentController {
+public class MenuPromotionMent {
 	
 	  private final MenuPromotionService menuPromotionService;
 	
