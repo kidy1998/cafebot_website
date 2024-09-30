@@ -41,7 +41,7 @@
     <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:../../partials/_sidebar.html -->
-            <%@ include file="../promotion/fragments/nav-menu.jsp" %>
+            <%@ include file="../promotion/fragments/nav-menu_eng.jsp" %>
 
     <!-- partial -->
 
