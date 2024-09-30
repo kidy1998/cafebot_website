@@ -69,7 +69,8 @@
             <div style="text-align: center;" >
                 <c:if test="${listSize > 3}">
                     <button class="rotated-arrow" id="all_list_btn" type="button">
-                        <image style="width: 20px; height: 100%" src="${pageContext.request.contextPath}/assets/images/pngwing.com.svg"/>
+                        <p style="width: 50px; height: 100%;">더 보기</p>
+                        <!-- <image style="width: 20px; height: 100%" src="${pageContext.request.contextPath}/assets/images/pngwing.com.svg"/> -->
                     </button>
                 </c:if>
             </div>

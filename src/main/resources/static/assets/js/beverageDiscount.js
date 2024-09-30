@@ -159,36 +159,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 할인가 입력 후 확인 버튼 클릭 시 할인가 영역에 할인된 금액 표시
-    document.getElementById('confirmDiscountPriceBtn').addEventListener('click', function() {
+    // // 할인가 입력 후 확인 버튼 클릭 시 할인가 영역에 할인된 금액 표시
+    // document.getElementById('confirmDiscountPriceBtn').addEventListener('click', function() {
 
-        var discountPriceInput = document.getElementById('discountPriceInput').value;
-        var ProductPriceText = document.getElementById('productPrice').innerText;
-        var discountPrice = parseInt(ProductPriceText.replace('원', '').replace(',', ''));
+    //     var discountPriceInput = document.getElementById('discountPriceInput').value;
+    //     var ProductPriceText = document.getElementById('productPrice').innerText;
+    //     var discountPrice = parseInt(ProductPriceText.replace('원', '').replace(',', ''));
 
-        if (!isNaN(discountPriceInput) && discountPriceInput.trim() !== '') {
-            var discountedPrice = discountPrice-discountPriceInput;
-            document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()}원)`;
-            document.getElementById('discountPriceInput').value=discountedPrice;
+    //     if (!isNaN(discountPriceInput) && discountPriceInput.trim() !== '') {
+    //         var discountedPrice = discountPrice-discountPriceInput;
+    //         document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()}원)`;
+    //         document.getElementById('discountPriceInput').value=discountedPrice;
 
-        }
-    });
+    //     }
+    // });
 
 });
 
-function onclickConfirmDiscountPriceBtn(){
+function onclickConfirmDiscountPriceBtn() {
+    // 할인할 금액을 숫자로 추출
+    var discountValue = parseInt(document.getElementById('discountPriceInput').value, 10);
+    console.log("Entered discount value: ", discountValue); // 디버그용 콘솔 로그
 
-    var discountPriceInput = document.getElementById('discountPriceInput').value;
-    var ProductPriceText = document.getElementById('productPrice').innerText;
-    var discountPrice = parseInt(ProductPriceText.replace('원', '').replace(',', ''));
+    // 제품 가격을 숫자로 추출
+    var productPriceText = document.getElementById('productPrice').innerText;
+    var productPrice = parseInt(productPriceText.replace('원', '').replace(',', ''), 10);
+    console.log("Product price: ", productPrice); // 디버그용 콘솔 로그
 
-    if (!isNaN(discountPriceInput) && discountPriceInput.trim() !== '') {
-        var discountedPrice = discountPrice-discountPriceInput;
+    if (!isNaN(discountValue) && discountValue > 0 && discountValue < productPrice) {
+        // 할인된 가격 계산
+        var discountedPrice = productPrice - discountValue;
+        console.log("Discounted price: ", discountedPrice); // 디버그용 콘솔 로그
+
+        // 할인된 가격을 표시
         document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()}원)`;
-        document.getElementById('discountPriceInput').value=discountPriceInput;
 
+        // 할인된 가격을 히든 필드에 설정
+        document.getElementById('discPriceInput').value = discountedPrice;
+    } else {
+        alert("유효한 할인 금액을 입력하세요.");
     }
 }
+
+
 
 
 function reload(){
@@ -837,20 +850,20 @@ function loadUpdateContent(menuPromoId, lang){
                 }
             }
 
-            // 할인가 입력 후 확인 버튼 클릭 시 할인가 영역에 할인된 금액 표시
-            document.getElementById('confirmDiscountPriceBtn').addEventListener('click', function() {
+            // // 할인가 입력 후 확인 버튼 클릭 시 할인가 영역에 할인된 금액 표시
+            // document.getElementById('confirmDiscountPriceBtn').addEventListener('click', function() {
 
-                var discountPriceInput = document.getElementById('discountPriceInput').value;
-                var ProductPriceText = document.getElementById('productPrice').innerText;
-                var discountPrice = parseInt(ProductPriceText.replace('원', '').replace(',', ''));
+            //     var discountPriceInput = document.getElementById('discountPriceInput').value;
+            //     var ProductPriceText = document.getElementById('productPrice').innerText;
+            //     var discountPrice = parseInt(ProductPriceText.replace('원', '').replace(',', ''));
 
-                if (!isNaN(discountPriceInput) && discountPriceInput.trim() !== '') {
-                    var discountedPrice = discountPrice-discountPriceInput;
-                    document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()}원)`;
-                    document.getElementById('discountPriceInput').value=discountedPrice;
+            //     if (!isNaN(discountPriceInput) && discountPriceInput.trim() !== '') {
+            //         var discountedPrice = discountPrice-discountPriceInput;
+            //         document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()}원)`;
+            //         document.getElementById('discountPriceInput').value=discountedPrice;
 
-                }
-            });
+            //     }
+            // });
 
 
         }else{
@@ -918,7 +931,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 필수 입력 요소들 (name으로 접근)
         const category = document.querySelector('input[name="category"]').value;
         const menu = document.querySelector('input[name="menu"]').value;
-        const discPrice = document.querySelector('input[name="discPrice"]').value;
+        const discPrice = document.querySelector('input[name="discPrice"]').value;  //할인하려는 가격
         const startTime = document.querySelector('input[name="startTime"]').value;
         const endTime = document.querySelector('input[name="endTime"]').value;
         const mentStartTime = document.querySelector('input[name="mentStartTime"]').value;

@@ -14,6 +14,8 @@ import com._thefull.dasom_web_demo.domain.dasomLocation.service.DasomLocationSer
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.openai.ChatGPTController;
 import com._thefull.dasom_web_demo.domain.store.domain.Store;
 import com._thefull.dasom_web_demo.domain.store.service.StoreService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.JsonObject;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +37,7 @@ public class CreateScenarioMentController {
 	 * @return
 	 */
 	@GetMapping("/createment")
-    public String createMeeting(
+    public JsonNode createMeeting(
             @RequestParam(name = "robotID") int robotID,
             @RequestParam(name = "storeID") long storeID,
             @RequestParam(name = "people") int people,
@@ -61,7 +63,7 @@ public class CreateScenarioMentController {
         // 필요한 처리 로직을 여기에 추가
         String ment = dasomLocation.toString();
         
-        String response = chatGPTController.createScenarioMent(dasomLocation, name, localTime, people);
+        JsonNode response = chatGPTController.createScenarioMent(dasomLocation, name, localTime, people);
         
 
         return response;

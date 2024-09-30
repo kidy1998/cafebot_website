@@ -4,6 +4,13 @@ import com._thefull.dasom_web_demo.domain.dasomLocation.domain.dto.DasomLocation
 import com._thefull.dasom_web_demo.domain.menu.service.MenuService;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.domain.dto.ForMentOfMenuPromotionDTO;
 import com._thefull.dasom_web_demo.domain.store.service.StoreService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +34,10 @@ public class ChatGPTController {
 
     @Autowired
     private RestTemplate template;
+
+	// ObjectMapper는 JSON 변환에 사용
+    private final ObjectMapper mapper = new ObjectMapper(); // ObjectMapper 선언
+    
 
     /**
      * 홍보 멘트 테스트 버튼 클릭시 작동 => 현재 구현 X
@@ -82,27 +93,41 @@ public class ChatGPTController {
     /*=====================================================================================================================*/
     
     
-    /**
-     * chatgpt 에서 시나리오에 따른 멘트 생성
-     * @param dto
-     * @param storeName
-     * @param localTime
-     * @param people
-     * @return
-     */
-    public String createScenarioMent(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people){
-
+ // 실제 응답을 생성하는 메서드
+    public JsonNode createScenarioMent(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people) {
+    	
+        
+        // ChatGPT API 호출을 위한 프롬프트 생성
         String prompt = createScenario(dto, storeName, localTime, people);
-        
         System.out.println("프롬프트 : " + prompt);
-        
+
+        // ChatGPT API 요청 생성 및 호출
         ChatGPTRequestDTO req = new ChatGPTRequestDTO(model, prompt);
-        ChatGPTResponseDTO res=template.postForObject(apiURL,req, ChatGPTResponseDTO.class);
-        
+        ChatGPTResponseDTO res = template.postForObject(apiURL, req, ChatGPTResponseDTO.class);
         System.out.println("요청 : " + req);
-        System.out.println("응답 : " + res);
+        // System.out.println("응답 : " + res);
+
+        // ChatGPT 응답에서 content 추출 (JSON 형식의 문자열)
+        String content = res.getChoices().get(0).getMessage().getContent();
         
-        return res.getChoices().get(0).getMessage().getContent();
+        content = content.replaceAll("```json", "").replaceAll("```", "").trim();
+        
+        System.out.println("Content: " + content); // JSON 형식의 문자열 확인
+
+        // content를 JsonNode로 변환
+        JsonNode jsonResponse = null;
+        try {
+            jsonResponse = mapper.readTree(content); // content를 JSON 객체로 파싱
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 파싱에 실패하면 에러 내용을 JSON으로 생성
+            ObjectNode errorNode = mapper.createObjectNode();
+            errorNode.put("error", "Invalid JSON format");
+            errorNode.put("originalContent", content);
+            return errorNode;
+        }
+
+        return jsonResponse; // JSON 객체 반환
     }
     
     
@@ -118,6 +143,7 @@ public class ChatGPTController {
 	private String createScenario(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people) {
 		
 		String prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야할 일은 인원, 시간 등에 관한 정보를 받고 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 돼."
+				+ "반환 형태는 json 형식으로 반환하고 store:" + storeName + "time : "+localTime + "people :" + people + "scenarioMent : "
 				+ "로봇에 왼쪽에 있는 메뉴들은 " + dto.getLeftSide() + ", 왼쪽 앞은 " + dto.getLeftFront() + "오른쪽 앞은" + dto.getRightFront() + 
 				"오른쪽은" + dto.getRightSide() + "이고 앞에는 " + dto.getFront() + "에 해당하는 메뉴가 있어 여기서 null 로 표시된 메뉴는 없다는 뜻이니 "
 				+ "말을 안하면 돼. 메뉴 홍보에 대한 내용은 2~3개 정도로 작성해줘. 현재 시간은 " + localTime + "인데 이게 낮 12시~2시 사이거나 저녁 6시~8시 일 경우 손님이 많은 시간대로 간주하면 돼. 사람 수는 "

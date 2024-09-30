@@ -2,6 +2,8 @@ package com._thefull.dasom_web_demo;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -33,15 +35,24 @@ public class MenuPromotionMent {
      */
     @GetMapping("/robot/ment")
     @ResponseBody
-    public ResponseEntity<String> MenuPromotionRobotMent(@RequestParam(name = "time") String time,
+    public ResponseEntity<Map<String, Object>> MenuPromotionRobotMent(@RequestParam(name = "time") String time,
     		@RequestParam(name="storeID") Long storeID) {
     	
-    	// String으로 받은 시간을 LocalTime으로 변환
+    	 // String으로 받은 시간을 LocalTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime localTime = LocalTime.parse(time, formatter);
 
+        // DB에서 조회된 값 또는 ChatGPT 응답 값 (String 형태)
         String response = menuPromotionService.checkMent(localTime, storeID);
-        return ResponseEntity.ok().body(response);
+
+        // JSON 응답을 위한 Map 객체 생성
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("id", storeID); // storeID를 JSON에 추가
+        responseBody.put("time", time);  // time을 JSON에 추가
+        responseBody.put("promotionMent", response); // 응답 String을 JSON에 추가
+
+        // JSON 형태로 반환
+        return ResponseEntity.ok().body(responseBody);
     }
 
 }
