@@ -55,7 +55,7 @@ public class DasomLocation extends BaseEntity {
 
     @Column(name = "`USE`")
     @Builder.Default
-    private Boolean use=true;
+    private Boolean use=false;
 
     public void changeUse(Boolean use){
         this.use=use;

@@ -465,11 +465,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function loadUpdateLocationContent(locationId){
+function loadUpdateLocationContent(locationId, lang){
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open('GET','/settings/dasom-locations/updatepage?id='+locationId, true);
+    xhr.open('GET','/settings/dasom-locations/updatepage?id='+locationId+'&lang='+lang, true);
 
     // 요청 성공할 경우 onload 설정
     xhr.onload=function(){

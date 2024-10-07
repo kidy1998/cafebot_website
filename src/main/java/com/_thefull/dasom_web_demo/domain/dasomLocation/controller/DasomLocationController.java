@@ -91,7 +91,8 @@ public class DasomLocationController {
     @GetMapping("/updatepage")
     public String loadUpdatePage(HttpServletRequest request,
                                  @RequestParam(name = "id") Long id,
-                                 Model model){
+                                 Model model,
+                                 @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
         HttpSession session = request.getSession(false);
         if (session==null){
             return "redirect:/page/user/login";
@@ -99,8 +100,14 @@ public class DasomLocationController {
 
         DasomLocationResponseDTO dto = dasomLocationService.findLocationDetails(id);
         model.addAttribute("theLocation", dto);
-
-        return "settings/fragments/location_update";
+        
+        if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+        	return "settings/fragments/location_update_eng";
+        } else {
+            // 기본값으로 한국어 페이지 반환
+        	return "settings/fragments/location_update";
+        }
 
     }
 
@@ -108,7 +115,8 @@ public class DasomLocationController {
     public String createDasomLocation(@ModelAttribute DasomLocationRequestDTO requestDTO,
                                       BindingResult bindingResult,
                                       HttpServletRequest request,
-                                      RedirectAttributes redirectAttribute){
+                                      RedirectAttributes redirectAttribute,
+                                      @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         HttpSession session = request.getSession(false);
         if(session==null){
@@ -121,7 +129,7 @@ public class DasomLocationController {
         
         redirectAttribute.addFlashAttribute("message", "register");
 
-        return "redirect:/settings/dasom-locations/main";
+        return "redirect:/settings/dasom-locations/main?lang="+lang;
     }
 
     /**
@@ -136,7 +144,8 @@ public class DasomLocationController {
     public String changeWhetherUse(@RequestParam(name = "use")Boolean use,
                                    @RequestParam(name = "id")Long id,
                                    HttpServletRequest request,
-                                   RedirectAttributes redirectAttribute){
+                                   RedirectAttributes redirectAttribute,
+                                   @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         HttpSession session = request.getSession(false);
         if(session==null){
@@ -149,7 +158,7 @@ public class DasomLocationController {
         
         redirectAttribute.addFlashAttribute("message", "location");
 
-        return "redirect:/settings/dasom-locations/main";
+        return "redirect:/settings/dasom-locations/main?lang="+lang;
     }
 
     /* 카페봇 위치 설정 전체 수정 PUT */
@@ -158,7 +167,8 @@ public class DasomLocationController {
     public String updateLocation(@ModelAttribute DasomLocationRequestDTO dto,
                                  BindingResult bindingResult,
                                  HttpServletRequest request,
-                                 RedirectAttributes redirectAttribute){
+                                 RedirectAttributes redirectAttribute,
+                                 @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         System.out.println("변경하려는 정보 : " + dto.toString());
 
@@ -170,7 +180,7 @@ public class DasomLocationController {
         
         redirectAttribute.addFlashAttribute("message", "update");
 
-        return "redirect:/settings/dasom-locations/main";
+        return "redirect:/settings/dasom-locations/main?lang="+lang;
 
     }
 

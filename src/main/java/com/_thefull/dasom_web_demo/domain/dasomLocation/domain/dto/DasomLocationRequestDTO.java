@@ -32,7 +32,7 @@ public class DasomLocationRequestDTO {
                 .rightFront(this.rightFront)
                 .front(this.front)
                 .robot(robot)
-                .use(true)
+                .use(false)
                 .build();
     }
 

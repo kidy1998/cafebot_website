@@ -118,7 +118,7 @@
                                     </c:when>
                                 </c:choose>
                                 <br>
-                                <button class="btn-primary edit-location" onclick="loadUpdateLocationContent(${robot_location.id})">
+                                <button class="btn-primary edit-location" onclick="loadUpdateLocationContent(${robot_location.id}, 'eng')">
                                     <i class="material-symbols-outlined">pin_drop</i>
                                     Edit
                                 </button>
