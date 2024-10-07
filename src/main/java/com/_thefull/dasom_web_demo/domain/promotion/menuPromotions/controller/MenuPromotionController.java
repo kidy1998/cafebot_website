@@ -82,6 +82,11 @@ public class MenuPromotionController {
 
         List<MenuPromotionResponseDTO> allPromotionList = menuPromotionService.findAllPromotionList(storeId);
         model.addAttribute("all_promotion_list",allPromotionList);
+        
+        for(MenuPromotionResponseDTO dto : allPromotionList) {
+        	System.out.println("Promotion : " + dto.toString());
+        }
+        
 
         List<Menu> menuList = menuService.findAllMenu(storeId);
         model.addAttribute("menu_list",menuList);

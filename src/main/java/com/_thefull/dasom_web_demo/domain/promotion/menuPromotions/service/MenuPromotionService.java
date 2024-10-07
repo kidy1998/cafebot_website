@@ -44,9 +44,10 @@ public class MenuPromotionService {
     public List<MenuPromotionResponseDTO> findAllPromotionList(Long storeId) {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
-
+        
         List<MenuPromotionResponseDTO> responseDTOList = new ArrayList<>();
-        List<MenuPromotion> findPromoList = menuPromotionsRepository.findByStore(store);
+        List<MenuPromotion> findPromoList = menuPromotionsRepository.findByStoreId(store.getId());
+        
         for (MenuPromotion mp : findPromoList){
             if (mp.getStatus()!= Status.COMPLETED) {
                 int freq= calculateFreq(mp.getMentInterval(), mp.getMentEndTime(), mp.getMentStartTime());
@@ -59,9 +60,12 @@ public class MenuPromotionService {
 
     @Transactional
     public void registerMenuPromotion(Long storeId, MenuPromotionRequestDTO dto) {
+    	
+    	System.out.println("등록dto : " + dto.toString());
+    	
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
-        Menu menu = menuRepository.findByName(dto.getMenu())
+        Menu menu = menuRepository.findById(dto.getMenuPromoId())
                 .orElseThrow(()-> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
         
 
@@ -106,7 +110,7 @@ public class MenuPromotionService {
         MenuPromotion foundMenuPromotion = menuPromotionsRepository.findById(dto.getMenuPromoId())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_MENU_PROMOTION, "메뉴 프로모션을 찾을 수 없습니다"));
 
-        Menu menu = menuRepository.findByName(dto.getMenu())
+        Menu menu = menuRepository.findFirstByName(dto.getMenu())
                 .orElseThrow(()-> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
 
 
