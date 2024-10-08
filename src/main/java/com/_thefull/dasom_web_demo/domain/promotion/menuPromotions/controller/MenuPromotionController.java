@@ -128,6 +128,7 @@ public class MenuPromotionController {
         	requestDTO.setBoolIsAlways(false);
         }
         
+        
         System.out.println("등록 메뉴정보 : " + requestDTO.toString());
 
         Long storeId = (Long)session.getAttribute("storeId");

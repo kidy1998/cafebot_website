@@ -24,7 +24,7 @@ public class MenuPromotionResponseDTO {
 
     Integer price;
     Boolean isRate;
-    Integer discPrice;
+    Integer discPrice; //할인이 적용된 가격
     Integer discRate;
     Integer discVal;
 

@@ -22,11 +22,11 @@ public class MenuPromotionRequestDTO {
     private Boolean boolIsAlways;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Boolean boolEqlStoreOpr;
+    private Boolean boolEqlStoreOpr = false;
 
     private LocalTime mentStartTime;
     private LocalTime mentEndTime;
-    private Boolean boolEqlEventStart;
+    private Boolean boolEqlEventStart = false;
 
     private Integer interval;
 

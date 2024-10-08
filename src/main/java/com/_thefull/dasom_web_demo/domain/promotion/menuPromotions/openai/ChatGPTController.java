@@ -3,11 +3,16 @@ package com._thefull.dasom_web_demo.domain.promotion.menuPromotions.openai;
 import com._thefull.dasom_web_demo.domain.dasomLocation.domain.dto.DasomLocationResponseDTO;
 import com._thefull.dasom_web_demo.domain.menu.service.MenuService;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.domain.dto.ForMentOfMenuPromotionDTO;
+import com._thefull.dasom_web_demo.domain.store.domain.Store;
 import com._thefull.dasom_web_demo.domain.store.service.StoreService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -37,7 +42,7 @@ public class ChatGPTController {
 
 	// ObjectMapper는 JSON 변환에 사용
     private final ObjectMapper mapper = new ObjectMapper(); // ObjectMapper 선언
-    
+    private final StoreService dasomStoreService;
 
     /**
      * 홍보 멘트 테스트 버튼 클릭시 작동 => 현재 구현 X
@@ -57,9 +62,15 @@ public class ChatGPTController {
      * @return
      */
     @PostMapping("/ment")
-    public ResponseEntity<?> createAiMent(@ModelAttribute ForMentOfMenuPromotionDTO dto){
+    public ResponseEntity<?> createAiMent(@ModelAttribute ForMentOfMenuPromotionDTO dto, HttpServletRequest request){
+    	
+    	HttpSession session = request.getSession(false);
+        Long storeId= (Long)session.getAttribute("storeId");
+        
+        Store store = dasomStoreService.findStore(storeId);
+        String name = store.getName();
 
-        String prompt = createPrompt(dto, dto.getMenu());
+        String prompt = createPrompt(dto, name);
         ChatGPTRequestDTO req = new ChatGPTRequestDTO(model, prompt);
         ChatGPTResponseDTO res=template.postForObject(apiURL,req, ChatGPTResponseDTO.class);
         return ResponseEntity.ok(Collections.singletonMap("ment", res.getChoices().get(0).getMessage().getContent()));
@@ -72,17 +83,48 @@ public class ChatGPTController {
      * @param menuName
      * @return
      */
-    private String createPrompt(ForMentOfMenuPromotionDTO dto, String menuName){
-
-        String prompt = "카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 "+menuName+"이고,"
-                +dto.getDiscType() + "은 다음과 같고, 할인 값은 " + dto.getDiscVal() + "입니다. "
-                + "할인기간은" + dto.getStartDate() + "부터 " + dto.getEndDate() + "까지 유효하며, "
-                + "할인 시간은" + dto.getStartTime() + "부터 " + dto.getEndTime() + "까지입니다. "
-                + (dto.getIsAddDiscCond() ? "추가 조건: " + dto.getAddDiscCond() + " " : "")
-                + (dto.getIsAddMenuDesc() ? "추가 메뉴 설명: " + dto.getAddMenuDesc() : "")
-                + "메뉴의 정가는 "+dto.getPrice()+"이고, 정가에서 얼마나 할인했는지 꼭 포함해서 설명해주세요."
-                +"멘트에는 연도를 제외한 할인기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. 그리고 나머지 정보를 참고해서 300자의 홍보멘트를 만들어주세요. 로봇이 말할거야. 숫자는 숫자로 작성하고 "
-                + ", 나머지는 한글로, 매우 자연스럽게 작성해주세요.";
+    private String createPrompt(ForMentOfMenuPromotionDTO dto, String name){
+    	
+    	System.out.println("멘트정보 : " + dto.toString());
+    	
+    	// 한국어 프롬프트 생성
+    	String prompt;
+    	
+    	if (dto.getDiscVal() != 0) { // 할인 조건이 있는 경우
+    	    prompt = String.format(
+    	        "이름이 %s인 카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 %s이고, 할인 값은 %s입니다. "
+    	        + "할인 기간은 %s부터 %s까지 유효하며, 할인 시간은 %s부터 %s까지입니다. "
+    	        + "%s%s메뉴의 정가는 %s원이며, 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해주세요. "
+    	        + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. "
+    	        + "그리고 나머지 정보를 참고해서 약 200자 정도의 홍보 멘트를 만들어주세요. 로봇이 말할 거예요. "
+    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
+    	        name,
+    	        dto.getMenu(),
+    	        dto.getDiscVal(), //얼마나 할인하는지
+    	        dto.getStartDate(),
+    	        dto.getEndDate(),
+    	        dto.getStartTime(),
+    	        dto.getEndTime(),
+    	        dto.getIsAddDiscCond() ? "추가 조건: " + dto.getAddDiscCond() + " " : "",
+    	        dto.getIsAddMenuDesc() ? "추가 메뉴 설명: " + dto.getAddMenuDesc() + " " : "",
+    	        dto.getPrice()
+    	    );
+    	} else { // 할인 조건이 없는 경우
+    		
+    		  prompt = String.format(
+    			        "할인 없이 이름이 %s인 카페에서 %s 메뉴를 홍보하는 멘트를 만들려고 합니다. "
+    			        + "%s의 특징을 강조하고, 자연스럽게 제품을 소개해주세요. 다음은 수박 주스에 관하여 홍보하는 예시입니다. "
+    			        + "[예시: 돌아온 베스트셀러! 수박주스가 출시되었어요! 직접 공수한 수박을 갈아서 달달하고 시원한 맛을 자랑합니다. "
+    			        + "꿉꿉하고 더운 날씨에 시원한 수박주스 어떠세요?] "
+    			        + "나머지 정보를 참고해서 300자의 홍보 멘트를 만들어주세요. 메뉴와 어울릴 만한 멘트를 작성해주고 특정 계절,날씨를 언급하는 것은 지양해주세요. "
+    			        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
+    			        name,
+    			        dto.getMenu(),
+    			        dto.getAddMenuDesc(), // 제품의 특징 설명
+    			        dto.getMenu(),
+    			        dto.getMenu()
+    	    );
+    	}
 
 
 
@@ -93,7 +135,7 @@ public class ChatGPTController {
     /*=====================================================================================================================*/
     
     
- // 실제 응답을 생성하는 메서드
+    // 시나리오 멘트 생성하는 메서드
     public JsonNode createScenarioMent(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people, String lang) {
     	
         
