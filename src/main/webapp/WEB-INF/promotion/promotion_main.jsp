@@ -29,7 +29,6 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/beverageDiscountpage.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/settings.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.png"/>

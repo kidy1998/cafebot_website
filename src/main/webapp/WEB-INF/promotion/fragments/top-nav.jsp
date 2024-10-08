@@ -31,10 +31,10 @@
                         <span class="selectedItem"> 언어(Language) </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
-                         aria-labelledby="messageDropdown" style="z-index: 9990;">
+                         aria-labelledby="messageDropdown" style="z-index: 1050;">
                         <div class="dropdown-divider"></div>
                         <!-- 한국어 선택 -->
-                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')">
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')" style="border:1px solid red;">
                             <div class="preview-item-content flex-grow py-2">
                                 <span class="preview-subject ellipsis fw-medium text-dark">한국어</span>
                             </div>
@@ -70,29 +70,29 @@
 
         <script>
 
-        function switchLanguage(lang) {
+            function switchLanguage(lang) {
 
-            let currentUrl = window.location.href;
+                let currentUrl = window.location.href;
 
-            if (currentUrl.includes("?")) {
-                // 기존 lang 파라미터를 대체
-                if (currentUrl.includes("lang=")) {
-                    currentUrl = currentUrl.replace(/lang=\w*/, `lang=` + lang);
+                if (currentUrl.includes("?")) {
+                    // 기존 lang 파라미터를 대체
+                    if (currentUrl.includes("lang=")) {
+                        currentUrl = currentUrl.replace(/lang=\w*/, `lang=` + lang);
+                    } else {
+                        currentUrl += `&lang=` + lang;
+                    }
                 } else {
-                    currentUrl += `&lang=` + lang;
+                    currentUrl += `?lang=` + lang;
                 }
-            } else {
-                currentUrl += `?lang=` + lang;
+
+                // confirm 창으로 lang 값 확인
+                
+
+            
+                // 새 URL로 이동
+                window.location.href = currentUrl;
+                
             }
-
-            // confirm 창으로 lang 값 확인
-            
-
-        
-            // 새 URL로 이동
-            window.location.href = currentUrl;
-            
-        }
 
 
 

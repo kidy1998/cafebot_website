@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -187,7 +189,7 @@
 <!-- Include Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/dasom_location.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="${pageContext.request.contextPath}/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
@@ -207,7 +209,7 @@
 <script src="${pageContext.request.contextPath}/assets/js/file-upload.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/typeahead.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/select2.js"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <!-- End custom js for this page-->
 </body>

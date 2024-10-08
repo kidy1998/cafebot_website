@@ -186,7 +186,7 @@ function onclickConfirmDiscountPriceBtn() {
     var productPrice = parseInt(productPriceText.replace('원', '').replace(',', ''), 10);
     console.log("Product price: ", productPrice); // 디버그용 콘솔 로그
 
-    if (!isNaN(discountValue) && discountValue > 0 && discountValue < productPrice) {
+    if (!isNaN(discountValue) && discountValue >= 0 && discountValue < productPrice) {
         // 할인된 가격 계산
         var discountedPrice = productPrice - discountValue;
         console.log("Discounted price: ", discountedPrice); // 디버그용 콘솔 로그

@@ -42,7 +42,7 @@ public class CreateScenarioMentController {
             @RequestParam(name = "storeID") long storeID,
             @RequestParam(name = "people") int people,
             @RequestParam(name = "time") String time,
-            @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) {
+            @RequestParam(value = "lang", required = false, defaultValue = "ko") String lang) {
         
         // String으로 받은 시간을 LocalTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");

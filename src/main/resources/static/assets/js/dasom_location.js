@@ -414,7 +414,15 @@ function handleToggleClick(index, locationId, isChecked) {
 }
 
 
-
+// 언어 선택 드롭다운 초기화
+document.addEventListener('DOMContentLoaded', function () {
+    // Bootstrap 드롭다운 수동 초기화
+    var dropdowns = document.querySelectorAll('.dropdown-toggle');
+    dropdowns.forEach(function(dropdown) {
+        new bootstrap.Dropdown(dropdown);
+        console.log("드롭다운 초기화");
+    });
+});
 
 
 
@@ -464,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+//수정페이지로 이동하는 js
 function loadUpdateLocationContent(locationId, lang){
 
     var xhr = new XMLHttpRequest();

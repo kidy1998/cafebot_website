@@ -146,7 +146,7 @@ public class ChatGPTController {
 		System.out.println("lang : " + lang);
 		String prompt;
 		
-		if(lang.equals("kor")) {
+		if(lang.equals("ko")) {
 			
 			 prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야할 일은 인원, 시간 등에 관한 정보를 받고 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 돼."
 					+ " 반환 형태는 json 형식으로 반환하고 store:" + storeName + "time : "+localTime + "people :" + people + "scenarioMent : "
