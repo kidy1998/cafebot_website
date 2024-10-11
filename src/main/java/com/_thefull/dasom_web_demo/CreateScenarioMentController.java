@@ -12,9 +12,13 @@ import com._thefull.dasom_web_demo.domain.dasomLocation.domain.DasomLocation;
 import com._thefull.dasom_web_demo.domain.dasomLocation.domain.dto.DasomLocationResponseDTO;
 import com._thefull.dasom_web_demo.domain.dasomLocation.service.DasomLocationService;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.openai.ChatGPTController;
+import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.service.MenuPromotionService;
 import com._thefull.dasom_web_demo.domain.store.domain.Store;
 import com._thefull.dasom_web_demo.domain.store.service.StoreService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +30,7 @@ public class CreateScenarioMentController {
 	private final DasomLocationService dasomLocationService;
 	private final StoreService dasomStoreService;
 	private final ChatGPTController chatGPTController;
+	private final MenuPromotionService menuPromotionService;
 	
 	
 	/**
@@ -35,6 +40,7 @@ public class CreateScenarioMentController {
 	 * @param people
 	 * @param time
 	 * @return
+	 * @throws Exception 
 	 */
 	@GetMapping("/createment")
     public JsonNode createMeeting(
@@ -42,7 +48,7 @@ public class CreateScenarioMentController {
             @RequestParam(name = "storeID") long storeID,
             @RequestParam(name = "people") int people,
             @RequestParam(name = "time") String time,
-            @RequestParam(value = "lang", required = false, defaultValue = "ko") String lang) {
+            @RequestParam(value = "lang", required = false, defaultValue = "ko") String lang) throws JsonMappingException, Exception {
         
         // String으로 받은 시간을 LocalTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -55,12 +61,25 @@ public class CreateScenarioMentController {
         String name = store.getName();
         
         // 로직 예시: 받은 값들을 콘솔에 출력
-        System.out.println("robotID: " + robotID);
-        System.out.println("storeID: " + storeID);
-        System.out.println("People: " + people);
-        System.out.println("Time: " + localTime);
-        System.out.println("name: " + name);
-
+//        System.out.println("robotID: " + robotID);
+//        System.out.println("storeID: " + storeID);
+//        System.out.println("People: " + people);
+//        System.out.println("Time: " + localTime);
+//        System.out.println("name: " + name);
+        
+        
+        //DB에서 조회된 값 또는 ChatGPT 응답 값 (String 형태)
+        String ment = menuPromotionService.checkMent(localTime, storeID);
+        
+        if(ment != null && !ment.trim().isEmpty()) {
+        	
+        	System.out.println("홍보멘트 존재");
+        	// response를 JsonNode로 바로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonResponse = objectMapper.readTree("{\"id\":\"" + storeID + "\", \"time\":\"" + time + "\", \"promotionMent\":\"" + ment + "\"}");
+            
+            return jsonResponse;
+        }
         
         JsonNode response = chatGPTController.createScenarioMent(dasomLocation, name, localTime, people, lang);
         

@@ -154,7 +154,7 @@ public class ChatGPTController {
         
         content = content.replaceAll("```json", "").replaceAll("```", "").trim();
         
-        System.out.println("Content: " + content); // JSON 형식의 문자열 확인
+       // System.out.println("Content: " + content); // JSON 형식의 문자열 확인
 
         // content를 JsonNode로 변환
         JsonNode jsonResponse = null;
@@ -185,29 +185,86 @@ public class ChatGPTController {
 	 */
 	private String createScenario(DasomLocationResponseDTO dto, String storeName, LocalTime localTime, int people, String lang) {
 		
-		System.out.println("lang : " + lang);
+		System.out.println("localTime : " + localTime);
+		
+		
 		String prompt;
 		
 		if(lang.equals("ko")) {
 			
-			 prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야할 일은 인원, 시간 등에 관한 정보를 받고 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 돼."
-					+ " 반환 형태는 json 형식으로 반환하고 store:" + storeName + "time : "+localTime + "people :" + people + "scenarioMent : "
-					+ "로봇에 왼쪽에 있는 메뉴들은 " + dto.getLeftSide() + ", 왼쪽 앞은 " + dto.getLeftFront() + "오른쪽 앞은" + dto.getRightFront() + 
-					"오른쪽은" + dto.getRightSide() + "이고 앞에는 " + dto.getFront() + "에 해당하는 메뉴가 있어. 여기서 null 로 표시된 메뉴는 없다는 뜻이니 "
-					+ "말을 안하면 돼. 메뉴 홍보에 대한 내용은 2~3개 정도로 작성해줘. 현재 시간은 " + localTime + "인데 이게 낮 12시~1시일 경우 손님이 많은 피크 시간대로 간주하면 돼. 사람 수는 "
-					+ people + "명이고 가게 이름은 " + storeName + "이야. 한국어로 자연스럽게 작성해 주고 다음은 예시 멘트인데  '안녕하세요. 원더풀카페 에 오신 것을 환영합니다. 제 오른쪽에는 각종가 있는 디저트와 샌드위치가 있고 왼쪽에는 먹음직스러운 케이크가 있습니다.	\r\n"
-					+ "앞쪽에 위치한 아메리카노와 함께 먹는다면 정말 맛있지 않을까요? 일행이 있으시다면 2층에 단체 공간을 추천드립니다!' 이렇게 위치에 따른 메뉴를 발화하고 사람이 여러 명일 때는 "
-					+ "위와 같이 단체 자리로 안내하고 피크 시간일 경우에는 '빈 자리를 찾고 싶으시다면 위층이나 1층 창가 공간을 추천드립니다!' 같은 멘트를 작성해줘.";
+			 prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야 할 일은 인원, 시간 등에 관한 정보를 받고, 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 해."
+					+ " 반환 형태는 json 형식으로 반환하고 key 값들은 각각 store, time, people, greeting, rightMenu, leftMenu, frontMenu, seatingGuide, timeMent 순서대로 만들어줘."
+					+ " 만약 각 위치에 해당하는 값이 null일 경우 해당 문장은 만들지 말고 건너뛰어줘."
+					+ "store: " + storeName + ", time: " + localTime + ", people: " + people + ","
+					+ "\"greeting\": \"첫 번째 문장에서는 카페 이름인 "+storeName+"을 넣은 인사말을 만들어 줘.\","
+					+ "\"rightMenu\": \"" + ((dto.getRightSide() != null || dto.getRightFront() != null) ? "두 번째 문장에서는 오른쪽에 위치한 " 
+					+ (dto.getRightSide() != null ? dto.getRightSide() : " ") 
+					+ (dto.getRightSide() != null && dto.getRightFront() != null ? "와 " : " ") 
+					+ (dto.getRightFront() != null ? dto.getRightFront() : " ") + "메뉴들을 홍보해줘." : " ") + "\","
+					+ "\"leftMenu\": \"" + ((dto.getLeftSide() != null || dto.getLeftFront() != null) ? "세 번째 문장에서는 왼쪽에 위치한 " 
+					+ (dto.getLeftSide() != null ? dto.getLeftSide() : " ") 
+					+ (dto.getLeftSide() != null && dto.getLeftFront() != null ? "와 " : " ") 
+					+ (dto.getLeftFront() != null ? dto.getLeftFront() : " ") + "메뉴들을 홍보해줘." : " ") + "\","
+					+ "\"frontMenu\": \"" + (dto.getFront() != null ? "네 번째 문장에서는 앞에 위치한 " + dto.getFront() + " 메뉴를 홍보해줘." : " ") + "\","
+					+ "만약 각 위치에 해당하는 값이 null일 경우 해당 문장은 만들지 말고 건너뛰어 줘. "
+					+ "\"seatingGuide\": \"" 
+				    + (people >= 2 
+				        ? "여러 명의 손님이 있을 때는 '일행이 있으시군요! 위층에 단체석을 추천드립니다.'와 같이 사람이 많이 왔을 때 일반적으로 사용하는 좌석 안내를 추가해줘. " : ""
+				    ) + "\","
+				    + "\"timeMent\": \"" 
+				    + ((localTime.isAfter(LocalTime.of(12, 0)) || localTime.equals(LocalTime.of(12, 0))) 
+					           && (localTime.isBefore(LocalTime.of(13, 0)) || localTime.equals(LocalTime.of(13, 0))) 
+					            ? "'지금은 사람이 많아 혼잡한 시간대입니다. 빈 자리를 찾고 싶으시면 위층이나 1층 창가 공간을 추천드립니다!'와 같이 피크 시간대에 발생할 수 있는 문제를 해결할 수 있는 문장을 작성해줘."
+					            : (localTime.isBefore(LocalTime.of(10, 0)) || localTime.equals(LocalTime.of(10, 0)))
+					                ? " '오늘도 즐거운 하루 되시길 바랍니다!'와 같은 아침 인사를 추가해줘." 
+					                : ((localTime.isAfter(LocalTime.of(18, 0)) || localTime.equals(LocalTime.of(18, 0))) 
+					                   && (localTime.isBefore(LocalTime.of(23, 0)) || localTime.equals(LocalTime.of(23, 0)))
+					                    ? "'오늘 하루도 고생 많으셨습니다!'와 같은 저녁 인사를 추가해줘." 
+					                    : " ")) + "\","
+					+ " 전체 멘트를 한국어로 자연스럽게 작성해줘."
+					+ " 예를 들어, '안녕하세요. 원더풀카페에 오신 것을 환영합니다. 제 오른쪽에는 다양한 디저트와 샌드위치가 위치해 있고, 왼쪽에는 갓 구운 맛있는 베이커리가 있습니다. "
+					+ " 일행이 있으시군요? 위층에 단체석 공간이 있습니다! 오늘도 좋은 하루 되세요! 처럼 상황에 맞게 주어진 값들로 멘트를 작성해줘.'"
+					+ " 숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘. 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘.";
+
+
 			
 		}else {
 			
-			 prompt = "You are an expert in generating promotional messages for the US market. Your task is to receive information about the number of people, time, and relevant details about the menu around the robot, and then create a promotional message. Return the result in JSON format as follows: store: " + storeName + ", time: " + localTime + ", people: " + people + ", scenarioMent : "
+			 prompt = "You are a professional promotional script creator. Your task is to receive information such as the number of people, time, and menu details around the promotional robot, and create a promotional script based on these details."
+				    + " The return format should be in JSON with key values in the order of store, time, people, greeting, rightMenu, leftMenu, frontMenu, seatingGuide, timeMent."
+				    + " If any value corresponding to each position is null, skip that statement and do not generate it."
+				    + " store: " + storeName + ", time: " + localTime + ", people: " + people + ","
+				    + "\"greeting\": \"In the first sentence, create a greeting that includes the cafe name, " + storeName + ".\","
+				    + "\"rightMenu\": \"" + ((dto.getRightSide() != null || dto.getRightFront() != null) ? "In the second sentence, promote the menu items located on the right side: " 
+				    + (dto.getRightSide() != null ? dto.getRightSide() : " ") 
+				    + (dto.getRightSide() != null && dto.getRightFront() != null ? " and " : " ") 
+				    + (dto.getRightFront() != null ? dto.getRightFront() : " ") + "." : " ") + "\","
+				    + "\"leftMenu\": \"" + ((dto.getLeftSide() != null || dto.getLeftFront() != null) ? "In the third sentence, promote the menu items located on the left side: " 
+				    + (dto.getLeftSide() != null ? dto.getLeftSide() : " ") 
+				    + (dto.getLeftSide() != null && dto.getLeftFront() != null ? " and " : " ") 
+				    + (dto.getLeftFront() != null ? dto.getLeftFront() : " ") + "." : " ") + "\","
+				    + "\"frontMenu\": \"" + (dto.getFront() != null ? "In the fourth sentence, promote the menu items located in front: " + dto.getFront() + "." : " ") + "\","
+				    + "If any value corresponding to each position is null, skip that statement and do not generate it. "
+				    + "\"seatingGuide\": \"" 
+				    + (people >= 2 
+				        ? "When there are multiple guests, include a seating guide such as 'You have a group! We recommend the group seating area on the upper floor.' to provide guidance for group seating." 
+				        : ""
+				    ) + "\","
+				    + "\"timeMent\": \"" 
+				    + ((localTime.isAfter(LocalTime.of(12, 0)) || localTime.equals(LocalTime.of(12, 0))) 
+				           && (localTime.isBefore(LocalTime.of(13, 0)) || localTime.equals(LocalTime.of(13, 0))) 
+				            ? "'It is currently a busy time. If you are looking for a seat, we recommend the upstairs area or the window seats on the first floor!' to address potential congestion during peak hours."
+				            : (localTime.isBefore(LocalTime.of(10, 0)) || localTime.equals(LocalTime.of(10, 0)))
+				                ? "'Have a wonderful day!' or a similar morning greeting to start the day positively." 
+				                : ((localTime.isAfter(LocalTime.of(18, 0)) || localTime.equals(LocalTime.of(18, 0))) 
+				                   && (localTime.isBefore(LocalTime.of(23, 0)) || localTime.equals(LocalTime.of(23, 0)))
+				                    ? "'Hope you had a great day!' or a similar evening greeting to end the day on a positive note." 
+				                    : " ")) + "\","
+				    + " Write the entire script naturally in English."
+				    + " For example, 'Hello, welcome to Wonder Cafe. On my right, we have a variety of desserts and sandwiches, and on my left, we have freshly baked delicious bread. "
+				    + " You have a group? There is a group seating area available on the upper floor! Have a great day!' Create the script based on the given values to match the situation."
+				    + " Use numerals for numbers and write everything else naturally in English. Do not include any emoticons or icons when generating the script.";
 
-					+ " The menu items are located as follows: on the left side are " + dto.getLeftSide() + ", in the left front are " + dto.getLeftFront() + ", in the right front are " + dto.getRightFront() + ", on the right side are " + dto.getRightSide() + ", and in the front are " + dto.getFront()
-					+ ". If any menu is marked as null, it means there are no items in that position, so there is no need to mention them. Please create 2-3 sentences of promotional content for the menu. The current time is " + localTime + ", which, if it's between 12 PM and 1 PM, should be considered peak time with many customers. The number of people is " + people + " and the store name is " + storeName
-					+ ". Write the content in natural English. Here's an example sentence: 'Hello, welcome to Wonderful Café! To my right, we have a variety of delicious desserts and sandwiches, and to the left, we have some mouth-watering cakes. How about pairing one of our cakes with a freshly brewed Americano from the front section? If you're here with a group, "
-					+ "we recommend the spacious seating area on the second floor!' Based on the number of people, suggest a group seating area, and if it's peak time, suggest: 'If you're looking for a spot, we recommend the upstairs seating or the window seats on the first floor!'";
-										 
 		}
 		
 		

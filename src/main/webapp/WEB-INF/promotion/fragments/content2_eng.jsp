@@ -210,9 +210,9 @@
                     <thead>
                         <tr>
                             <th>Generate AI CafeBot Message</th>
-                            <th>Test Progress<span class="info">* Check how the CafeBot speaks!</span>
-                            </th>
-                        </tr>
+                            <!-- <th>Test Progress<span class="info">* Check how the CafeBot speaks!</span>
+                            </th> -->
+                        </tr> 
                     </thead>
                     <tbody>
                     <tr>
@@ -229,8 +229,8 @@
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary">CafeBot Promotion Test
-                            </button>
+                            <!-- <button type="button" class="btn btn-primary">CafeBot Promotion Test
+                            </button> -->
                         </td>
 
                     </tr>
