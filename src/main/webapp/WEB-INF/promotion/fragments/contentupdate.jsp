@@ -255,7 +255,7 @@
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary">카페봇 홍보 테스트
+                            <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
                             </button>
                         </td>
 

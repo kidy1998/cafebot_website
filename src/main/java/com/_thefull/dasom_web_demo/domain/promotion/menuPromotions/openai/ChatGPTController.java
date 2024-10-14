@@ -97,7 +97,9 @@ public class ChatGPTController {
     	        + "%s%s메뉴의 정가는 %s원이며, 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해주세요. "
     	        + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. "
     	        + "그리고 나머지 정보를 참고해서 약 200자 정도의 홍보 멘트를 만들어주세요. 로봇이 말할 거예요. "
-    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
+    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. "
+    	        + "Let's think step by step"
+    	        + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
     	        name,
     	        dto.getMenu(),
     	        dto.getDiscVal(), //얼마나 할인하는지
@@ -116,7 +118,8 @@ public class ChatGPTController {
     			        + "%s의 특징을 강조하고, 자연스럽게 제품을 소개해주세요. 다음은 수박 주스에 관하여 홍보하는 예시입니다. "
     			        + "[예시: 돌아온 베스트셀러! 수박주스가 출시되었어요! 직접 공수한 수박을 갈아서 달달하고 시원한 맛을 자랑합니다. "
     			        + "꿉꿉하고 더운 날씨에 시원한 수박주스 어떠세요?] "
-    			        + "나머지 정보를 참고해서 300자의 홍보 멘트를 만들어주세요. 메뉴와 어울릴 만한 멘트를 작성해주고 특정 계절,날씨를 언급하는 것은 지양해주세요. "
+    			        + "나머지 정보를 참고해서 300자의 홍보 멘트를 만들어주세요. 메뉴와 어울릴 만한 멘트를 작성해주고 특정 계절,날씨는 언급하지 말아주세요."
+    			        + "Let's think step by step"
     			        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
     			        name,
     			        dto.getMenu(),
@@ -223,7 +226,8 @@ public class ChatGPTController {
 					                    : " ")) + "\","
 					+ " 전체 멘트를 한국어로 자연스럽게 작성해줘."
 					+ " 예를 들어, '안녕하세요. 원더풀카페에 오신 것을 환영합니다. 제 오른쪽에는 다양한 디저트와 샌드위치가 위치해 있고, 왼쪽에는 갓 구운 맛있는 베이커리가 있습니다. "
-					+ " 일행이 있으시군요? 위층에 단체석 공간이 있습니다! 오늘도 좋은 하루 되세요! 처럼 상황에 맞게 주어진 값들로 멘트를 작성해줘.'"
+					+ " 일행이 있으시군요? 위층에 단체석 공간이 있습니다! 오늘도 좋은 하루 되세요! 처럼 상황에 맞게 주어진 값들로 멘트를 작성해줘.' "
+					+ " Let's think step by step"
 					+ " 숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘. 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘.";
 
 
@@ -263,6 +267,7 @@ public class ChatGPTController {
 				    + " Write the entire script naturally in English."
 				    + " For example, 'Hello, welcome to Wonder Cafe. On my right, we have a variety of desserts and sandwiches, and on my left, we have freshly baked delicious bread. "
 				    + " You have a group? There is a group seating area available on the upper floor! Have a great day!' Create the script based on the given values to match the situation."
+				    + " Let's think step by step"
 				    + " Use numerals for numbers and write everything else naturally in English. Do not include any emoticons or icons when generating the script.";
 
 		}

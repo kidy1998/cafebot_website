@@ -90,7 +90,11 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.14.2'
-
+	
+	// Spring Boot 웹소켓 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    // Spring Boot 웹 관련 의존성 (필요 시)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {

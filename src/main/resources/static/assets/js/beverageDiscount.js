@@ -920,6 +920,31 @@ function createMent(){
 
 }
 
+function mentTest() {
+    // <textarea>의 값을 가져옴
+    const mentText = document.getElementById("ment-textarea").value;
+    
+    console.log('멘트정보:', mentText);
+
+    // 서버에 POST 요청을 보냄 (fetch API 사용)
+    fetch('/api/websocket/send', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'  // @ModelAttribute를 사용하기 위한 설정
+        },
+        body: new URLSearchParams({
+            ment: mentText
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
 
 
 /*  제품 등록 시 유효성을 검사하는 함수   */
@@ -949,4 +974,5 @@ document.addEventListener('DOMContentLoaded', function () {
         // 추가적인 검증이 필요한 경우 여기에 추가 가능
     });
 });
+
 
