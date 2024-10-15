@@ -8,6 +8,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 import java.util.Map;
@@ -21,121 +22,78 @@ import java.util.HashSet;
 @Component
 public class RobotWebSocketHandler extends TextWebSocketHandler {
 
-    // JSON 변환을 위한 ObjectMapper
-    private ObjectMapper objectMapper = new ObjectMapper();
-
-    // 전역 변수로 웹소켓 세션을 저장
-    private volatile WebSocketSession globalSession;
-
-    // 클라이언트 세션을 저장할 Map: robotId -> WebSocketSession
-    private Map<String, WebSocketSession> clients = new ConcurrentHashMap<>();
-
-    // storeId로 그룹별 클라이언트를 관리할 Map: storeId -> robotId List
-    private Map<String, Set<String>> storeGroups = new ConcurrentHashMap<>();
+    // 각 사용자별로 웹소켓 세션을 관리할 맵 (예: 사용자 ID -> WebSocketSession)
+    private Map<String, WebSocketSession> userSessions = new ConcurrentHashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        // 쿼리 파라미터에서 robotId와 storeId를 추출
-        String query = session.getUri().getQuery();  // 예시: "robotId=1&storeId=1"
-        Map<String, String> params = Arrays.stream(query.split("&"))
-                                           .map(param -> param.split("="))
-                                           .collect(Collectors.toMap(pair -> pair[0], pair -> pair[1]));
-
-        System.out.println("params: " + params.toString());  // 쿼리 문자열 확인
-
-        String robotId = params.get("robotId");
-        String storeId = params.get("storeId");
-
-        // 세션을 전역 변수에 저장
-        globalSession = session;
-
-        // 세션을 관리 Map에 저장
-        clients.put(robotId, session);
-
-        // 바로 조회해서 확인
-        WebSocketSession testSession = clients.get(robotId);
-        System.out.println("저장 직후 조회한 세션: " + testSession);
-
-        System.out.println("저장 시 robotId 타입 : " + robotId.getClass().getName());  // 저장된 robotId 출력
-
-        // storeId에 해당하는 로봇 그룹에 추가
-        storeGroups.computeIfAbsent(storeId, k -> new HashSet<>()).add(robotId);
-
-        System.out.println("Connected: robotId=" + robotId + ", storeId=" + storeId);
+    	
+    	System.out.println("웹소켓 세션 : " + session);
+    	
+        // HttpSession을 통해 로그인된 사용자 ID를 가져옵니다 (로그인 세션과 연계)
+        HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
+        System.out.println("조회한 로그인 세션 : " + httpSession);
+        
+        if (httpSession != null) {
+            String robotId = (String) httpSession.getAttribute("robotId");  // 로봇 id
+            System.out.println("웹소켓에서 robotId : " + robotId);
+            
+            if (robotId != null) {
+                // 사용자의 웹소켓 세션을 저장
+                userSessions.put(robotId, session);
+                System.out.println("사용자 " + robotId + "의 웹소켓 세션이 연결되었습니다.");
+            }
+        }
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        // 세션이 닫히면 전역 변수도 초기화
-        globalSession = null;
-
-        // 쿼리 파라미터에서 robotId와 storeId 추출
-        String query = session.getUri().getQuery();
-        Map<String, String> params = Arrays.stream(query.split("&"))
-                                           .map(param -> param.split("="))
-                                           .collect(Collectors.toMap(pair -> pair[0], pair -> pair[1]));
-
-        String robotId = params.get("robotId");
-        String storeId = params.get("storeId");
-
-        // 세션이 닫히기 전, 세션이 있는지 확인
-        System.out.println("세션 종료 전 clients 내용: " + clients.toString());
-        System.out.println("제거 전 robotId " + robotId + "의 세션: " + clients.get(robotId));
-
-        if (session != null) {
-            System.out.println("제거 전 세션 상태: " + (session.isOpen() ? "열림" : "닫힘"));
+    	
+    	System.out.println("session 해제 : " + session);
+        // 세션이 종료될 때 userSessions에서 해당 세션을 제거
+        HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
+        if (httpSession != null) {
+            String robotId = (String) httpSession.getAttribute("robotId");
+            if (robotId != null) {
+                userSessions.remove(robotId);
+                System.out.println("사용자 " + robotId + "의 웹소켓 세션이 종료되었습니다.");
+            }
         }
-
-        // 세션이 닫히면 클라이언트와 그룹에서 제거
-        clients.remove(robotId);
-        if (storeGroups.containsKey(storeId)) {
-            storeGroups.get(storeId).remove(robotId);
-        }
-
-        // 세션이 닫힌 후, 세션이 제거되었는지 확인
-        System.out.println("세션 종료 후 clients 내용: " + clients.toString());
-        System.out.println("제거 후 robotId " + robotId + "의 세션: " + clients.get(robotId));
-
-        System.out.println("Disconnected: robotId=" + robotId + ", storeId=" + storeId);
     }
-
+    
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-
-        System.out.println("세션 : " + session.toString());
-        // 메시지를 수신하면 처리 (예: 에코 메시지)
+        // 클라이언트로부터 받은 메시지 출력
         String payload = message.getPayload();
-        System.out.println("Received message: " + payload);
-        session.sendMessage(new TextMessage("Echo: " + payload));
+        System.out.println("수신된 메시지: " + payload);
+
+        // WebSocketSession의 attributes에서 HttpSession을 가져옴
+        HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
+        
+        if (httpSession != null) {
+            // HttpSession에서 robotId를 가져옴
+            String robotId = (String) httpSession.getAttribute("robotId");
+            if (robotId != null) {
+                System.out.println("사용자 " + robotId + "으로부터 메시지: " + payload);
+            }
+        }
+
+        // 받은 메시지에 응답 메시지 전송 (예: 에코 메시지)
+        session.sendMessage(new TextMessage("서버로부터의 응답: " + payload));
     }
 
-    // 전역 세션을 통해 메시지를 보내는 메서드
-	 public void sendMessageToClient(String storeId, String ment) throws Exception {
-	    
-		 System.out.println("글로벌 세션 : " + globalSession);
-		 if (globalSession != null && globalSession.isOpen()) {
-	            // JSON 형태로 보낼 데이터를 객체로 생성
-			  	MessageData messageData = new MessageData(storeId, ment);
-	
-	            // 객체를 JSON 문자열로 변환
-	            String jsonMessage = objectMapper.writeValueAsString(messageData);
-	
-	            // 변환된 JSON 문자열을 클라이언트에게 전송
-	            globalSession.sendMessage(new TextMessage(jsonMessage));
-	        } else {
-	            System.out.println("전역 세션이 없거나 세션이 닫혀 있습니다.");
-	        } 
-	}
+    
+    
 
-    // 메시지 데이터 클래스를 정의
-    @Data
-    static class MessageData {
-        private String id;
-        private String ment;
-
-        public MessageData(String id, String ment) {
-            this.id = id;
-            this.ment = ment;
+    // 특정 사용자에게 메시지 전송
+    public void sendMessageToUser(String robotId, String message) throws Exception {
+        WebSocketSession session = userSessions.get(robotId);
+        
+        System.out.println("메시지 전송 시 session : " + session);
+        if (session != null && session.isOpen()) {
+            session.sendMessage(new TextMessage(message));
+        } else {
+            System.out.println("사용자 " + robotId + "의 웹소켓 세션이 존재하지 않거나 종료되었습니다.");
         }
     }
 }

@@ -927,7 +927,7 @@ function mentTest() {
     console.log('멘트정보:', mentText);
 
     // 서버에 POST 요청을 보냄 (fetch API 사용)
-    fetch('/api/websocket/send', {
+    fetch('/api/websocket/sendMessage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'  // @ModelAttribute를 사용하기 위한 설정

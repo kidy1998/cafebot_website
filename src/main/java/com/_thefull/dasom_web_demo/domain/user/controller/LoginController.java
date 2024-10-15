@@ -55,7 +55,7 @@ public class LoginController {
                 session.setAttribute("userId", user.getUserId());
                 session.setAttribute("storeId", storeId);
                 session.setAttribute("robotId", robotId);
-                //System.out.println("로그인 시 robotid : " + robotId);
+                System.out.println("Httpsession : " + session);
                 session.setAttribute("userName", user.getName());
 
                 if ("eng".equals(lang)) {
@@ -86,6 +86,11 @@ public class LoginController {
             session.invalidate(); // 세션 무효화
         }
         return "redirect:/page/main?lang="+lang;
+    }
+    
+    public HttpSession getHttpSession() {
+    	
+		return null;
     }
 
 }

@@ -235,8 +235,8 @@
                         <tr>
                             <th>AI 카페봇 멘트 생성
                             </th>
-                            <th>테스트 진행<span class="info">* 카페봇이 어떻게 말하는지 확인해보세요!</span>
-                            </th>
+                            <!-- <th>테스트 진행<span class="info">* 카페봇이 어떻게 말하는지 확인해보세요!</span>
+                            </th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -255,8 +255,8 @@
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
-                            </button>
+                            <!-- <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
+                            </button> -->
                         </td>
 
                     </tr>

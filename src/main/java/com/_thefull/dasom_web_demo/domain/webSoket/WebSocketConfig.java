@@ -3,15 +3,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
+    private final RobotWebSocketHandler webSocketHandler;
+
+    public WebSocketConfig(RobotWebSocketHandler webSocketHandler) {
+        this.webSocketHandler = webSocketHandler;
+    }
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // "/robot" 엔드포인트에서 웹소켓을 처리하도록 핸들러를 등록
-        registry.addHandler(new RobotWebSocketHandler(), "/robot")
-                .setAllowedOrigins("*");  // 모든 도메인 허용 (실제 운영 환경에서는 제한 권장)
+        registry.addHandler(webSocketHandler, "/webSoket")
+                .addInterceptors(new HttpSessionHandshakeInterceptor())  // HTTP 세션 연계
+                .setAllowedOrigins("*");
     }
 }

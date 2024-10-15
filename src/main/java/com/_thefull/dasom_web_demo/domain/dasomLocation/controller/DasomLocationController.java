@@ -71,8 +71,10 @@ public class DasomLocationController {
         List<DasomLocationResponseDTO> allRobotLocationCategories = dasomLocationService.findAllRobotLocation(robotId, storeId);
         model.addAttribute("all_robot_location_category_list", allRobotLocationCategories);
         
+       
+       //System.out.println("활성화된 위치 : " + allRobotLocationCategories.get(0).toString());
         
-        System.out.println("활성화된 위치 : " + allRobotLocationCategories.get(0).toString());
+      
       
         
         if (message != null) {

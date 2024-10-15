@@ -185,8 +185,6 @@ public class MenuPromotionController {
                                          HttpServletRequest request,
                                          RedirectAttributes redirectAttribute,
                                          @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
-
-        HttpSession session = request.getSession(false);
       
         if(requestDTO.getBoolIsAlways() == null) {
         	requestDTO.setBoolIsAlways(false);

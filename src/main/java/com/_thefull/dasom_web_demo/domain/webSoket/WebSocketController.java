@@ -1,9 +1,12 @@
 package com._thefull.dasom_web_demo.domain.webSoket;
 
+import org.apache.hc.core5.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -17,28 +20,32 @@ import lombok.Data;
 @RequestMapping("/api/websocket")
 public class WebSocketController {
 	
-	private volatile WebSocketSession globalSession;
-
-    private final RobotWebSocketHandler webSocketHandler;
+ private final RobotWebSocketHandler webSocketHandler;
 
     public WebSocketController(RobotWebSocketHandler webSocketHandler) {
         this.webSocketHandler = webSocketHandler;
     }
 
-    // 특정 클라이언트로 메시지 전송하는 REST API
-    @PostMapping("/send")
-    public void sendMessageToClient(@ModelAttribute MenuPromotionRequestDTO requestDTO,
-    		  HttpServletRequest request) throws Exception {
-    	
-    	HttpSession session = request.getSession(false);
-    	Long robotId = (Long)session.getAttribute("robotId");
-    	Long storeId = (Long)session.getAttribute("storeId");
-    	
-    	System.out.println("로봇id : " + robotId);
-    	
-        webSocketHandler.sendMessageToClient(storeId.toString(), requestDTO.getMent());
+    @PostMapping("/sendMessage")
+    public ResponseEntity<String> sendMessageToUser(HttpServletRequest request, @ModelAttribute MenuPromotionRequestDTO requestDTO) {
+        HttpSession httpSession = request.getSession(false);
         
+        System.out.println("WebSocketController 에서의 httpSession : " + httpSession);
+        
+        if (httpSession != null) {
+            String robotId =  httpSession.getAttribute("robotId").toString();
+            if (robotId != null) {
+                try {
+                    webSocketHandler.sendMessageToUser(robotId, requestDTO.getMent());
+                    return ResponseEntity.ok("메시지 전송 성공");
+                } catch (Exception e) {
+                    return ResponseEntity.status(HttpStatus.SC_INTERNAL_SERVER_ERROR).body("메시지 전송 실패");
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.SC_BAD_REQUEST).body("사용자 세션이 유효하지 않습니다.");
     }
+    
 }
 
 	
