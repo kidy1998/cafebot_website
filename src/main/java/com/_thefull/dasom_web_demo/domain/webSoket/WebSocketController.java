@@ -1,6 +1,7 @@
 package com._thefull.dasom_web_demo.domain.webSoket;
 
-import org.apache.hc.core5.http.HttpStatus;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
