@@ -1,7 +1,5 @@
 package com._thefull.dasom_web_demo.domain.user.controller;
 
-import com._thefull.dasom_web_demo.domain.robot.domain.Robot;
-import com._thefull.dasom_web_demo.domain.store.domain.Store;
 import com._thefull.dasom_web_demo.domain.user.domain.dto.LoginRequestDto;
 import com._thefull.dasom_web_demo.domain.user.domain.User;
 import com._thefull.dasom_web_demo.domain.user.service.LoginService;
@@ -22,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -89,8 +89,8 @@ public class LoginController {
     }
     
     public HttpSession getHttpSession() {
-    	
-		return null;
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession(false);
     }
 
 }

@@ -18,10 +18,17 @@ public class LoginService {
 
     public User login(LoginRequestDto dto) {
         Optional<User> optionalUser = userRepository.findByPhoneNum(dto.getPhoneNum());
-
-        User user = optionalUser.get();
-      
-        return user;
+        
+     // Optional 객체에서 값이 있는지 확인한 후 처리
+        if (optionalUser.isPresent()) {
+            // 값이 존재할 때만 get()을 호출
+            User user = optionalUser.get();
+            return user;
+        } else {
+            // Optional이 비어있다면 null을 반환
+            return null;
+        }
+       
     }
 
 }
