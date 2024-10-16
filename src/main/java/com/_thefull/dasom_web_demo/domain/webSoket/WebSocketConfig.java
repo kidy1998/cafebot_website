@@ -18,7 +18,6 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(webSocketHandler, "/webSoket")
-                .addInterceptors(new HttpSessionHandshakeInterceptor())  // HTTP 세션 연계
-                .setAllowedOrigins("*");
+                .setAllowedOrigins("https://api.dasom-cafebot-web.p-e.kr");
     }
 }
