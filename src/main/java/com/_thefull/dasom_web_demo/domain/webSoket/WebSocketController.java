@@ -32,7 +32,7 @@ public class WebSocketController {
     		) {
         HttpSession httpSession = request.getSession(false);
         
-        System.out.println("WebSocketController 에서의 httpSession : " + httpSession);
+        //System.out.println("WebSocketController 에서의 httpSession : " + httpSession);
         
         if (httpSession != null) {
             String robotId =  httpSession.getAttribute("robotId").toString();

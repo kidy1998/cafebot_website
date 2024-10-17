@@ -24,7 +24,7 @@ public class RobotWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("웹소켓 세션 : " + session);
+        //System.out.println("웹소켓 세션 : " + session);
 
         // URI에서 쿼리 파라미터 추출
         String query = session.getUri().getQuery();
@@ -94,7 +94,7 @@ public class RobotWebSocketHandler extends TextWebSocketHandler {
         }
 
         // 받은 메시지에 응답 메시지 전송 (예: 에코 메시지)
-        session.sendMessage(new TextMessage("서버로부터의 응답: " + payload));
+       // session.sendMessage(new TextMessage("서버로부터의 응답: " + payload));
     }
 
     
@@ -103,7 +103,7 @@ public class RobotWebSocketHandler extends TextWebSocketHandler {
     // 특정 사용자에게 메시지 전송
     public void sendMessageToUser(String robotId, String message) throws Exception {
         WebSocketSession session = userSessions.get(robotId);
-        System.out.println("메시지 전송 시 session : " + session.toString());
+        //System.out.println("메시지 전송 시 session : " + session.toString());
 
         if (session != null && session.isOpen()) {
             // 메시지를 JSON 형식으로 변환

@@ -54,7 +54,7 @@ public class MenuPromotionController {
     public String checkLogin(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         HttpSession session = request.getSession(false);
         
-        System.out.println("userId : " + session.getAttribute("userId"));
+        //System.out.println("userId : " + session.getAttribute("userId"));
         
         if (session == null || session.getAttribute("userId") == null) {
            return "redirect:/page/user/login?message=login_required";
@@ -78,14 +78,14 @@ public class MenuPromotionController {
         HttpSession session = request.getSession(false);
        
         Long storeId= (Long)session.getAttribute("storeId");
-        System.out.println("storeID : " + storeId);
+       // System.out.println("storeID : " + storeId);
 
         List<MenuPromotionResponseDTO> allPromotionList = menuPromotionService.findAllPromotionList(storeId);
         model.addAttribute("all_promotion_list",allPromotionList);
         
-        for(MenuPromotionResponseDTO dto : allPromotionList) {
-        	System.out.println("Promotion : " + dto.toString());
-        }
+//        for(MenuPromotionResponseDTO dto : allPromotionList) {
+//        	System.out.println("Promotion : " + dto.toString());
+//        }
         
 
         List<Menu> menuList = menuService.findAllMenu(storeId);
@@ -129,7 +129,7 @@ public class MenuPromotionController {
         }
         
         
-        System.out.println("등록 메뉴정보 : " + requestDTO.toString());
+        //System.out.println("등록 메뉴정보 : " + requestDTO.toString());
 
         Long storeId = (Long)session.getAttribute("storeId");
         menuPromotionService.registerMenuPromotion(storeId, requestDTO);
@@ -157,7 +157,7 @@ public class MenuPromotionController {
 
         MenuPromotionResponseDTO dto = menuPromotionService.findOneMenuPromotion(id);
         
-        System.out.println("해당 메뉴정보 : " + dto.toString());
+        //System.out.println("해당 메뉴정보 : " + dto.toString());
         model.addAttribute("thepromo",dto);
         
         if ("eng".equals(lang)) {
@@ -190,7 +190,7 @@ public class MenuPromotionController {
         	requestDTO.setBoolIsAlways(false);
         }
         
-        System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
+       // System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
         
         menuPromotionService.updatePromotionContent(requestDTO);
         
@@ -241,27 +241,27 @@ public class MenuPromotionController {
         private String testText;
     }
 
-    @PostMapping("/test")
-    public String testpage(@ModelAttribute testDto dto,
-                            BindingResult bindingResult,
-            /*@RequestParam(value = "testText") String testText,*/
-                           HttpSession session){
-
-        System.out.println("JSPmainController.testpage");
-        User user = (User)session.getAttribute("userId");
-        Long storeId = (Long)session.getAttribute("storeId");
-
-        Store store = storeRepository.findById(storeId)
-                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));
-
-        List<Robot> robotList = robotRepository.findByStore(store);
-        Robot robot = robotList.get(0);
-        System.out.println(robot.getId());
-
-
-        return "promotion/test";
-    }
-    
+//    @PostMapping("/test")
+//    public String testpage(@ModelAttribute testDto dto,
+//                            BindingResult bindingResult,
+//            /*@RequestParam(value = "testText") String testText,*/
+//                           HttpSession session){
+//
+//        System.out.println("JSPmainController.testpage");
+//        
+//        Long storeId = (Long)session.getAttribute("storeId");
+//
+//        Store store = storeRepository.findById(storeId)
+//                .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));
+//
+//        List<Robot> robotList = robotRepository.findByStore(store);
+//        Robot robot = robotList.get(0);
+//        System.out.println(robot.getId());
+//
+//
+//        return "promotion/test";
+//    }
+//    
 
     
 }

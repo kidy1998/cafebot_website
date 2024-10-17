@@ -51,7 +51,7 @@ public class MenuPromotionMent {
         responseBody.put("time", time);  // time을 JSON에 추가
         responseBody.put("promotionMent", response); // 응답 String을 JSON에 추가
         
-        System.out.println("responseBody : " + responseBody );
+        //System.out.println("responseBody : " + responseBody );
         
         // JSON 형태로 반환
         return ResponseEntity.ok().body(responseBody);

@@ -37,7 +37,7 @@ public class DasomLocationController {
     		@RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) throws IOException {
         HttpSession session = request.getSession(false);
         
-        System.out.println("userId : " + session.getAttribute("userId"));
+        //System.out.println("userId : " + session.getAttribute("userId"));
         
         if (session == null || session.getAttribute("userId") == null) {
         	
@@ -172,7 +172,7 @@ public class DasomLocationController {
                                  RedirectAttributes redirectAttribute,
                                  @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
-        System.out.println("변경하려는 정보 : " + dto.toString());
+        //System.out.println("변경하려는 정보 : " + dto.toString());
 
         HttpSession session = request.getSession(false);
       

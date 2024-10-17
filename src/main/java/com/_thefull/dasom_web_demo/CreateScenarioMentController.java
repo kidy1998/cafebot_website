@@ -73,7 +73,7 @@ public class CreateScenarioMentController {
         
         if(ment != null && !ment.trim().isEmpty()) {
         	
-        	System.out.println("홍보멘트 존재");
+        	//System.out.println("홍보멘트 존재");
         	// response를 JsonNode로 바로 변환
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonResponse = objectMapper.readTree("{\"id\":\"" + storeID + "\", \"time\":\"" + time + "\", \"promotionMent\":\"" + ment + "\"}");

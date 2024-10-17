@@ -85,7 +85,7 @@ public class ChatGPTController {
      */
     private String createPrompt(ForMentOfMenuPromotionDTO dto, String name){
     	
-    	System.out.println("멘트정보 : " + dto.toString());
+    	//System.out.println("멘트정보 : " + dto.toString());
     	
     	// 한국어 프롬프트 생성
     	String prompt;
