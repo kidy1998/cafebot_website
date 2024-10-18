@@ -37,7 +37,7 @@
 <body>
 <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
-    <%@ include file="../promotion/fragments/top-nav.jsp" %>
+    <%@ include file="../promotion/fragments/top-nav_eng.jsp" %>
     <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:../../partials/_sidebar.html -->

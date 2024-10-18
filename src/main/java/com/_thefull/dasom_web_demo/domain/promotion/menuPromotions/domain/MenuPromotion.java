@@ -53,10 +53,10 @@ public class MenuPromotion extends BaseEntity {
     @Column(name = "STATUS" , columnDefinition = "TINYINT")
     private Status status;
 
-    //정가
-    @Column(name = "PRICE")
-    @NotNull
-    private int price;
+//    //정가
+//    @Column(name = "PRICE")
+//    @NotNull
+//    private int price;
 
 //    // 할인 적용 가격 : 할인이 적용된 가격 ex) 5000원 -> 4000원
 //    @Column(name = "DISC_PRICE")
@@ -192,7 +192,7 @@ public class MenuPromotion extends BaseEntity {
         this.addMenuDesc=dto.getAddMenuDesc();
         this.ment= dto.getMent();
         this.menu=menu;
-        this.price = dto.getPrice();
+        //this.price = dto.getPrice();
 
     }
 

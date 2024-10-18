@@ -35,7 +35,7 @@
 <body>
 
 <div class="container-scroller">
-    <%@ include file="../promotion/fragments/top-nav.jsp" %>
+    <%@ include file="../promotion/fragments/top-nav_eng.jsp" %>
         <div class="container-fluid page-body-wrapper">
              <%@ include file="../promotion/fragments/nav-menu_eng.jsp" %>
 

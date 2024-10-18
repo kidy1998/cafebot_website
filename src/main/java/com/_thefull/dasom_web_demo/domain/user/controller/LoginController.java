@@ -55,7 +55,7 @@ public class LoginController {
                 session.setAttribute("userId", user.getUserId());
                 session.setAttribute("storeId", storeId);
                 session.setAttribute("robotId", robotId);
-                System.out.println("Httpsession : " + session);
+                //System.out.println("Httpsession : " + session);
                 session.setAttribute("userName", user.getName());
 
                 if ("eng".equals(lang)) {

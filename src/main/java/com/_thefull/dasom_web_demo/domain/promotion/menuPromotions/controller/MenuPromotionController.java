@@ -6,19 +6,11 @@ import com._thefull.dasom_web_demo.domain.menu.service.MenuService;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.domain.dto.MenuPromotionRequestDTO;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.domain.dto.MenuPromotionResponseDTO;
 import com._thefull.dasom_web_demo.domain.promotion.menuPromotions.service.MenuPromotionService;
-import com._thefull.dasom_web_demo.domain.robot.domain.Robot;
-import com._thefull.dasom_web_demo.domain.robot.repository.RobotRepository;
-import com._thefull.dasom_web_demo.domain.store.domain.Store;
-import com._thefull.dasom_web_demo.domain.store.repository.StoreRepository;
-import com._thefull.dasom_web_demo.domain.user.domain.User;
-import com._thefull.dasom_web_demo.global.exception.AppException;
-import com._thefull.dasom_web_demo.global.exception.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +29,6 @@ import java.util.List;
 public class MenuPromotionController {
 
     private final MenuPromotionService menuPromotionService;
-    private final RobotRepository robotRepository;
-    private final StoreRepository storeRepository;
     private final MenuService menuService;
     
     
@@ -126,6 +116,10 @@ public class MenuPromotionController {
         
         if(requestDTO.getBoolIsAlways() == null) {
         	requestDTO.setBoolIsAlways(false);
+        }
+        
+        if(requestDTO.getDiscVal() == null) {
+        	requestDTO.setDiscVal(0);
         }
         
         

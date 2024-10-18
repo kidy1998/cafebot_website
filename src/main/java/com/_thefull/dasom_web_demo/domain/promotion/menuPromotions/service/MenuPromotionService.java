@@ -61,7 +61,7 @@ public class MenuPromotionService {
     @Transactional
     public void registerMenuPromotion(Long storeId, MenuPromotionRequestDTO dto) {
     	
-    	System.out.println("등록dto : " + dto.toString());
+    	//System.out.println("등록dto : " + dto.toString());
     	
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));

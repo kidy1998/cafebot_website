@@ -903,10 +903,11 @@ function createMent(){
             endDate: $('[name="endDate"]').val(),
             startTime: $('[name="startTime"]').val(),
             endTime: $('[name="endTime"]').val(),
-            isAddDiscCond: $('[name="isAddCond-k"]').is(':checked'),
+            isAddDiscCond: $('[name="boolAddCond"]').val(),
             addDiscCond: $('[name="addDiscCond"]').val(),
             isAddMenuDesc: $('[name="isAddDesc-k"]').is(':checked'),
-            addMenuDesc: $('[name="addMenuDesc"]').val()
+            addMenuDesc: $('[name="addMenuDesc"]').val(),
+            isAlways : $('[name="boolIsAlways"]').is(':checked')
         },
         success: function (response) {
             console.log(response.ment);

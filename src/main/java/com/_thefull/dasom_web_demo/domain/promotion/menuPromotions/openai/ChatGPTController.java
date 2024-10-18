@@ -85,32 +85,43 @@ public class ChatGPTController {
      */
     private String createPrompt(ForMentOfMenuPromotionDTO dto, String name){
     	
-    	//System.out.println("멘트정보 : " + dto.toString());
+    	System.out.println("멘트정보 : " + dto.toString());
     	
     	// 한국어 프롬프트 생성
     	String prompt;
     	
     	if (dto.getDiscVal() != 0) { // 할인 조건이 있는 경우
-    	    prompt = String.format(
-    	        "이름이 %s인 카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 %s이고, 할인 값은 %s입니다. "
-    	        + "할인 기간은 %s부터 %s까지 유효하며, 할인 시간은 %s부터 %s까지입니다. "
-    	        + "%s%s메뉴의 정가는 %s원이며, 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해주세요. "
-    	        + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. "
-    	        + "그리고 나머지 정보를 참고해서 약 200자 정도의 홍보 멘트를 만들어주세요. 로봇이 말할 거예요. "
-    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. "
-    	        + "Let's think step by step"
-    	        + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
-    	        name,
-    	        dto.getMenu(),
-    	        dto.getDiscVal(), //얼마나 할인하는지
-    	        dto.getStartDate(),
-    	        dto.getEndDate(),
-    	        dto.getStartTime(),
-    	        dto.getEndTime(),
-    	        dto.getIsAddDiscCond() ? "추가 조건: " + dto.getAddDiscCond() + " " : "",
-    	        dto.getIsAddMenuDesc() ? "추가 메뉴 설명: " + dto.getAddMenuDesc() + " " : "",
-    	        dto.getPrice()
-    	    );
+//    	    prompt = String.format(
+//    	        "이름이 %s인 카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 %s이고, 할인 값은 %s입니다. "
+//    	        + "할인 기간은 %s부터 %s까지 유효하며, 할인 시간은 %s부터 %s까지입니다. "
+//    	        + "%s%s메뉴의 정가는 %s원이며, 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해주세요. "
+//    	        + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. "
+//    	        + "그리고 나머지 정보를 참고해서 약 200자 정도의 홍보 멘트를 만들어주세요. 로봇이 말할 거예요. "
+//    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. "
+//    	        + "Let's think step by step"
+//    	        + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
+//    	        name,
+//    	        dto.getMenu(),
+//    	        dto.getDiscVal(), //얼마나 할인하는지
+//    	        dto.getStartDate(),
+//    	        dto.getEndDate(),
+//    	        dto.getStartTime(),
+//    	        dto.getEndTime(),
+//    	        dto.getIsAddDiscCond() ? "홍보 멘트에 " + dto.getAddDiscCond() + "를 추가해서 자연스롭게 작성해 주세요" : "",
+//    	        dto.getPrice()
+//    	 );
+//    	        
+    		prompt = "이름이 "+name+"인 카페에서 "+ dto.getMenu()+"메뉴를 홍보하려 해. " + dto.getDiscVal()+"만큼 할인이 적용되고 할인기간은" 
+    			   +  (dto.getIsAlways() ? "상시 할인이야" : dto.getStartDate()+" 부터 "+ dto.getEndDate()+"까지야 "
+    			   		+ "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 작성해줘. 메뉴의 정가는")
+    			   +   dto.getPrice() + "이고 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해줘."
+    			   +  (!dto.getAddDiscCond().isEmpty() ? "할인 멘트에" + dto.getAddDiscCond()+"를 추가해서 작성해줘" :  "")
+    			   +  "길이는 약 200자 정도로 작성해줘"
+    			   + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘. "
+    			   + "Let's think step by step"
+    			   + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘 나중에 tts 로 발화할 거야";
+    	        
+    	   
     	} else { // 할인 조건이 없는 경우
     		
     		  prompt = String.format(

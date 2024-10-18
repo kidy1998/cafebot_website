@@ -11,9 +11,9 @@ public class MenuPromotionRequestDTO {
     private String category;
     private String menu;
 
-    private Integer price;
-    private Integer discVal;
-    private Integer discPrice;
+    private Integer price;		// 원래 가격
+    private Integer discVal = 0;	// 얼마나 할인하는지
+    private Integer discPrice;  // 할인 적용된 가격
 
     private LocalDate startDate;
     private LocalDate endDate;
