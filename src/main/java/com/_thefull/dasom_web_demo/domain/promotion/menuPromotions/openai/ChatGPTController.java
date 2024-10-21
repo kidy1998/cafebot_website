@@ -111,7 +111,7 @@ public class ChatGPTController {
 //    	        dto.getPrice()
 //    	 );
 //    	        
-    		prompt = "이름이 "+name+"인 카페에서 "+ dto.getMenu()+"메뉴를 홍보하려 해. " + dto.getDiscVal()+"만큼 할인이 적용되고 할인기간은" 
+    		prompt = "이름이 "+name+"인 카페에서 "+ dto.getMenu()+"메뉴를 홍보하려 해. " + dto.getDiscVal()+"원 만큼 할인이 적용되고 할인기간은" 
     			   +  (dto.getIsAlways() ? "상시 할인이야" : dto.getStartDate()+" 부터 "+ dto.getEndDate()+"까지야 "
     			   		+ "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 작성해줘. 메뉴의 정가는")
     			   +   dto.getPrice() + "이고 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해줘."

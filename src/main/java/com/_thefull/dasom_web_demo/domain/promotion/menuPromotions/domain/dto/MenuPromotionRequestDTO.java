@@ -1,13 +1,15 @@
 package com._thefull.dasom_web_demo.domain.promotion.menuPromotions.domain.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 @Data
 public class MenuPromotionRequestDTO {
     private Long menuPromoId;
-
+    
     private String category;
     private String menu;
 

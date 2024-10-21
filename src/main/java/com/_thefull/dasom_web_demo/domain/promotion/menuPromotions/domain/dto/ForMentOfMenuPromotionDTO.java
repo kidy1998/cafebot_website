@@ -9,9 +9,9 @@ import java.time.LocalTime;
 @Data
 public class ForMentOfMenuPromotionDTO {
     private String menu;
-    private Integer price;
+    private int price;
     private String discType;
-    private Integer discVal;  //얼마나 할인하는지
+    private int discVal;  //얼마나 할인하는지
     private String dateType;
     private LocalDate startDate;
     private LocalDate endDate;

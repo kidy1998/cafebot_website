@@ -155,9 +155,7 @@
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem">${thepromo.interval}분 간격</span></a>
                                 <div class="dropdown-content">
-                                    <a class ="dropdown-item" data-value="5분 간격">5분 간격</a>
                                     <a class ="dropdown-item" data-value="10분 간격">10분 간격</a>
-                                    <a class ="dropdown-item" data-value="15분 간격">15분 간격</a>
                                     <a class ="dropdown-item" data-value="20분 간격">20분 간격</a>
                                     <a class ="dropdown-item" data-value="30분 간격">30분 간격</a>
                                 </div>
