@@ -48,7 +48,7 @@
                     <h4 class="card-title">카페봇 위치 목록</h4>
                     <span><button id="prevButton" class="hidden" onclick="showPreviousItems()" style="border: none; background-color:white;"><image style="width: 40px; height: 100%" src="${pageContext.request.contextPath}/assets/images/free-icon-arrow-right-6423875left.svg"/></button><span>
                         <c:forEach items="${all_robot_location_category_list}" var="robot_location" varStatus="status">
-                            <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}">
+                            <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}" >
                                 <h5><strong>${robot_location.location}</strong></h5>
                                 <br>
 
@@ -66,55 +66,60 @@
                                 <br><br>
 
                                 <label style="display: inline-block; margin-right: 10px;">왼쪽</label>
+                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftSide}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.leftSide}" var="lse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${lse}</span></li>
+                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${lse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">왼쪽 앞</label>
+                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftFront}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.leftFront}" var="lfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${lfe}</span></li>
+                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${lfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">앞</label>
+                                <label style="display: inline-block; margin-right: 10px;">앞쪽</label>
+                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.front}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.front}" var="fe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${fe}</span></li>
+                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${fe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">오른쪽</label>
+                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightSide}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.rightSide}" var="rse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${rse}</span></li>
+                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${rse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">오른쪽 앞</label>
+                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightFront}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.rightFront}" var="rfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${rfe}</span></li>
+                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${rfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>

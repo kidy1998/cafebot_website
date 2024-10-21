@@ -34,12 +34,12 @@
                         <td>
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem"> ${thepromo.category} </span></a>
-                                <div class="dropdown-content">
-                                    <a class="dropdown-item" data-value="Beverage">Beverage</a>
-                                    <a class="dropdown-item" data-value="Bakery">Bakery</a>
-                                    <a class="dropdown-item" data-value="Cake">Cake</a>
-                                    <a class="dropdown-item" data-value="Set Product">Set Product</a>
-                                </div>
+                                <!-- <div class="dropdown-content">
+                                    <a class="dropdown-item" data-value="Beverage">음료</a> 
+                                    <a class="dropdown-item" data-value="Bakery">베이커리</a>
+                                    <a class="dropdown-item" data-value="Cake">케이크</a>
+                                    <a class="dropdown-item" data-value="Set Product">세트상품</a>
+                                </div> -->
                             </div>
 
                             <input type="hidden" id="categoryInput" name="menuPromoId" value="${thepromo.menuPromoId}">
@@ -52,7 +52,7 @@
                             <div class="input-container">
                                 <button type="button" class="search-button custom-input form-control"
                                         id="product_search_btn">${thepromo.menu}
-                                        <i class="icon-search" onclick="openMenuModal()"></i>
+                                        <!-- <i class="icon-search" onclick="openMenuModal()"></i> -->
                                 </button>
                                 <input type="hidden" id="menunameInput" name="menu" value="${thepromo.menu}">
 

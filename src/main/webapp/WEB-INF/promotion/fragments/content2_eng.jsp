@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="thiscategoryInput00" name="menuPromoId" value=1>
+                            <!-- <input type="hidden" id="thiscategoryInput00" name="menuPromoId" value=1> -->
                             <!-- category hidden input -->
                             <input type="hidden" id="categoryInput" name="category" value="BEVERAGE">
                         </td>

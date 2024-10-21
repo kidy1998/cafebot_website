@@ -65,7 +65,7 @@ public class MenuPromotionService {
     	
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
-        Menu menu = menuRepository.findById(dto.getMenuPromoId())
+        Menu menu = menuRepository.findByName(dto.getMenu())
                 .orElseThrow(()-> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
         
 

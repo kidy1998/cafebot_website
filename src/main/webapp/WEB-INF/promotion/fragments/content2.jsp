@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" id="thiscategoryInput00" name="menuPromoId" value=1>
+                           
                             <!-- category hidden input -->
                             <input type="hidden" id="categoryInput" name="category" value="BEVERAGE">
                         </td>
@@ -77,7 +77,6 @@
                         <td>
                             <div class="discount-section date">
                                 <input type="date" class="custom-input form-control" id="startDate" name="startDate">
-
                                 &nbsp~&nbsp
                                 <input type="date" class="custom-input form-control" id="endDate" name="endDate">
                                 <label class="custom-label">
@@ -85,6 +84,7 @@
                                     &nbsp상시
                                 </label>
                             </div>
+
                         </td>
 
                     </tr>
@@ -228,8 +228,8 @@
                             </div>
                         </td>
                         <td class="test">
-                            <!-- <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
-                            </button> -->
+                            <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
+                            </button>
                         </td>
 
                     </tr>

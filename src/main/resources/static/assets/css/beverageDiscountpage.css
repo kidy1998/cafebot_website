@@ -170,13 +170,13 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .rotated-arrow{
     display: inline-block;
-    background-color: white;
+    background-color: white;    
     border: 0;
 }
 
 .discount-register .custom-input{
-    max-width: 7.1rem;
-    width: 100%;
+    max-width: 9rem;
+   
     height:1.8rem;
     box-sizing: border-box;
     font-size:1em;
@@ -583,3 +583,8 @@ input[type="number"]::-webkit-inner-spin-button {
     z-index: 1000; /* Ensure it appears above other content */
 }
 
+
+
+#menunameInput {
+    min-width: 80px;
+}

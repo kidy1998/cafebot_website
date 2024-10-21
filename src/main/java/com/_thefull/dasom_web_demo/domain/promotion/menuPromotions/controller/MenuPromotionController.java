@@ -123,7 +123,7 @@ public class MenuPromotionController {
         }
         
         
-        System.out.println("등록 메뉴정보 : " + requestDTO.toString());
+        //System.out.println("등록 메뉴정보 : " + requestDTO.toString());
 
         Long storeId = (Long)session.getAttribute("storeId");
         menuPromotionService.registerMenuPromotion(storeId, requestDTO);
@@ -151,7 +151,7 @@ public class MenuPromotionController {
 
         MenuPromotionResponseDTO dto = menuPromotionService.findOneMenuPromotion(id);
         
-        System.out.println("해당 메뉴정보 : " + dto.toString());
+        //System.out.println("해당 메뉴정보 : " + dto.toString());
         model.addAttribute("thepromo",dto);
         
         if ("eng".equals(lang)) {
@@ -184,7 +184,7 @@ public class MenuPromotionController {
         	requestDTO.setBoolIsAlways(false);
         }
         
-       System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
+       //System.out.println("수정하려는 메뉴 정보 : " + requestDTO.toString());
         
         menuPromotionService.updatePromotionContent(requestDTO);
         

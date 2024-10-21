@@ -34,7 +34,7 @@
                          aria-labelledby="messageDropdown" style="z-index: 1050;">
                         <div class="dropdown-divider"></div>
                         <!-- 한국어 선택 -->
-                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')" style="border:1px solid red;">
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')" style="">
                             <div class="preview-item-content flex-grow py-2">
                                 <span class="preview-subject ellipsis fw-medium text-dark">한국어</span>
                             </div>

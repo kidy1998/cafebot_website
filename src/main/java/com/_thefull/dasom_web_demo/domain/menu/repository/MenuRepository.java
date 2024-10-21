@@ -12,4 +12,5 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
     Optional<Menu> findFirstByName(String name);
     List<Menu> findByStoreOrderByCategoryAsc(Store store);
     List<Menu> findAllByStoreAndNameContainingOrderByCategoryAsc(Store store, String search);
+	Optional<Menu> findByName(String string);
 }
