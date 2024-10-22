@@ -34,12 +34,6 @@
                         <td>
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem"> ${thepromo.category} </span></a>
-                                <!-- <div class="dropdown-content">
-                                    <a class ="dropdown-item" data-value="음료" >음료</a>
-                                    <a class ="dropdown-item" data-value="베이커리">베이커리</a>
-                                    <a class ="dropdown-item" data-value="케이크" >케이크</a>
-                                    <a class ="dropdown-item" data-value="세트상품">세트상품</a>
-                                </div> -->
                             </div>
 
                             <input type="hidden" id="categoryInput" name="menuPromoId" value="${thepromo.menuPromoId}">

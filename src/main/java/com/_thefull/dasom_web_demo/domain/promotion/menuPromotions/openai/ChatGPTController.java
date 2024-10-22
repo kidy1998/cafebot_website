@@ -201,19 +201,21 @@ public class ChatGPTController {
 		
 		String prompt;
 		
+		System.out.println("멘트정보 : " + dto.toString());
+		
 		if(lang.equals("ko")) {
 			
 			 prompt = "너는 한국의 홍보 멘트 생성 전문가야. 너가 해야 할 일은 인원, 시간 등에 관한 정보를 받고, 홍보 로봇 근처 메뉴에 대한 정보를 종합해서 홍보 멘트를 만들어야 해."
-					+ " 반환 형태는 json 형식으로 반환하고 key 값들은 각각 store, time, people, promotionMent 순서대로 만들어줘."
+					+ " 반환 형태는 json 형식으로 반환하고 key 값들은 각각 store, time, people, promotionMent 순서대로 만들어줘. 내가 말한대로 잘 작성해주면 10$ 팁을 줄게"
 					+ "store: " + storeName + ", time: " + localTime + ", people: " + people + ","
 					+ "\"promotionMent\": \"첫 번째 순서로 카페 이름인 "+storeName+"을 넣은 인사말을 만들어 줘."
-					+ ((dto.getRightSide() != null && dto.getRightFront() != null) ? 
+					+ ((dto.getRightSide() != null || dto.getRightFront() != null) ? 
 						    "두 번째 순서로 오른쪽에 위치한 " +
 						    (dto.getRightSide() != null ? dto.getRightSide() + " 와 " : "") +
 						    (dto.getRightFront() != null ? dto.getRightFront() : "") + 
 						    " 메뉴들을 홍보해줘. 홍보 메뉴는 최대 1개까지로 해줘." 
 						    : "") 
-					+ ((dto.getLeftSide() != null && dto.getLeftFront() != null) ? 
+					+ ((dto.getLeftSide() != null || dto.getLeftFront() != null) ? 
 						    "세 번째 순서로 왼쪽에 위치한 " +
 						    (dto.getLeftSide() != null ? dto.getLeftSide() + " 와 " : "") +
 						    (dto.getLeftFront() != null ? dto.getLeftFront() : "") + 
@@ -223,7 +225,7 @@ public class ChatGPTController {
 						    "네 번째 순서로 앞쪽에 위치한 " + dto.getFront() + " 메뉴를 홍보해줘. 홍보 메뉴는 최대 1개까지로 해줘."
 						    : "" )
 				    + (people >= 2 
-				        ? "여러 명의 손님이 있을 때는 '일행이 있으시군요! 위층에 단체석을 추천드립니다.'와 같이 사람이 많이 왔을 때 일반적으로 사용하는 좌석 안내를 추가해줘. " : ""
+				        ? "여러 명의 손님이 있을 때는 '일행이 있으시군요! 위층에 단체석을 추천드립니다.'와 같이 사람이 많이 왔을 때 일반적으로 사용하는 좌석 안내를 홍보 멘트 뒤에 추가해줘. " : ""
 				    ) + ","
 				    + ((localTime.isAfter(LocalTime.of(12, 0))) && (localTime.isBefore(LocalTime.of(13, 0))) 
 					            ? "'지금은 사람이 많아 혼잡한 시간대입니다. 빈 자리를 찾고 싶으시면 위층이나 1층 창가 공간을 추천드립니다!'와 같이 피크 시간대에 발생할 수 있는 문제를 해결할 수 있는 문장을 작성해줘."
@@ -233,8 +235,8 @@ public class ChatGPTController {
 					                    ? "'오늘 하루도 고생 많으셨습니다!'와 같은 저녁 인사를 추가해줘." 
 					                    : " ")) + "\","
 					+ " 전체 멘트를 한국어로 자연스럽게 작성해줘."
-					+ " 예를 들어, '안녕하세요. 원더풀카페에 오신 것을 환영합니다. 제 오른쪽에는 다양한 디저트와 샌드위치가 위치해 있고, 왼쪽에는 갓 구운 맛있는 베이커리가 있습니다. "
-					+ " 일행이 있으시군요? 위층에 단체석 공간이 있습니다! 오늘도 좋은 하루 되세요! 처럼 상황에 맞게 주어진 값들로 멘트를 작성해줘.' "
+					+ " 예를 들어 만약 오른쪽에 디저트와 샌드위치가 있고 왼쪽에 베이커리가 있다면 , '안녕하세요. 원더풀카페에 오신 것을 환영합니다. 제 오른쪽에는 다양한 디저트와 샌드위치가 위치해 있고, 왼쪽에는 갓 구운 맛있는 베이커리가 있습니다. "
+					+ " 오늘도 좋은 하루 되세요!' 처럼 상황에 맞게 주어진 값들로 멘트를 작성해줘. "
 					+ " Let's think step by step"
 					+ " 숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘. 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘.";
 
@@ -247,10 +249,10 @@ public class ChatGPTController {
 		               + " The response should be in JSON format with the following keys in order: store, time, people, promotionMent."
 		               + " store: " + storeName + ", time: " + localTime + ", people: " + people + ","
 		               + "\"promotionMent\": \"Start with a greeting that includes the store name, " + storeName + ".\""
-		               + ((dto.getRightSide() != null && dto.getRightFront() != null) ? 
+		               + ((dto.getRightSide() != null || dto.getRightFront() != null) ? 
 		                       " Next, promote the menu items located on the right side, mentioning up to one item. " 
 		                       : "") 
-		               + ((dto.getLeftSide() != null && dto.getLeftFront() != null) ? 
+		               + ((dto.getLeftSide() != null || dto.getLeftFront() != null) ? 
 		                       " Then, promote the menu items on the left side, mentioning up to one item. " 
 		                       : "" )
 		               + ((dto.getFront() != null) ? 
@@ -268,7 +270,8 @@ public class ChatGPTController {
 		                               ? "'Thank you for visiting today!' Please include an evening greeting."
 		                               : " "))) + "\","
 		               + " Please compose the entire message in natural English."
-		               + " For example, 'Hello and welcome to Wonderful Cafe! To my right, you'll find a variety of desserts and sandwiches, and to my left, there's freshly baked bread from our bakery. It looks like you're with a group! We have a large table upstairs available. Have a great day!' Please create a message that fits the given conditions."
+		               + " For example, 'Hello and welcome to Wonderful Cafe! To my right, you'll find a variety of desserts and sandwiches, and to my left, there's freshly baked bread from our bakery. It looks like you're with a group! We have a large table upstairs available. Have a great day!' "
+		               + " Please create a message that fits the given conditions."
 		               + " Let's think step by step."
 		               + " Use numbers as digits and write the rest in English naturally. Do not include any emojis or icons.";
 

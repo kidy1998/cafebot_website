@@ -1,14 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-            <!-- <div class="me-3">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-                    <span class="icon-menu"></span>
-                </button>
-            </div> -->
+           
             <div style="margin-left:20px;">
                 <a class="navbar-brand brand-logo-mini" href="../../page/main">
                     <h4> Admin Page</h4>
@@ -16,12 +12,7 @@
             </div>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-top">
-            <!--<ul class="navbar-nav">
-                <li class="nav-item fw-semibold d-none d-lg-block ms-0">
-                    <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
-                    <h3 class="welcome-sub-text">Your performance summary this week </h3>
-                </li>
-            </ul>-->
+          
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item dropdown d-none d-lg-block">
@@ -93,8 +84,6 @@
                 window.location.href = currentUrl;
                 
             }
-
-
 
         </script>
     </nav>

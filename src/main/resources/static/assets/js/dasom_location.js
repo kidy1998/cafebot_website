@@ -380,14 +380,14 @@ function inputEventListener() {
    });
 }
 
-function confirmToggleClick(index, locationId, isChecked) {
+function confirmToggleClick(index, locationId, lang) {
     
     // 위치 변경을 확인하는 창을 띄움
     const isConfirmed = confirm("위치를 변경하시겠습니까?");
     
     if (isConfirmed) {
         // 사용자가 확인을 누르면 handleToggleClick 함수 실행
-        handleToggleClick(index, locationId, isChecked);
+        handleToggleClick(index, locationId, lang);
     } else {
         console.log("위치 변경이 취소되었습니다.");
     }
@@ -407,22 +407,22 @@ function handleToggleClick(index, locationId, isChecked) {
 
     // 리다이렉트 URL 생성
     const newState = radio.checked;  // 새로운 radio 버튼 상태
-    const url = '/settings/dasom-locations/use?use=' + newState + '&id=' + locationId;
+    const url = '/settings/dasom-locations/use?use=' + newState + '&id=' + locationId + '&lang=' + lang;
 
     // 페이지 리다이렉트
     window.location.href = url;
 }
 
 
-// 언어 선택 드롭다운 초기화
-document.addEventListener('DOMContentLoaded', function () {
-    // Bootstrap 드롭다운 수동 초기화
-    var dropdowns = document.querySelectorAll('.dropdown-toggle');
-    dropdowns.forEach(function(dropdown) {
-        new bootstrap.Dropdown(dropdown);
-        console.log("드롭다운 초기화");
-    });
-});
+// // 언어 선택 드롭다운 초기화
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Bootstrap 드롭다운 수동 초기화
+//     var dropdowns = document.querySelectorAll('.dropdown-toggle');
+//     dropdowns.forEach(function(dropdown) {
+//         new bootstrap.Dropdown(dropdown);
+//         console.log("드롭다운 초기화");
+//     });
+// });
 
 
 
@@ -510,3 +510,59 @@ function loadUpdateLocationContent(locationId, lang){
     xhr.send();
 
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+    // 드롭다운 메뉴를 클릭할 때 show 클래스를 토글하는 함수
+    function toggleDropdown(event) {
+
+      const dropdownToggle = event.target.closest('.dropdown-toggle');
+      if (!dropdownToggle) return;
+
+      // dropdownToggle과 같은 부모 요소를 공유하는 dropdown-menu-toggle 를 찾기
+      const dropdownMenu = dropdownToggle.nextElementSibling;
+      console.log(dropdownMenu);
+
+      // dropdownMenu가 존재하고, classList를 사용할 수 있는지 확인
+      if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu-right')) {
+          
+          // 다른 열려있는 드롭다운 메뉴를 닫기 (optional: 페이지에서 하나만 열리도록 할 때)
+          document.querySelectorAll('.dropdown-menu-right.show').forEach(function(menu) {
+              if (menu !== dropdownMenu) {
+                  menu.classList.remove('show');
+              }
+          });
+
+          // dropdownMenu에 show 클래스를 추가하거나 제거
+          dropdownMenu.classList.toggle('show');
+
+      } else {
+          console.error('Dropdown menu not found or does not have the correct class.');
+      }
+
+      // 이벤트가 전파되지 않도록 방지 (드롭다운 외부를 클릭하면 닫히도록)
+      event.stopPropagation();
+    }
+
+
+
+  // 전역 클릭 핸들러 (드롭다운 외부 클릭 시 닫기)
+  document.addEventListener('click', function(event) {
+      const isClickInside = event.target.closest('.dropdown-toggle, .dropdown-menu-right');
+      if (!isClickInside) {
+          document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+              menu.classList.remove('show');
+          });
+      }
+  });
+
+  // 드롭다운 토글 요소에 클릭 이벤트 추가
+  document.querySelectorAll('.dropdown-toggle').forEach(function(dropdown) {
+      dropdown.addEventListener('click', toggleDropdown);
+  });
+
+
+
+});

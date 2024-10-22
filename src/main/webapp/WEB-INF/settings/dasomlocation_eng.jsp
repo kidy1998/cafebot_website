@@ -35,7 +35,66 @@
 <body>
 
 <div class="container-scroller">
-    <%@ include file="../promotion/fragments/top-nav_eng.jsp" %>
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+           
+            <div style="margin-left:20px;">
+                <a class="navbar-brand brand-logo-mini" href="../../page/main">
+                    <h4> Admin Page</h4>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-top">
+          
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown"
+                       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
+                        <span class="selectedItem"> Language </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="messageDropdown" style="z-index: 1050;">
+                        <div class="dropdown-divider"></div>
+                        <!-- 한국어 선택 -->
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')" >
+                            <div class="preview-item-content flex-grow py-2">
+                                <span class="preview-subject ellipsis fw-medium text-dark">Korean</span>
+                            </div>
+                        </button>
+                        <!-- 영어 선택 -->
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('eng')">
+                            <div class="preview-item-content flex-grow py-2">
+                                <span class="preview-subject ellipsis fw-medium text-dark">English</span>
+                            </div>
+                        </button>
+                    </div>
+                </li>
+                
+                <li class="nav-item d-none d-lg-block">
+                    <c:choose>
+                       
+                        <c:when test="${sessionScope.userId == null}">
+                            <p id="login-user-info"><strong>Welcome. Guest!</strong></p>
+                        </c:when>
+
+                        <c:otherwise>
+                            <p id="login-user-info"><strong>Welcome. ${sessionScope.userName}!</strong></p>
+                        </c:otherwise>
+                    </c:choose>
+                </li>
+
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+
+    </nav>
+
         <div class="container-fluid page-body-wrapper">
              <%@ include file="../promotion/fragments/nav-menu_eng.jsp" %>
 
@@ -50,8 +109,6 @@
                                 <h5><strong>${robot_location.location}</strong></h5>
                                 <br>
 
-                             
-                                
                                 <!-- 활성화 선택을 위한 radio 버튼 -->
                                 <label style="display: inline-block; margin-right: 10px;">
                                     Activate
@@ -59,7 +116,7 @@
 
                                 <input type="radio" name="locationToggle" id="toggleOn${status.index}"
                                         <c:if test="${robot_location.use eq 'true'}">checked</c:if>
-                                        onclick="confirmToggleClick('${status.index}', '${robot_location.id}')">
+                                        onclick="confirmToggleClick('${status.index}', '${robot_location.id}', 'eng')">
                               
                                 <br><br>
 
@@ -164,6 +221,29 @@
     <% } %>
 
 
+    <script>
+
+        function switchLanguage(lang) {
+
+            let currentUrl = window.location.href;
+
+            if (currentUrl.includes("?")) {
+                // 기존 lang 파라미터를 대체
+                if (currentUrl.includes("lang=")) {
+                    currentUrl = currentUrl.replace(/lang=\w*/, `lang=` + lang);
+                } else {
+                    currentUrl += `&lang=` + lang;
+                }
+            } else {
+                currentUrl += `?lang=` + lang;
+            }
+
+            // 새 URL로 이동
+            window.location.href = currentUrl;
+            
+        }
+
+    </script>
 
 <!-- content-wrapper ends -->
 <!-- partial:../../partials/_footer.html -->
@@ -184,8 +264,12 @@
 <!-- plugins:js -->
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Include Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/assets/js/dasom_location.js"></script>
 
 

@@ -37,8 +37,66 @@
 <body>
 
 <div class="container-scroller">
-    <%@ include file="../promotion/fragments/top-nav.jsp" %>
-        <div class="container-fluid page-body-wrapper">
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+           
+            <div style="margin-left:20px;">
+                <a class="navbar-brand brand-logo-mini" href="../../page/main">
+                    <h4> 관리자페이지</h4>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-top">
+           
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown"
+                       href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="ti-world icon-md text-info d-flex align-self-start me-3"></i>
+                        <span class="selectedItem"> 언어(Language) </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                         aria-labelledby="messageDropdown" style="z-index: 1050;">
+                        <div class="dropdown-divider"></div>
+                        <!-- 한국어 선택 -->
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')">
+                            <div class="preview-item-content flex-grow py-2">
+                                <span class="preview-subject ellipsis fw-medium text-dark">한국어</span>
+                            </div>
+                        </button>
+                        <!-- 영어 선택 -->
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('eng')">
+                            <div class="preview-item-content flex-grow py-2">
+                                <span class="preview-subject ellipsis fw-medium text-dark">English</span>
+                            </div>
+                        </button>
+                    </div>
+                </li>
+                
+                <li class="nav-item d-none d-lg-block">
+                    <c:choose>
+                       
+                        <c:when test="${sessionScope.userId == null}">
+                            <p id="login-user-info"><strong>반갑습니다. 게스트님!</strong></p>
+                        </c:when>
+
+                        <c:otherwise>
+                            <p id="login-user-info"><strong>반갑습니다. ${sessionScope.userName}님!</strong></p>
+                        </c:otherwise>
+                    </c:choose>
+                </li>
+
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </nav>
+
+<div class="container-fluid page-body-wrapper">
              <%@ include file="../promotion/fragments/nav-menu.jsp" %>
 
     <div class="main-panel">
@@ -48,7 +106,7 @@
                     <h4 class="card-title">카페봇 위치 목록</h4>
                     <span><button id="prevButton" class="hidden" onclick="showPreviousItems()" style="border: none; background-color:white;"><image style="width: 40px; height: 100%" src="${pageContext.request.contextPath}/assets/images/free-icon-arrow-right-6423875left.svg"/></button><span>
                         <c:forEach items="${all_robot_location_category_list}" var="robot_location" varStatus="status">
-                            <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}" >
+                            <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}">
                                 <h5><strong>${robot_location.location}</strong></h5>
                                 <br>
 
@@ -61,71 +119,66 @@
 
                                 <input type="radio" name="locationToggle" id="toggleOn${status.index}"
                                         <c:if test="${robot_location.use eq 'true'}">checked</c:if>
-                                        onclick="confirmToggleClick('${status.index}', '${robot_location.id}')">
+                                        onclick="confirmToggleClick('${status.index}', '${robot_location.id}', 'kor')">
                               
                                 <br><br>
 
                                 <label style="display: inline-block; margin-right: 10px;">왼쪽</label>
-                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftSide}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.leftSide}" var="lse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${lse}</span></li>
+                                                <li style="display: inline-block; margin-right: 10px;"><span>${lse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">왼쪽 앞</label>
-                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftFront}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.leftFront}" var="lfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${lfe}</span></li>
+                                                <li style="display: inline-block; margin-right: 10px;"><span>${lfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">앞쪽</label>
-                                <br>
+                                <label style="display: inline-block; margin-right: 10px;">앞</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.front}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.front}" var="fe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${fe}</span></li>
+                                                <li style="display: inline-block; margin-right: 10px;"><span>${fe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">오른쪽</label>
-                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightSide}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.rightSide}" var="rse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${rse}</span></li>
+                                                <li style="display: inline-block; margin-right: 10px;"><span>${rse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
                                 <label style="display: inline-block; margin-right: 10px;">오른쪽 앞</label>
-                                <br>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightFront}">
                                         <ul style="display: inline-block; padding-left: 0; list-style: none;">
                                             <c:forEach items="${robot_location.rightFront}" var="rfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 5px; margin-bottom: 5px;"><span>${rfe}</span></li>
+                                                <li style="display: inline-block; margin-right: 10px;"><span>${rfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
                                 <br>
-                                <button class="btn-primary edit-location" onclick="loadUpdateLocationContent(${robot_location.id},'kor')">
+                                <button class="btn-primary edit-location    " onclick="loadUpdateLocationContent(${robot_location.id},'kor')">
                                     <i class="material-symbols-outlined">pin_drop</i>
                                     위치수정
                                 </button>
@@ -142,11 +195,34 @@
             <div id="location_input">
                 <%@ include file = "fragments/location_registration.jsp" %>
             </div>
-<!-- locationupdate or locationregisteration  -->
         </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    function switchLanguage(lang) {
+
+        let currentUrl = window.location.href;
+
+        if (currentUrl.includes("?")) {
+            // 기존 lang 파라미터를 대체
+            if (currentUrl.includes("lang=")) {
+                currentUrl = currentUrl.replace(/lang=\w*/, `lang=` + lang);
+            } else {
+                currentUrl += `&lang=` + lang;
+            }
+        } else {
+            currentUrl += `?lang=` + lang;
+        }
+
+        // 새 URL로 이동
+        window.location.href = currentUrl;
+        
+    }
+
+</script>
 
 
     <% String message = (String) request.getAttribute("message"); %>
@@ -191,8 +267,13 @@
 <!-- plugins:js -->
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Include Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
+
 <script src="${pageContext.request.contextPath}/assets/js/dasom_location.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 

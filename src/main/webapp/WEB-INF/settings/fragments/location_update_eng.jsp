@@ -100,7 +100,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false"
                                        value="${inputValue}" ${not empty theLocation.leftSide ? '' : 'disabled'}>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown1">
                                     <ul class="dropdown-options">
                                         <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
@@ -138,7 +138,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false"
                                        value="${inputValue}" ${not empty theLocation.leftFront ? '' : 'disabled'}>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown4">
                                     <ul class="dropdown-options">
                                         <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
@@ -176,7 +176,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false"
                                        value="${inputValue}" ${not empty theLocation.front ? '' : 'disabled'}>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown5">
                                     <ul class="dropdown-options">
                                         <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
@@ -215,7 +215,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false"
                                        value="${inputValue}" ${not empty theLocation.rightSide ? '' : 'disabled'}>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown3">
                                     <ul class="dropdown-options">
                                         <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
@@ -255,7 +255,7 @@
                                        data-bs-toggle="dropdown"
                                        aria-expanded="false"
                                        value="${inputValue}" ${not empty theLocation.rightFront ? '' : 'disabled'}>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0 pt-0"
+                                <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown6">
                                     <ul class="dropdown-options">
                                         <li class="nav-item dropdown" data-value="베이커리">Bakery</li>

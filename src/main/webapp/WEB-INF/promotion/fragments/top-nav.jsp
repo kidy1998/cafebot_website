@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
             <!-- <div class="me-3">
@@ -34,7 +34,7 @@
                          aria-labelledby="messageDropdown" style="z-index: 1050;">
                         <div class="dropdown-divider"></div>
                         <!-- 한국어 선택 -->
-                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')" style="">
+                        <button class="dropdown-item preview-item" onclick="switchLanguage('kor')">
                             <div class="preview-item-content flex-grow py-2">
                                 <span class="preview-subject ellipsis fw-medium text-dark">한국어</span>
                             </div>
