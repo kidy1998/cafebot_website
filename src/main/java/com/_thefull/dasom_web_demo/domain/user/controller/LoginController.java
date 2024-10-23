@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import java.io.IOException;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,16 @@ public class LoginController {
                         RedirectAttributes redirectAttributes,
                         @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang
                         ) throws IOException{
+    	
+//    	 // 평문 비밀번호
+//        String rawPassword = "cafebot1";
+//        
+//        // 비밀번호 암호화
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String encodedPassword = passwordEncoder.encode(rawPassword);
+//        
+//        // 암호화된 비밀번호 출력 (이 값을 DB에 저장해야 함)
+//        System.out.println("암호화된 비밀번호: " + encodedPassword);
 
         // 로그인 서비스 호출 (비밀번호 검증 포함)
         User user = loginService.login(requestDTO);
