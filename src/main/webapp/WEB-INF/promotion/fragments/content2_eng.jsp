@@ -137,9 +137,7 @@
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem"> Select </span></a>
                                 <div class="dropdown-content">
-                                    <a class="dropdown-item" data-value="5-min Interval">5-min Interval</a>
                                     <a class="dropdown-item" data-value="10-min Interval">10-min Interval</a>
-                                    <a class="dropdown-item" data-value="15-min Interval">15-min Interval</a>
                                     <a class="dropdown-item" data-value="20-min Interval">20-min Interval</a>
                                     <a class="dropdown-item" data-value="30-min Interval">30-min Interval</a>
                                 </div>
@@ -220,7 +218,7 @@
                            
                             <textarea id="ment-textarea" name="ment"></textarea>
                             <div class="button-container">
-                                <button type="button" onclick="createMent()" class="btn btn-outline-light btn-sm">Generate Message
+                                <button type="button" onclick="createMent('en')" class="btn btn-outline-light btn-sm">Generate Message
                                 </button>
                                 <!-- <button type="button" class="btn btn-outline-light btn-sm">Load
                                 </button> -->

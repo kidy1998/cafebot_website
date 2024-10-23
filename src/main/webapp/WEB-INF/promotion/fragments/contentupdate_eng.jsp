@@ -143,9 +143,7 @@
                             <div class="my_dropdown">
                                 <a class="dropbtn"><span id="selectedItem">${thepromo.interval}-min Interval</span></a>
                                 <div class="dropdown-content">
-                                    <a class="dropdown-item" data-value="5-min Interval">5-min Interval</a>
                                     <a class="dropdown-item" data-value="10-min Interval">10-min Interval</a>
-                                    <a class="dropdown-item" data-value="15-min Interval">15-min Interval</a>
                                     <a class="dropdown-item" data-value="20-min Interval">20-min Interval</a>
                                     <a class="dropdown-item" data-value="30-min Interval">30-min Interval</a>
                                 </div>
@@ -222,7 +220,7 @@
                     <thead>
                         <tr>
                             <th>Generate AI CafeBot Message</th>
-                            <th>Test Progress<span class="info">* Check how the CafeBot speaks!</span>
+                            <!-- <th>Test Progress<span class="info">* Check how the CafeBot speaks!</span> -->
                             </th>
                         </tr>
                     </thead>
@@ -233,7 +231,7 @@
                              <!-- textarea with actual content, not using 'value' attribute -->
                             <textarea id="ment-textarea" name="ment">${thepromo.ment}</textarea>
                             <div class="button-container">
-                                <button type="button" onclick="createMent()" class="btn btn-outline-light btn-sm">Generate Message
+                                <button type="button" onclick="createMent('en')" class="btn btn-outline-light btn-sm">Generate Message
                                 </button>
                                 <!-- <button type="button" class="btn btn-outline-light btn-sm">Load
                                 </button> -->
@@ -242,8 +240,8 @@
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary">CafeBot Promotion Test
-                            </button>
+                            <!-- <button type="button" class="btn btn-primary">CafeBot Promotion Test
+                            </button> -->
                         </td>
 
                     </tr>

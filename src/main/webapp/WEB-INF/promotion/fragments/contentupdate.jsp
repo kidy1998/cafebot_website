@@ -238,7 +238,7 @@
                              <!-- textarea with actual content, not using 'value' attribute -->
                             <textarea id="ment-textarea" name="ment">${thepromo.ment}</textarea>
                             <div class="button-container">
-                                <button type="button" onclick="createMent()" class="btn btn-outline-light btn-sm">멘트생성
+                                <button type="button" onclick="createMent('ko')" class="btn btn-outline-light btn-sm">멘트생성
                                 </button>
                                 <!-- <button type="button" class="btn btn-outline-light btn-sm">불러오기
                                 </button> -->

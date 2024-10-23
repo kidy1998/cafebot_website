@@ -888,10 +888,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function createMent(){
+function createMent(lang){
 
     $.ajax({
-        url: '/openai/ment',
+        url: '/openai/ment?lang=' + lang,
         method: 'POST',
         dataType: 'json',
         data: {

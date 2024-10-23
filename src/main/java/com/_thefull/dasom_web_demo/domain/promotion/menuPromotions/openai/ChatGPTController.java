@@ -62,7 +62,8 @@ public class ChatGPTController {
      * @return
      */
     @PostMapping("/ment")
-    public ResponseEntity<?> createAiMent(@ModelAttribute ForMentOfMenuPromotionDTO dto, HttpServletRequest request){
+    public ResponseEntity<?> createAiMent(@ModelAttribute ForMentOfMenuPromotionDTO dto, HttpServletRequest request,
+    		 @RequestParam(value = "lang", required = false, defaultValue = "ko") String lang){
     	
     	HttpSession session = request.getSession(false);
         Long storeId= (Long)session.getAttribute("storeId");
@@ -70,7 +71,7 @@ public class ChatGPTController {
         Store store = dasomStoreService.findStore(storeId);
         String name = store.getName();
 
-        String prompt = createPrompt(dto, name);
+        String prompt = createPrompt(dto, name,lang);
         ChatGPTRequestDTO req = new ChatGPTRequestDTO(model, prompt);
         ChatGPTResponseDTO res=template.postForObject(apiURL,req, ChatGPTResponseDTO.class);
         return ResponseEntity.ok(Collections.singletonMap("ment", res.getChoices().get(0).getMessage().getContent()));
@@ -83,67 +84,75 @@ public class ChatGPTController {
      * @param menuName
      * @return
      */
-    private String createPrompt(ForMentOfMenuPromotionDTO dto, String name){
-    	
-    	//System.out.println("멘트정보 : " + dto.toString());
-    	
-    	// 한국어 프롬프트 생성
-    	String prompt;
-    	
-    	if (dto.getDiscVal() != 0) { // 할인 조건이 있는 경우
-//    	    prompt = String.format(
-//    	        "이름이 %s인 카페에서 할인 홍보 멘트를 만들려고 합니다. 메뉴 이름은 %s이고, 할인 값은 %s입니다. "
-//    	        + "할인 기간은 %s부터 %s까지 유효하며, 할인 시간은 %s부터 %s까지입니다. "
-//    	        + "%s%s메뉴의 정가는 %s원이며, 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해주세요. "
-//    	        + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 말하고 싶어요. "
-//    	        + "그리고 나머지 정보를 참고해서 약 200자 정도의 홍보 멘트를 만들어주세요. 로봇이 말할 거예요. "
-//    	        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. "
-//    	        + "Let's think step by step"
-//    	        + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
-//    	        name,
-//    	        dto.getMenu(),
-//    	        dto.getDiscVal(), //얼마나 할인하는지
-//    	        dto.getStartDate(),
-//    	        dto.getEndDate(),
-//    	        dto.getStartTime(),
-//    	        dto.getEndTime(),
-//    	        dto.getIsAddDiscCond() ? "홍보 멘트에 " + dto.getAddDiscCond() + "를 추가해서 자연스롭게 작성해 주세요" : "",
-//    	        dto.getPrice()
-//    	 );
-//    	        
-    		prompt = "이름이 "+name+"인 카페에서 "+ dto.getMenu()+"메뉴를 홍보하려 해. " + dto.getDiscVal()+"원 만큼 할인이 적용되고 할인기간은" 
-    			   +  (dto.getIsAlways() ? "상시 할인이야" : dto.getStartDate()+" 부터 "+ dto.getEndDate()+"까지야 "
-    			   		+ "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 작성해줘. 메뉴의 정가는")
-    			   +   dto.getPrice() + "이고 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해줘."
-    			   +  (!dto.getAddDiscCond().isEmpty() ? "할인 멘트에" + dto.getAddDiscCond()+"를 추가해서 작성해줘" :  "")
-    			   +  "길이는 약 200자 정도로 작성해줘"
-    			   + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘. "
-    			   + "Let's think step by step"
-    			   + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘 나중에 tts 로 발화할 거야";
-    	        
-    	   
-    	} else { // 할인 조건이 없는 경우
-    		
-    		  prompt = String.format(
-    			        "할인 없이 이름이 %s인 카페에서 %s 메뉴를 홍보하는 멘트를 만들려고 합니다. "
-    			        + "%s의 특징을 강조하고, 자연스럽게 제품을 소개해주세요. 다음은 수박 주스에 관하여 홍보하는 예시입니다. "
-    			        + "[예시: 돌아온 베스트셀러! 수박주스가 출시되었어요! 직접 공수한 수박을 갈아서 달달하고 시원한 맛을 자랑합니다. "
-    			        + "꿉꿉하고 더운 날씨에 시원한 수박주스 어떠세요?] "
-    			        + "나머지 정보를 참고해서 200자의 홍보 멘트를 만들어주세요. 메뉴와 어울릴 만한 멘트를 작성해주고 특정 계절,날씨는 언급하지 말아주세요."
-    			        + "Let's think step by step"
-    			        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요",
-    			        name,
-    			        dto.getMenu(),
-    			        dto.getAddMenuDesc(), // 제품의 특징 설명
-    			        dto.getMenu(),
-    			        dto.getMenu()
-    	    );
-    	}
+    private String createPrompt(ForMentOfMenuPromotionDTO dto, String name, String lang){
 
+        // 한국어 또는 영어 프롬프트 생성
+        String prompt;
 
+        if (lang.equals("en")) { // 영어 프롬프트 생성
+
+            if (dto.getDiscVal() != 0) { // 할인 조건이 있는 경우
+                prompt = "You are promoting the " + dto.getMenu() + " menu at the cafe named " + name + ". "
+                       + "There is a discount of " + dto.getDiscVal() + " KRW, "
+                       + "and the discount period is " 
+                       + (dto.getIsAlways() ? "always available." : "from " + dto.getStartDate() + " to " + dto.getEndDate() + ". "
+                        + "Make sure to include the start and end dates, excluding the year, and the discount time in the message. ")
+                       + "The original price of the menu is " + dto.getPrice() + " KRW, and be sure to mention how much is discounted from the original price."
+                       + (!dto.getAddDiscCond().isEmpty() ? "Also, include the following discount conditions in the message: " + dto.getAddDiscCond() + "." : "")
+                       + "The length of the message should be around 200 characters. "
+                       + "Use numbers for digits and write the rest naturally in English. "
+                       + "Let's think step by step."
+                       + "Additionally, do not include emojis or icons in the message as it will be used for TTS later.";
+            } else { // 할인 조건이 없는 경우
+                prompt = String.format(
+                        "You are creating a promotional message for the %s menu at the cafe named %s without any discounts. "
+                        + "Please highlight the key features of the %s and naturally introduce the product. "
+                        + "Here’s an example for a watermelon juice promotion: "
+                        + "[Example: Our bestseller is back! Watermelon juice is now available. Made from freshly sourced watermelons, it's sweet and refreshing. "
+                        + "How about cooling off with a fresh watermelon juice on a hot day?] "
+                        + "Based on this example and the provided information, please create a promotional message of around 200 characters. "
+                        + "Do not mention any specific season or weather."
+                        + "Let's think step by step. "
+                        + "Use numbers for digits and write the rest naturally in English. Additionally, do not include emojis or icons in the message.",
+                        dto.getMenu(),
+                        name,
+                        dto.getAddMenuDesc()
+                );
+            }
+
+        } else { // 한국어 프롬프트 생성
+
+            if (dto.getDiscVal() != 0) { // 할인 조건이 있는 경우
+                prompt = "이름이 " + name + "인 카페에서 " + dto.getMenu() + "메뉴를 홍보하려 해. " + dto.getDiscVal() + "원 만큼 할인이 적용되고 할인기간은"
+                       + (dto.getIsAlways() ? "상시 할인이야" : dto.getStartDate() + " 부터 " + dto.getEndDate() + "까지야 "
+                       + "멘트에는 연도를 제외한 할인 기간의 시작과 끝, 그리고 할인 시간을 꼭 포함해서 작성해줘. 메뉴의 정가는")
+                       + dto.getPrice() + "이고 정가에서 얼마나 할인되었는지 꼭 포함해서 설명해줘."
+                       + (!dto.getAddDiscCond().isEmpty() ? "할인 멘트에 " + dto.getAddDiscCond() + "를 추가해서 작성해줘" : "")
+                       + " 길이는 약 200자 정도로 작성해줘."
+                       + " 숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해줘."
+                       + "Let's think step by step. "
+                       + "추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아줘 나중에 TTS로 발화할 거야.";
+            } else { // 할인 조건이 없는 경우
+                prompt = String.format(
+                        "할인 없이 이름이 %s인 카페에서 %s 메뉴를 홍보하는 멘트를 만들려고 합니다. "
+                        + "%s의 특징을 강조하고, 자연스럽게 제품을 소개해주세요. 다음은 수박 주스에 관하여 홍보하는 예시입니다. "
+                        + "[예시: 돌아온 베스트셀러! 수박주스가 출시되었어요! 직접 공수한 수박을 갈아서 달달하고 시원한 맛을 자랑합니다. "
+                        + "꿉꿉하고 더운 날씨에 시원한 수박주스 어떠세요?] "
+                        + "나머지 정보를 참고해서 200자의 홍보 멘트를 만들어주세요. 메뉴와 어울릴 만한 멘트를 작성해주고 특정 계절, 날씨는 언급하지 말아주세요."
+                        + "Let's think step by step."
+                        + "숫자는 숫자로 작성하고, 나머지는 한글로 매우 자연스럽게 작성해주세요. 추가로 멘트를 생성할 때 이모티콘이나 아이콘은 만들지 말아 주세요.",
+                        name,
+                        dto.getMenu(),
+                        dto.getAddMenuDesc(),
+                        dto.getMenu(),
+                        dto.getMenu()
+                );
+            }
+        }
 
         return prompt;
     }
+
     
     
     /*=====================================================================================================================*/
