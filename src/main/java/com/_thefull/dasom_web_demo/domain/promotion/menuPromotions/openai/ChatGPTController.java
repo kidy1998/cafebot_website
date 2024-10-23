@@ -101,16 +101,19 @@ public class ChatGPTController {
                        + (!dto.getAddDiscCond().isEmpty() ? "Also, include the following discount conditions in the message: " + dto.getAddDiscCond() + "." : "")
                        + "The length of the message should be around 200 characters. "
                        + "Use numbers for digits and write the rest naturally in English. "
+                       + "Do not use special characters such as  `'`  "
                        + "Let's think step by step."
                        + "Additionally, do not include emojis or icons in the message as it will be used for TTS later.";
+                       
             } else { // 할인 조건이 없는 경우
                 prompt = String.format(
                         "You are creating a promotional message for the %s menu at the cafe named %s without any discounts. "
                         + "Please highlight the key features of the %s and naturally introduce the product. "
                         + "Here’s an example for a watermelon juice promotion: "
-                        + "[Example: Our bestseller is back! Watermelon juice is now available. Made from freshly sourced watermelons, it's sweet and refreshing. "
+                        + "[Example: Our bestseller is back! Watermelon juice is now available. Made from freshly sourced watermelons, it is sweet and refreshing. "
                         + "How about cooling off with a fresh watermelon juice on a hot day?] "
                         + "Based on this example and the provided information, please create a promotional message of around 200 characters. "
+                        + "Do not use special characters such as `'` "
                         + "Do not mention any specific season or weather."
                         + "Let's think step by step. "
                         + "Use numbers for digits and write the rest naturally in English. Additionally, do not include emojis or icons in the message.",

@@ -393,7 +393,7 @@ function confirmToggleClick(index, locationId, lang) {
     }
 }
 
-function handleToggleClick(index, locationId, isChecked) {
+function handleToggleClick(index, locationId, lang) {
     // 현재 클릭한 radio 버튼을 가져옴
     const radio = document.getElementById('toggleOn' + index);
 
