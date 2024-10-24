@@ -192,7 +192,8 @@ public class DasomLocationController {
     @GetMapping("/delete")
     public String deleteDasomLocation(@RequestParam(name = "id")Long id,
                                       HttpServletRequest request,
-                                      RedirectAttributes redirectAttribute){
+                                      RedirectAttributes redirectAttribute,
+                                      @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
         System.out.println("DasomLocationController.deleteDasomLocation");
 
@@ -207,7 +208,7 @@ public class DasomLocationController {
         
         redirectAttribute.addFlashAttribute("message", "delete");
 
-        return "redirect:/settings/dasom-locations/main";
+        return "redirect:/settings/dasom-locations/main?lang=" +lang;
 
     }
 

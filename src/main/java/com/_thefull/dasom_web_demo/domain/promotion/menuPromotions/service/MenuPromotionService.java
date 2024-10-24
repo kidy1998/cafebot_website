@@ -49,6 +49,7 @@ public class MenuPromotionService {
         List<MenuPromotion> findPromoList = menuPromotionsRepository.findByStoreId(store.getId());
         
         for (MenuPromotion mp : findPromoList){
+        	//	System.out.println(mp.getCategory());
             if (mp.getStatus()!= Status.COMPLETED) {
                 int freq= calculateFreq(mp.getMentInterval(), mp.getMentEndTime(), mp.getMentStartTime());
                 MenuPromotionResponseDTO e = MenuPromotionResponseDTO.from(mp, freq);

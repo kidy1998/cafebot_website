@@ -49,7 +49,7 @@
                                 <!--<input type="text" class="custom-input form-control search" disabled>-->
                                 <button type="button" class="search-button custom-input form-control"
                                         id="product_search_btn"><i
-                                        class="icon-search" onclick="openMenuModal()"></i>
+                                        class="icon-search" onclick="openMenuModal('kor')"></i>
                                 </button>
                                 <input type="hidden" id="menunameInput" name="menu" >
 

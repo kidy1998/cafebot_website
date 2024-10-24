@@ -382,14 +382,20 @@ function inputEventListener() {
 
 function confirmToggleClick(index, locationId, lang) {
     
-    // 위치 변경을 확인하는 창을 띄움
-    const isConfirmed = confirm("위치를 변경하시겠습니까?");
+    var isConfirmed = false;
+    if(lang == 'eng'){
+        isConfirmed = confirm("Would you like to change your location?");
+    }else{
+        isConfirmed = confirm("위치를 변경하시겠습니까?");
+    }
+    
     
     if (isConfirmed) {
         // 사용자가 확인을 누르면 handleToggleClick 함수 실행
         handleToggleClick(index, locationId, lang);
     } else {
-        console.log("위치 변경이 취소되었습니다.");
+        window.location.reload();
+        window.location.href = window.location.href;
     }
 }
 
@@ -412,19 +418,6 @@ function handleToggleClick(index, locationId, lang) {
     // 페이지 리다이렉트
     window.location.href = url;
 }
-
-
-// // 언어 선택 드롭다운 초기화
-// document.addEventListener('DOMContentLoaded', function () {
-//     // Bootstrap 드롭다운 수동 초기화
-//     var dropdowns = document.querySelectorAll('.dropdown-toggle');
-//     dropdowns.forEach(function(dropdown) {
-//         new bootstrap.Dropdown(dropdown);
-//         console.log("드롭다운 초기화");
-//     });
-// });
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {

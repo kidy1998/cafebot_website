@@ -27,7 +27,8 @@ public class MenuController {
 
     @GetMapping("/all")
     public String getAllMenuList(HttpServletRequest request,
-                                 Model model) {
+                                 Model model,
+                                 @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/page/user/login";
@@ -39,7 +40,12 @@ public class MenuController {
 
         model.addAttribute("menu_list",allMenu);
 
-        return "promotion/fragments/menuModal";
+        if ("eng".equals(lang)) {
+        	return "promotion/fragments/menuModal_eng";
+        } else {
+        	return "promotion/fragments/menuModal";
+        }
+        
 
     }
 

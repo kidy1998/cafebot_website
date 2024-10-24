@@ -281,7 +281,7 @@
                         </button>
 
                         <button type="button" class="btn btn-outline-primary">
-                            <a href="/settings/dasom-locations/delete?id=${theLocation.id}" 
+                            <a href="/settings/dasom-locations/delete?id=${theLocation.id}&lang=eng" 
                                 onclick="return confirm('Do you want to delete this location?');" style="text-decoration: none;">
                                 Delete
                             </a>
