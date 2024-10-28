@@ -29,7 +29,7 @@ public class UserRegisterService {
         Store findStore = storeRepository.findByCode(dto.getCode())
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾지 못했습니다"));
 
-        findStore.changeUser(savedUser);
+        // findStore.changeUser(savedUser);
 
         Robot newRobot = Robot.builder().model("DASOM1004").store(findStore).build();
         robotRepository.save(newRobot);

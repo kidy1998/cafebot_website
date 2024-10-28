@@ -192,7 +192,7 @@ function onclickConfirmDiscountPriceBtn() {
         console.log("Discounted price: ", discountedPrice); // 디버그용 콘솔 로그
 
         // 할인된 가격을 표시
-        document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()} KRW)`;
+        document.getElementById('discountPrice').innerText = `(${discountedPrice.toLocaleString()} 원)`;
 
         // 할인된 가격을 히든 필드에 설정
         document.getElementById('discPriceInput').value = discountedPrice;

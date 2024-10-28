@@ -23,8 +23,8 @@ public class Robot {
     @Column(name = "MODEL",length = 100)
     private String model;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STORE_ID")
+    @OneToOne
+    @JoinColumn(name = "STORE_ID", unique = true)
     private Store store;
 
     @OneToMany(mappedBy = "robot", cascade = CascadeType.ALL)

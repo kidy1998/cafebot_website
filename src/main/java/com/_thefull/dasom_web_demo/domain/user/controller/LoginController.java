@@ -54,13 +54,17 @@ public class LoginController {
 
         // 로그인 서비스 호출 (비밀번호 검증 포함)
         User user = loginService.login(requestDTO);
-
+        
         if (user != null) {
             // 비밀번호 비교
             if (passwordEncoder.matches(requestDTO.getPassword(), user.getPassword())) {
+            	
+            	System.out.println(user.toString());
+            	System.out.println(user.getStores());
+            	
                 // 로그인 성공
-                Long storeId = user.getStoreList().get(0).getId();
-                Long robotId = user.getStoreList().get(0).getRobotList().get(0).getId();
+                Long storeId = user.getStores().get(0).getId();
+                Long robotId = user.getStores().get(0).getRobotList().get(0).getId();
 
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getUserId());

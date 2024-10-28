@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,17 +18,10 @@ public class LoginService {
     private final UserRepository userRepository;
 
     public User login(LoginRequestDto dto) {
-        Optional<User> optionalUser = userRepository.findByPhoneNum(dto.getPhoneNum());
-        
-     // Optional 객체에서 값이 있는지 확인한 후 처리
-        if (optionalUser.isPresent()) {
-            // 값이 존재할 때만 get()을 호출
-            User user = optionalUser.get();
-            return user;
-        } else {
-            // Optional이 비어있다면 null을 반환
-            return null;
-        }
+        Optional<User> optionalUser = userRepository.findByPhoneNumWithStoresAndRobots(dto.getPhoneNum());
+       
+
+        return optionalUser.orElse(null);  // Optional이 비어있다면 null 반환
        
     }
 

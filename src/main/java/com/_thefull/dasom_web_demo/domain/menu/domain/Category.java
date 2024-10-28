@@ -10,11 +10,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Category {
 
-    BEVERAGE(1,"BEVERAGE","BEVERAGE"),
-    BAKERY(2, "BAKERY", "BAKERY"),
-    CAKE(3, "CAKE", "CAKE"),
-    SET(4, "SET","SET"),
-    ALL(5, "ALL","ALL");
+    BEVERAGE(1,"음료","음료"),
+    BAKERY(2, "베이커리", "베이커리"),
+    CAKE(3, "케이크", "케이크"),
+    SET(4, "세트메뉴","세트메뉴"),
+    ALL(5, "기타","기타");
 
 
     private final int categoryNum;

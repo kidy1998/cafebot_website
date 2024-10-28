@@ -36,7 +36,7 @@
                                     <a class ="dropdown-item" data-value="음료" >음료</a>
                                     <a class ="dropdown-item" data-value="베이커리">베이커리</a>
                                     <a class ="dropdown-item" data-value="케이크" >케이크</a>
-                                    <a class ="dropdown-item" data-value="세트상품">세트상품</a>
+                                    <!-- <a class ="dropdown-item" data-value="세트상품">세트상품</a> -->
                                 </div>
                             </div>
 
@@ -228,8 +228,8 @@
                             </div>
                         </td>
                         <td class="test">
-                            <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
-                            </button>
+                            <!-- <button type="button" class="btn btn-primary" onclick="mentTest()">카페봇 홍보 테스트
+                            </button> -->
                         </td>
 
                     </tr>

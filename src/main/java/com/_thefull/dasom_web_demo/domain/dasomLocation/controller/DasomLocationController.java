@@ -195,8 +195,6 @@ public class DasomLocationController {
                                       RedirectAttributes redirectAttribute,
                                       @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
 
-        System.out.println("DasomLocationController.deleteDasomLocation");
-
         HttpSession session = request.getSession(false);
         if(session==null){
             return "redirect:/page/user/login";

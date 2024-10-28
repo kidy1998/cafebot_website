@@ -8,10 +8,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Status {
-    IN_PROGRESS(1, "IN_PROGRESS"),
-    SCHEDULED(2,"SCHEDULED"),
-    STOPPED(3,"STOPPED"),
-    COMPLETED(4,"COMPLETED");
+    IN_PROGRESS(1, "진행중"),
+    SCHEDULED(2,"예정"),
+    STOPPED(3,"중단"),
+    COMPLETED(4,"완료");
 
     private final int stateNum;
     private final String stateType;

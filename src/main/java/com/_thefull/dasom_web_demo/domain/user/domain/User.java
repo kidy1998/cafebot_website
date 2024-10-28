@@ -16,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Entity(name = "USER")
+@Setter
+@Entity
+@Table(name = "USER")
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 public class User extends BaseEntity {
@@ -44,9 +46,40 @@ public class User extends BaseEntity {
     @CreatedDate
     @Column(columnDefinition = "TIMESTAMP", name = "REGISTER_DATE", updatable = false)
     private LocalDateTime registerAt;
+    
+    //User 엔티티가 로드될 때, userStores 필드가 초기화되고, UserStore 객체를 통해 간접적으로 Store와 Robot 객체가 자동으로 매핑됩니다.
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<UserStore> userStores;
 
-    // BUILDER 패턴은 초기화를 해주지 않는다. 따라서 직접 선언+초기화까지 한 경우에는 @Builder.Default를 하라고 lombok에서 exception으로 알려줌.
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Store> storeList = new ArrayList<>();
+    // Store 목록 가져오기 편의를 위한 메서드 추가
+    public List<Store> getStores() {
+        return userStores.stream().map(UserStore::getStore).toList();
+    }
+    
+//    User 객체 생성 
+//    └── userStores 리스트 초기화 및 UserStore 객체 생성
+//          └── UserStore 객체에서 Store 객체 생성
+//                 └── Store 객체에서 Robot 객체 생성
+    
+    
+    
+    @Override
+    public String toString() {
+        return "User{" +
+               "userId=" + userId +
+               ", name='" + name + '\'' +
+               ", phoneNum='" + phoneNum + '\'' +
+               ", password='" + password + '\'' +
+               ", profileImageUrl='" + profileImageUrl + '\'' +
+               ", registerAt=" + registerAt +
+               '}';
+    }
+
+
+//    // BUILDER 패턴은 초기화를 해주지 않는다. 따라서 직접 선언+초기화까지 한 경우에는 @Builder.Default를 하라고 lombok에서 exception으로 알려줌.
+//    @Builder.Default
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Store> storeList = new ArrayList<>();
+    
+    
 }
