@@ -18,27 +18,27 @@
                         <p class="title">1. Please set the location of CafeBot within the café.</p>
                         <label class="custom-label first-label" for="entrance">
                             <input type="radio" name="location"
-                                   id="entrance" value="입구 근처" ${theLocation.location eq '입구 근처' ? 'checked' : ''}>
+                                   id="entrance" value="Near Entrance" ${theLocation.location eq 'Near Entrance' ? 'checked' : ''}>
                             Near Entrance
                         </label>
                         <label class="custom-label" for="counter">
                             <input type="radio" name="location"
-                                   id="counter" value="계산대 근처" ${theLocation.location eq '계산대 근처' ? 'checked' : ''}>
+                                   id="counter" value="Near Counter" ${theLocation.location eq 'Near Counter' ? 'checked' : ''}>
                             Near Counter
                         </label>
                         <label class="custom-label" for="pickupTable">
                             <input type="radio" name="location"
-                                   id="pickupTable" value="픽업테이블 근처" ${theLocation.location eq '픽업테이블 근처' ? 'checked' : ''}>
+                                   id="pickupTable" value="Near PickupTable" ${theLocation.location eq 'Near PickupTable' ? 'checked' : ''}>
                             Near Pickup Table
                         </label>
                         <label class="custom-label" for="goodsDisplay">
                             <input type="radio" name="location"
-                                   id="goodsDisplay" value="굿즈 매대 근처" ${theLocation.location eq '굿즈 매대 근처' ? 'checked' : ''}>
+                                   id="goodsDisplay" value="Near the goods stand" ${theLocation.location eq 'Near the goods stand' ? 'checked' : ''}>
                             Near Goods Display
                         </label>
                         <label class="custom-label" for="other">
                             <input type="radio" name="location"
-                                   id="other" value="기타" ${theLocation.location eq '기타' ? 'checked' : ''}>
+                                   id="other" value="Other" ${theLocation.location eq 'Other' ? 'checked' : ''}>
                             Other
                         </label>
                     </div>
@@ -103,16 +103,16 @@
                                 <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown1">
                                     <ul class="dropdown-options">
-                                        <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
-                                        <li class="nav-item dropdown" data-value="디저트">Dessert</li>
-                                        <li class="nav-item dropdown" data-value="샌드위치">Sandwich</li>
-                                        <li class="nav-item dropdown" data-value="샐러드">Salad</li>
-                                        <li class="nav-item dropdown" data-value="계산대">Counter</li>
-                                        <li class="nav-item dropdown" data-value="유제품">Dairy Products</li>
-                                        <li class="nav-item dropdown" data-value="병음료">bottled drink</li>
-                                        <li class="nav-item dropdown" data-value="케이크">Cake</li>
-                                        <li class="nav-item dropdown" data-value="창가자리">window seat</li>
-                                        <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">Custom input</li>
+                                        <li class="nav-item dropdown" data-value="Bakery">Bakery</li>
+                                        <li class="nav-item dropdown" data-value="Dessert">Dessert</li>
+                                        <li class="nav-item dropdown" data-value="Sandwich">Sandwich</li>
+                                        <li class="nav-item dropdown" data-value="Salad">Salad</li>
+                                        <li class="nav-item dropdown" data-value="Counter">Counter</li>
+                                        <li class="nav-item dropdown" data-value="Dairy Products">Dairy Products</li>
+                                        <li class="nav-item dropdown" data-value="bottled drink">bottled drink</li>
+                                        <li class="nav-item dropdown" data-value="Cake">Cake</li>
+                                        <li class="nav-item dropdown" data-value="window seat">window seat</li>
+                                        <li class="nav-item dropdown" data-value="Custom input" onclick="openAdditionalContent()">Custom input</li>
                                     </ul>
                                 </div>
                             </div>
@@ -141,16 +141,16 @@
                                 <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown4">
                                     <ul class="dropdown-options">
-                                        <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
-                                        <li class="nav-item dropdown" data-value="디저트">Dessert</li>
-                                        <li class="nav-item dropdown" data-value="샌드위치">Sandwich</li>
-                                        <li class="nav-item dropdown" data-value="샐러드">Salad</li>
-                                        <li class="nav-item dropdown" data-value="계산대">Counter</li>
-                                        <li class="nav-item dropdown" data-value="유제품">Dairy Products</li>
-                                        <li class="nav-item dropdown" data-value="병음료">bottled drink</li>
-                                        <li class="nav-item dropdown" data-value="케이크">Cake</li>
-                                        <li class="nav-item dropdown" data-value="창가자리">window seat</li>
-                                        <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">Custom input</li>
+                                        <li class="nav-item dropdown" data-value="Bakery">Bakery</li>
+                                        <li class="nav-item dropdown" data-value="Dessert">Dessert</li>
+                                        <li class="nav-item dropdown" data-value="Sandwich">Sandwich</li>
+                                        <li class="nav-item dropdown" data-value="Salad">Salad</li>
+                                        <li class="nav-item dropdown" data-value="Counter">Counter</li>
+                                        <li class="nav-item dropdown" data-value="Dairy Products">Dairy Products</li>
+                                        <li class="nav-item dropdown" data-value="bottled drink">bottled drink</li>
+                                        <li class="nav-item dropdown" data-value="Cake">Cake</li>
+                                        <li class="nav-item dropdown" data-value="window seat">window seat</li>
+                                        <li class="nav-item dropdown" data-value="Custom input" onclick="openAdditionalContent()">Custom input</li>
                                     </ul>
                                 </div>
                             </div>
@@ -179,16 +179,16 @@
                                 <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown5">
                                     <ul class="dropdown-options">
-                                        <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
-                                        <li class="nav-item dropdown" data-value="디저트">Dessert</li>
-                                        <li class="nav-item dropdown" data-value="샌드위치">Sandwich</li>
-                                        <li class="nav-item dropdown" data-value="샐러드">Salad</li>
-                                        <li class="nav-item dropdown" data-value="계산대">Counter</li>
-                                        <li class="nav-item dropdown" data-value="유제품">Dairy Products</li>
-                                        <li class="nav-item dropdown" data-value="병음료">bottled drink</li>
-                                        <li class="nav-item dropdown" data-value="케이크">Cake</li>
-                                        <li class="nav-item dropdown" data-value="창가자리">window seat</li>
-                                        <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">Custom input</li>
+                                        <li class="nav-item dropdown" data-value="Bakery">Bakery</li>
+                                        <li class="nav-item dropdown" data-value="Dessert">Dessert</li>
+                                        <li class="nav-item dropdown" data-value="Sandwich">Sandwich</li>
+                                        <li class="nav-item dropdown" data-value="Salad">Salad</li>
+                                        <li class="nav-item dropdown" data-value="Counter">Counter</li>
+                                        <li class="nav-item dropdown" data-value="Dairy Products">Dairy Products</li>
+                                        <li class="nav-item dropdown" data-value="bottled drink">bottled drink</li>
+                                        <li class="nav-item dropdown" data-value="Cake">Cake</li>
+                                        <li class="nav-item dropdown" data-value="window seat">window seat</li>
+                                        <li class="nav-item dropdown" data-value="Custom input" onclick="openAdditionalContent()">Custom input</li>
                                     </ul>
                                 </div>
                             </div>
@@ -218,16 +218,16 @@
                                 <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown3">
                                     <ul class="dropdown-options">
-                                        <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
-                                        <li class="nav-item dropdown" data-value="디저트">Dessert</li>
-                                        <li class="nav-item dropdown" data-value="샌드위치">Sandwich</li>
-                                        <li class="nav-item dropdown" data-value="샐러드">Salad</li>
-                                        <li class="nav-item dropdown" data-value="계산대">Counter</li>
-                                        <li class="nav-item dropdown" data-value="유제품">Dairy Products</li>
-                                        <li class="nav-item dropdown" data-value="병음료">bottled drink</li>
-                                        <li class="nav-item dropdown" data-value="케이크">Cake</li>
-                                        <li class="nav-item dropdown" data-value="창가자리">window seat</li>
-                                        <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">Custom input</li>
+                                        <li class="nav-item dropdown" data-value="Bakery">Bakery</li>
+                                        <li class="nav-item dropdown" data-value="Dessert">Dessert</li>
+                                        <li class="nav-item dropdown" data-value="Sandwich">Sandwich</li>
+                                        <li class="nav-item dropdown" data-value="Salad">Salad</li>
+                                        <li class="nav-item dropdown" data-value="Counter">Counter</li>
+                                        <li class="nav-item dropdown" data-value="Dairy Products">Dairy Products</li>
+                                        <li class="nav-item dropdown" data-value="bottled drink">bottled drink</li>
+                                        <li class="nav-item dropdown" data-value="Cake">Cake</li>
+                                        <li class="nav-item dropdown" data-value="window seat">window seat</li>
+                                        <li class="nav-item dropdown" data-value="Custom input" onclick="openAdditionalContent()">Custom input</li>
                                     </ul>
                                 </div>
                             </div>
@@ -258,16 +258,16 @@
                                 <div class="dropdown-menu dropdown-menu-list navbar-dropdown preview-list pb-0 pt-0"
                                      aria-labelledby="messageDropdown" id="dropdown6">
                                     <ul class="dropdown-options">
-                                        <li class="nav-item dropdown" data-value="베이커리">Bakery</li>
-                                        <li class="nav-item dropdown" data-value="디저트">Dessert</li>
-                                        <li class="nav-item dropdown" data-value="샌드위치">Sandwich</li>
-                                        <li class="nav-item dropdown" data-value="샐러드">Salad</li>
-                                        <li class="nav-item dropdown" data-value="계산대">Counter</li>
-                                        <li class="nav-item dropdown" data-value="유제품">Dairy Products</li>
-                                        <li class="nav-item dropdown" data-value="병음료">bottled drink</li>
-                                        <li class="nav-item dropdown" data-value="케이크">Cake</li>
-                                        <li class="nav-item dropdown" data-value="창가자리">window seat</li>
-                                        <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">Custom input</li>
+                                        <li class="nav-item dropdown" data-value="Bakery">Bakery</li>
+                                        <li class="nav-item dropdown" data-value="Dessert">Dessert</li>
+                                        <li class="nav-item dropdown" data-value="Sandwich">Sandwich</li>
+                                        <li class="nav-item dropdown" data-value="Salad">Salad</li>
+                                        <li class="nav-item dropdown" data-value="Counter">Counter</li>
+                                        <li class="nav-item dropdown" data-value="Dairy Products">Dairy Products</li>
+                                        <li class="nav-item dropdown" data-value="bottled drink">bottled drink</li>
+                                        <li class="nav-item dropdown" data-value="Cake">Cake</li>
+                                        <li class="nav-item dropdown" data-value="window seat">window seat</li>
+                                        <li class="nav-item dropdown" data-value="Custom input" onclick="openAdditionalContent()">Custom input</li>
                                         <input type="text" class="hidden" id="directInput"></input>
                                     </ul>
                                 </div>
