@@ -825,7 +825,7 @@ function loadUpdateContent(menuPromoId, lang) {
 
 
 
-function loadRegisterpage(lang) {
+function loadRegistrationPage(lang) {
     const url = `/api/promotion-discount/registerpage?lang=${lang}`;
 
     fetch(url, {
@@ -1073,31 +1073,36 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('promotionFormEng');
 
-    form.addEventListener('submit', function (event) {
-        // 필수 입력 요소들 (name으로 접근)
-        const category = document.querySelector('input[name="category"]').value;
-        const menu = document.querySelector('input[name="menu"]').value;
-        const discPrice = document.querySelector('input[name="discPrice"]').value;  //할인하려는 가격
-        const startTime = document.querySelector('input[name="startTime"]').value;
-        const endTime = document.querySelector('input[name="endTime"]').value;
-        const mentStartTime = document.querySelector('input[name="mentStartTime"]').value;
-        const mentEndTime = document.querySelector('input[name="mentEndTime"]').value;
-        const interval = document.querySelector('input[name="interval"]').value;
-        const discVal = document.querySelector('input[name="discVal"]').value;
+    if(form){
 
-        // 검증 로직
-        if (!category || !menu || !discPrice || !startTime || !endTime || !mentStartTime || !mentEndTime || !interval || !ment || !discVal) {
-            Swal.fire({
-                title: "Please follow the form!",
-                text: "Please enter all information except discount conditions!",
-                position: 'top', // 원하는 위치로 설정
-                confirmButtonText: 'Confirm'
-            });
-            event.preventDefault(); // 제출을 막음
-            return;
-        }
+        form.addEventListener('submit', function (event) {
+            // 필수 입력 요소들 (name으로 접근)
+            const category = document.querySelector('input[name="category"]').value;
+            const menu = document.querySelector('input[name="menu"]').value;
+            const discPrice = document.querySelector('input[name="discPrice"]').value;  //할인하려는 가격
+            const startTime = document.querySelector('input[name="startTime"]').value;
+            const endTime = document.querySelector('input[name="endTime"]').value;
+            const mentStartTime = document.querySelector('input[name="mentStartTime"]').value;
+            const mentEndTime = document.querySelector('input[name="mentEndTime"]').value;
+            const interval = document.querySelector('input[name="interval"]').value;
+            const discVal = document.querySelector('input[name="discVal"]').value;
+    
+            // 검증 로직
+            if (!category || !menu || !discPrice || !startTime || !endTime || !mentStartTime || !mentEndTime || !interval || !ment || !discVal) {
+                Swal.fire({
+                    title: "Please follow the form!",
+                    text: "Please enter all information except discount conditions!",
+                    position: 'top', // 원하는 위치로 설정
+                    confirmButtonText: 'Confirm'
+                });
+                event.preventDefault(); // 제출을 막음
+                return;
+            }
+    
+            // 추가적인 검증이 필요한 경우 여기에 추가 가능
+        });
 
-        // 추가적인 검증이 필요한 경우 여기에 추가 가능
-    });
+    }
+   
 });
 
