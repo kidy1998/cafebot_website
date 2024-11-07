@@ -79,7 +79,7 @@ public class ChatGPTController {
     }
 
     /**
-     * createAiMent 에서의 프롬프트 생성
+     * createAiMent 에서의 프롬프트 생성(홍보멘트 생성)
      * @param dto
      * @param menuName
      * @return

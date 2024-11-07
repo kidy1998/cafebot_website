@@ -15,7 +15,7 @@
     <div class="card-body">
         <h4 class="card-title">제품홍보 등록</h4>
 
-        <form action="/api/promotion-discount/register" method="post" id="promotionForm">
+        <form action="/api/promotion-discount/register" method="post" id="promotionFormKor">
             <div class="table-responsive first-table">
                 <table class="table">
                     <thead>
@@ -155,7 +155,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>할인 조건 추가</th>
+                        <th>할인 조건 추가(선택)</th>
                         <th>제품 소개</th>
                     </tr>
                     </thead>

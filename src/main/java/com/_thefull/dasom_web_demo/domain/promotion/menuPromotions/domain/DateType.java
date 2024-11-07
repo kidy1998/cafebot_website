@@ -11,7 +11,7 @@ public enum DateType {
     ALWAYS(1, "상시"),
     TWO_WEEKS(2, "2주"),
     ONE_WEEK(3,"1주"),
-    OTHER(4,"직접입력");
+    OTHER(4,"직접입력");    //db 의 DATETYPE 컬럼을 이렇게 매핑하는 거 같은데 왜하는지는 모르겠음
 
     private final int intVal;
     private final String koreanName;

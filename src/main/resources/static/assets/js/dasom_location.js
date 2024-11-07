@@ -505,6 +505,47 @@ function loadUpdateLocationContent(locationId, lang){
 }
 
 
+//등록페이지로 이동하는 js
+function loadRegistrationPage(lang){
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET','/settings/dasom-locations/registerpage?lang='+lang, true);
+
+    // 요청 성공할 경우 onload 설정
+    xhr.onload=function(){
+        if(xhr.status >= 200 && xhr.status<400){
+            document.getElementById('location_input').innerHTML = xhr.responseText;
+
+            // var allSpans = document.querySelectorAll('[id^="settings"]');
+            // allSpans.forEach(function(span) {
+            //     span.style.backgroundColor = ''; // 배경색 초기화
+            // });
+
+            // 여기서 해당 id를 가진 요소의 배경색을 변경
+            // var locationSpan = document.getElementById('settings' + locationId);
+            // if(locationSpan) {
+            //     locationSpan.style.backgroundColor = '#F5DEB3'; // 연한 갈색
+            // }
+
+            inputEventListener();
+
+
+        }else{
+            console.error("제품할인 수정 화면 페이지 로드에 실패하였습니다");
+        }
+    };
+
+    // 요청 에러가 날 경우 onerror 설정
+    xhr.onerror = function() {
+        console.error("Connection error");
+    };
+    xhr.send();
+
+}
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
 

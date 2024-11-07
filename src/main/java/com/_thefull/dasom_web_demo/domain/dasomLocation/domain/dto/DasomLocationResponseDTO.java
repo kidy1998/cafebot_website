@@ -9,6 +9,10 @@ import lombok.Getter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 다솜 위치 목록 조회 시 사용
+ * @return
+ */
 @Getter @Builder
 @AllArgsConstructor
 @Data

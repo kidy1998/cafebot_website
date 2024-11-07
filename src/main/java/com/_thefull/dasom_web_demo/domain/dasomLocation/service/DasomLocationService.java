@@ -29,6 +29,12 @@ public class DasomLocationService {
     private final StoreRepository storeRepository;
 
 
+    /**
+     * 카페봇 위치목록 전부 조회
+     * @param robotId
+     * @param storeId
+     * @return
+     */
     public List<DasomLocationResponseDTO> findAllRobotLocation(Long robotId, Long storeId) {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다."));

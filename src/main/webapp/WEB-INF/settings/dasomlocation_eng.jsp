@@ -24,6 +24,10 @@
     <!-- Plugin css for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- End plugin css for this page -->
+
+    <!-- 알림창 관련 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/beverageDiscountpage.css">
@@ -202,19 +206,35 @@
     <% String message = (String) request.getAttribute("message"); %>
     <% if ("register".equals(message)) { %>
         <script>
-            alert("Location has been registered.");
+            Swal.fire({
+                text: "Location has been registered.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% } else if ("update".equals(message)) { %>
         <script>
-            alert("Location has been updated.");
+            Swal.fire({
+                text: "Location has been updated.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% } else if ("delete".equals(message)) { %>
         <script>
-            alert("Location has been deleted.");
+           Swal.fire({
+                text: "Location has been deleted.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% }  else if ("location".equals(message)) { %>
         <script>
-            alert("Location has been changed.");
+            Swal.fire({
+                text: "Location has been changed.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% } else { %>
 

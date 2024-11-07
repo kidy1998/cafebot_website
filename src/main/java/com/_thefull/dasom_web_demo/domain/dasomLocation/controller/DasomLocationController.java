@@ -17,6 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ *  카페봇 위치 설정 관련 컨트롤러
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/settings/dasom-locations")
@@ -58,6 +61,14 @@ public class DasomLocationController {
     }
     
 
+    /**
+     * 등록된 위치 목록 전부 조회
+     * @param model
+     * @param request
+     * @param message
+     * @param lang
+     * @return
+     */
     @GetMapping("/main")
     public String mainPage(Model model,
                            HttpServletRequest request,
@@ -90,6 +101,14 @@ public class DasomLocationController {
         }
     }
 
+    /**
+     * 수정페이지 이동
+     * @param request
+     * @param id
+     * @param model
+     * @param lang
+     * @return
+     */
     @GetMapping("/updatepage")
     public String loadUpdatePage(HttpServletRequest request,
                                  @RequestParam(name = "id") Long id,
@@ -97,7 +116,7 @@ public class DasomLocationController {
                                  @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
         HttpSession session = request.getSession(false);
         if (session==null){
-            return "redirect:/page/user/login";
+            return "redirect:/page/user/login?lang=" + lang;
         }
 
         DasomLocationResponseDTO dto = dasomLocationService.findLocationDetails(id);
@@ -112,7 +131,45 @@ public class DasomLocationController {
         }
 
     }
+    
+    
+    /**등록 페이지로 이동
+     * @param request
+     * @param id
+     * @param model
+     * @param lang
+     * @return
+     */
+    @GetMapping("/registerpage")
+    public String loadRegisterPage(HttpServletRequest request,
+                                 @RequestParam(value = "lang", required = false, defaultValue = "kor") String lang){
+    	
+        HttpSession session = request.getSession(false);
+        if (session==null){
+            return "redirect:/page/user/login?lang=" + lang;
+        }
 
+     
+        if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+        	return "settings/fragments/location_registration_eng";
+        } else {
+        	
+            // 기본값으로 한국어 페이지 반환
+        	return "settings/fragments/location_registration";
+        }
+
+    }
+
+    /**
+     * 위치 등록
+     * @param requestDTO
+     * @param bindingResult
+     * @param request
+     * @param redirectAttribute
+     * @param lang
+     * @return
+     */
     @PostMapping("/register")
     public String createDasomLocation(@ModelAttribute DasomLocationRequestDTO requestDTO,
                                       BindingResult bindingResult,
@@ -163,7 +220,7 @@ public class DasomLocationController {
         return "redirect:/settings/dasom-locations/main?lang="+lang;
     }
 
-    /* 카페봇 위치 설정 전체 수정 PUT */
+    /* 카페봇 위치 설정 수정 */
     @ResponseStatus(HttpStatus.SEE_OTHER)
     @PostMapping("/update")
     public String updateLocation(@ModelAttribute DasomLocationRequestDTO dto,

@@ -49,7 +49,6 @@ public class MenuPromotionService {
         List<MenuPromotion> findPromoList = menuPromotionsRepository.findByStoreId(store.getId());
         
         for (MenuPromotion mp : findPromoList){
-        	//	System.out.println(mp.getCategory());
             if (mp.getStatus()!= Status.COMPLETED) {
                 int freq= calculateFreq(mp.getMentInterval(), mp.getMentEndTime(), mp.getMentStartTime());
                 MenuPromotionResponseDTO e = MenuPromotionResponseDTO.from(mp, freq);
@@ -66,7 +65,7 @@ public class MenuPromotionService {
     	
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_STORE, "매장을 찾을 수 없습니다"));
-        Menu menu = menuRepository.findByName(dto.getMenu())
+        Menu menu = menuRepository.findFirstByName(dto.getMenu())
                 .orElseThrow(()-> new AppException(ErrorCode.NOT_FOUND_MENU, "메뉴를 찾을 수 없습니다"));
         
 
@@ -163,20 +162,37 @@ public class MenuPromotionService {
     
     
     public String checkMent(LocalTime localTime, Long storeId) {
-
         // 해당 storeId의 STATUS가 1(진행중)인 데이터 조회
         List<MenuPromotion> activePromotions = menuPromotionsRepository.findByStoreIdAndStatus(storeId, Status.IN_PROGRESS);
 
-
-        // STATUS가 1(진행중)인 데이터 중 mentStartTime과 mentEndTime 사이에 있는 경우 ment 반환
+        // STATUS가 1(진행중)인 데이터 중 mentStartTime과 mentEndTime 사이에 있는 경우
         for (MenuPromotion promotion : activePromotions) {
-            if (localTime.isAfter(promotion.getMentStartTime()) && localTime.isBefore(promotion.getMentEndTime())) {
+            //System.out.println("checkment : " + promotion.toString());
+
+            // mentStartTime과 mentEndTime 사이의 일정 간격을 계산하여 시간을 생성
+            List<LocalTime> intervals = getMentIntervals(promotion.getMentStartTime(), promotion.getMentEndTime(), promotion.getMentInterval());
+
+            // localTime이 intervals에 포함되어 있다면 ment 반환
+            if (intervals.contains(localTime)) {
                 return promotion.getMent();
             }
         }
 
         // 해당하는 경우가 없으면 빈 문자열 반환
         return "";
+    }
+
+    // mentStartTime부터 mentEndTime까지 mentInterval 간격으로 시간을 생성하는 메서드
+    private List<LocalTime> getMentIntervals(LocalTime mentStartTime, LocalTime mentEndTime, int mentInterval) {
+        List<LocalTime> intervals = new ArrayList<>();
+        LocalTime current = mentStartTime;
+
+        while (!current.isAfter(mentEndTime)) {
+            intervals.add(current);
+            current = current.plusMinutes(mentInterval);  // mentInterval 간격으로 시간 증가
+        }
+
+        return intervals;
     }
 
     

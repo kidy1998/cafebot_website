@@ -37,7 +37,7 @@
                                 <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                 <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                 <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
-                                <td>${promotion.freq} times</td>
+                                <td>${promotion.interval} min</td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">View</button></td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `eng`)">Edit</button></td>
                             </tr>

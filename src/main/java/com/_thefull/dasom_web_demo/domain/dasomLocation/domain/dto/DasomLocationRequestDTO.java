@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 위치 등록 시 쓰이는 dto
+ */
 @Data
 @NoArgsConstructor
 public class DasomLocationRequestDTO {

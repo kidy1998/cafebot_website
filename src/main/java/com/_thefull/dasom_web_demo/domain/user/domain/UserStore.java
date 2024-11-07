@@ -22,6 +22,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
+
+/**
+ * USER - STORE 사이의 해소테이블 
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

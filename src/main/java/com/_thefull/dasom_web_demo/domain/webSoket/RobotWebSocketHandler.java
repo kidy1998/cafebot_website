@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+/**
+ * 웹소켓 관련 : 사용 안 할 예정
+ */
 @Component
 public class RobotWebSocketHandler extends TextWebSocketHandler {
 	

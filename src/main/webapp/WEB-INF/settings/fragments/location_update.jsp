@@ -275,6 +275,11 @@
                         </div>
                     </div>
                     <div class="form-buttons">
+
+
+                        <button type="button" class="btn btn-outline-primary" id="returnButton" onclick="loadRegistrationPage('kor')">
+                            이전
+                        </button>
                        
                         <button type="submit" class="btn btn-primary">
                             수정

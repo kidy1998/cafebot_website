@@ -56,11 +56,11 @@ public class LoginController {
         User user = loginService.login(requestDTO);
         
         if (user != null) {
-            // 비밀번호 비교
+            // 암호화된 비밀번호 비교
             if (passwordEncoder.matches(requestDTO.getPassword(), user.getPassword())) {
             	
-            	System.out.println(user.toString());
-            	System.out.println(user.getStores());
+//            	System.out.println(user.toString());
+//            	System.out.println(user.getStores());
             	
                 // 로그인 성공
                 Long storeId = user.getStores().get(0).getId();

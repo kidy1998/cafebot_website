@@ -6,6 +6,9 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * chatgpt 홍보멘트발화를 위한 dto
+ */
 @Data
 public class ForMentOfMenuPromotionDTO {
     private String menu;

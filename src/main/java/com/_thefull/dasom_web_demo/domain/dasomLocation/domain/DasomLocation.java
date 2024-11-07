@@ -13,6 +13,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+/**
+ * DASOM_LOCATION 연결된 엔티티
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

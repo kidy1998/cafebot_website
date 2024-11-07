@@ -12149,9 +12149,9 @@ textarea.is-invalid.tt-hint, .select2-container--default .select2-selection--sin
     transition: none;
   }
 }
-.nav-link:hover, .nav-link:focus {
+/* .nav-link:hover, .nav-link:focus {
   color: var(--bs-nav-link-hover-color);
-}
+} */
 .nav-link:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -12178,7 +12178,7 @@ textarea.is-invalid.tt-hint, .select2-container--default .select2-selection--sin
   border-top-left-radius: var(--bs-nav-tabs-border-radius);
   border-top-right-radius: var(--bs-nav-tabs-border-radius);
 }
-.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+.nav-tabs, .nav-tabs {
   isolation: isolate;
   border-color: var(--bs-nav-tabs-link-hover-border-color);
 }
@@ -12219,7 +12219,7 @@ textarea.is-invalid.tt-hint, .select2-container--default .select2-selection--sin
   padding-left: 0;
   border-bottom: var(--bs-nav-underline-border-width) solid transparent;
 }
-.nav-underline .nav-link:hover, .nav-underline .nav-link:focus {
+.nav-underline , .nav-underline  {
   border-bottom-color: currentcolor;
 }
 .nav-underline .nav-link.active,
@@ -28593,7 +28593,7 @@ dl li {
   height: auto;
   border-top: 0;
 }
-.sidebar .nav.sub-menu .nav-item .nav-link:hover {
+.sidebar .nav.sub-menu .nav-item {
   color: #000;
 }
 .sidebar .nav.sub-menu .nav-item .nav-link.active {
@@ -28679,7 +28679,7 @@ dl li {
   background: transparent;
   font-weight: 900;
 }
-.sidebar-dark .sidebar .nav.sub-menu .nav-item .nav-link:hover {
+.sidebar-dark .sidebar .nav.sub-menu .nav-item {
   color: #9a94a7;
 }
 .sidebar-dark .sidebar .nav.sub-menu .nav-item:hover {
@@ -30097,10 +30097,10 @@ dl li {
   .sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title:after {
     display: none;
   }
-  .sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link:hover .menu-title {
+  .sidebar-icon-only .sidebar .nav .nav-item.hover-open .menu-title {
     background: #fff;
   }
-  .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link:hover .menu-title {
+  .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .menu-title {
     background: #fff;
   }
   .sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
@@ -30283,3 +30283,16 @@ dl li {
   outline: 1px solid slategrey;
 }
 /*# sourceMappingURL=maps/style.css.map */
+
+#login:hover {
+  color: var(--bs-nav-link-hover-color);
+}
+
+#signIn:hover {
+  color: var(--bs-nav-link-hover-color);
+}
+
+
+#logout:hover {
+  color: var(--bs-nav-link-hover-color);
+}

@@ -54,6 +54,19 @@ public class CreateScenarioMentController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime localTime = LocalTime.parse(time, formatter);
         
+      
+        String ment = menuPromotionService.checkMent(localTime, storeID); //현재시간에 해당하는 멘트가 있는지
+        
+        if(ment != null && !ment.trim().isEmpty()) {//현재 시간에 해당하는 홍보 멘트가 있는 경우
+        	
+        	//System.out.println("홍보멘트 존재");
+        	// response를 JsonNode로 바로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonResponse = objectMapper.readTree("{\"id\":\"" + storeID + "\", \"time\":\"" + time + "\", \"promotionMent\":\"" + ment + "\"}");
+            
+            return jsonResponse;
+        }
+        
         // robot에 해당하는 DasomLocation 중 use가 true인 첫 번째 항목 조회
         DasomLocationResponseDTO dasomLocation = dasomLocationService.findFirstRobotLocation(robotID);
         Store store = dasomStoreService.findStore(storeID);
@@ -67,19 +80,6 @@ public class CreateScenarioMentController {
 //        System.out.println("Time: " + localTime);
 //        System.out.println("name: " + name);
         
-        
-        //DB에서 조회된 값 또는 ChatGPT 응답 값 (String 형태)
-        String ment = menuPromotionService.checkMent(localTime, storeID);
-        
-        if(ment != null && !ment.trim().isEmpty()) {
-        	
-        	//System.out.println("홍보멘트 존재");
-        	// response를 JsonNode로 바로 변환
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonResponse = objectMapper.readTree("{\"id\":\"" + storeID + "\", \"time\":\"" + time + "\", \"promotionMent\":\"" + ment + "\"}");
-            
-            return jsonResponse;
-        }
         
         JsonNode response = chatGPTController.createScenarioMent(dasomLocation, name, localTime, people, lang);
         

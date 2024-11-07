@@ -26,6 +26,9 @@
     <!-- End plugin css for this page -->
     <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 
+    <!-- 알림창 관련 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/beverageDiscountpage.css">
@@ -73,15 +76,27 @@
     <% String message = (String) request.getAttribute("message"); %>
     <% if ("register".equals(message)) { %>
         <script>
-            alert("메뉴가 등록되었습니다.");
+            Swal.fire({
+                text: "메뉴가 등록되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+             });
         </script>
     <% } else if ("update".equals(message)) { %>
         <script>
-            alert("메뉴가 수정되었습니다.");
+            Swal.fire({
+                text: "메뉴가 수정되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+            });
         </script>
     <% } else if ("delete".equals(message)) { %>
         <script>
-            alert("메뉴가 삭제되었습니다.");
+            Swal.fire({
+                text: "메뉴가 삭제되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+            });
         </script>
     <% } else { %>
 

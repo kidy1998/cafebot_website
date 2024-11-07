@@ -15,7 +15,7 @@
     <div class="card-body">
         <h4 class="card-title">Register Promotion</h4>
 
-        <form action="/api/promotion-discount/register?lang=eng" method="post" id="promotionForm">
+        <form action="/api/promotion-discount/register?lang=eng" method="post" id="promotionFormEng">
             <div class="table-responsive first-table">
                 <table class="table">
                     <thead>
@@ -155,7 +155,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Add Discount Condition</th>
+                        <th>Add Discount Condition(Optional)</th>
                         <th>Product Description</th>
                     </tr>
                     </thead>

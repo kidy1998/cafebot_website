@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
             if (parentDropdown.querySelector('span').textContent !== "선택"){
+
+                console.log("선택");
+
                 if (selectedText=="음료"){
                     document.getElementById('categoryInput').value="BEVERAGE";
                 }
@@ -118,16 +121,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 else if(selectedText=="5분 간격"){
                    document.getElementById('intervalInput').value=5;
                 }
-                else if(selectedText=="10분 간격"){
+                else if(selectedText=="10분 간격" || selectedText=="10-min Interval"){
+                    console.log("선택");
                    document.getElementById('intervalInput').value=10;
                 }
                 else if(selectedText=="15분 간격"){
                    document.getElementById('intervalInput').value=15;
                 }
-                else if(selectedText=="20분 간격"){
+                else if(selectedText=="20분 간격" || selectedText=="20-min Interval"){
+                    console.log("선택");
                    document.getElementById('intervalInput').value=20;
                 }
-                else if(selectedText=="30분 간격"){
+                else if(selectedText=="30분 간격" || selectedText=="30-min Interval"){
+                    console.log("선택");
                    document.getElementById('intervalInput').value=30;
                 }
 
@@ -197,7 +203,11 @@ function onclickConfirmDiscountPriceBtn() {
         // 할인된 가격을 히든 필드에 설정
         document.getElementById('discPriceInput').value = discountedPrice;
     } else {
-        alert("유효한 할인 금액을 입력하세요.");
+        Swal.fire({
+            text: "유효한 할인 금액을 입력하세요!",
+            position: 'top', // 원하는 위치로 설정
+            confirmButtonText: '확인'
+        });
     }
 }
 
@@ -275,7 +285,11 @@ function openMenuDetail(menuId){
 
         },
         error: function () {
-            alert('검색 중 오류가 발생했습니다.');
+            Swal.fire({
+                text: "검색중 오류가 발생했습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+            });
         }
     });
 
@@ -467,7 +481,11 @@ function openMenuModal(lang){
 
                         },
                         error: function () {
-                            alert('검색 중 오류가 발생했습니다.');
+                            Swal.fire({
+                                text: "검색중 오류가 발생했습니다",
+                                position: 'top', // 원하는 위치로 설정
+                                confirmButtonText: '확인'
+                            });
                         }
                     });
                 });
@@ -625,46 +643,45 @@ function openMenuModal(lang){
 
 }
 
-function changeStatus(menuPromoId, selectedText){
-    var xhr = new XMLHttpRequest();
+// function changeStatus(menuPromoId, selectedText){
+//     var xhr = new XMLHttpRequest();
 
-    xhr.open('PATCH','/api/promotion-discount/changestatus?id='+menuPromoId+'&status='+selectedText,true);
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
-            console.error("제품할인 상태 변경에 성공하였습니다.");
-        }else{
-            console.error("제품할인 상태 변경에 실패하였습니다");
-        }
-    };
-    xhr.onerror = function(){
-        console.error("[Menu Promotion Change Status - PATCH] Connection Error");
-    }
+//     xhr.open('PATCH','/api/promotion-discount/changestatus?id='+menuPromoId+'&status='+selectedText,true);
+//     xhr.onload=function(){
+//         if(xhr.status >= 200 && xhr.status<400){
+//             console.error("제품할인 상태 변경에 성공하였습니다.");
+//         }else{
+//             console.error("제품할인 상태 변경에 실패하였습니다");
+//         }
+//     };
+//     xhr.onerror = function(){
+//         console.error("[Menu Promotion Change Status - PATCH] Connection Error");
+//     }
 
-    xhr.send();
-}
+//     xhr.send();
+// }
 
 /* 상태변경 드롭다운 클릭 시 상태 변경하는 api 요청 보내는 함수 */
-function changeStatus(menuPromoId, status){
+function changeStatus(menuPromoId, status) {
     var xhr = new XMLHttpRequest();
-
-    var url = '/api/promotion-discount/status?id='+menuPromoId+'&status='+status;
-    xhr.open('PATCH',url,true);
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
-            console.error("제품할인 상태 변경에 성공하였습니다.");
-        }else{
+    var url = '/api/promotion-discount/status?id=' + menuPromoId + '&status=' + status;
+    xhr.open('PATCH', url, true);
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            console.log("제품할인 상태 변경에 성공하였습니다.");
+            // 상태 변경 성공 후 새로고침
+            reload();
+        } else {
             console.error("제품할인 상태 변경에 실패하였습니다");
         }
     };
-    xhr.onerror = function(){
+    xhr.onerror = function() {
         console.error("[Menu Promotion Change Status- PATCH] Connection Error");
-    }
+    };
 
     xhr.send();
-
-    reload();
-
 }
+
 
 
 function openAdditionalContent(boolAddCond, boolAddDesc, addDiscCond, addMenuDesc, ment){
@@ -779,146 +796,160 @@ function toggleInput(radioName, inputName) {
 
 }
 
-function loadUpdateContent(menuPromoId, lang){
-    var xhr = new XMLHttpRequest();
-    // 어떤 요청을 보내는지 객체 초기화
-    xhr.open('GET','/api/promotion-discount/updatepage?id='+menuPromoId +'&lang='+lang ,true);
+function loadUpdateContent(menuPromoId, lang) {
+    const url = `/api/promotion-discount/updatepage?id=${menuPromoId}&lang=${lang}`;
+    const xhr = new XMLHttpRequest();
 
-    // 요청 성공할 경우 onload 설정
-    xhr.onload=function(){
-        if(xhr.status >= 200 && xhr.status<400){
+    console.log("페이지 로드 요청 전송");
+
+    xhr.open('GET', url, true);
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 400) {
+            // 로드된 HTML을 특정 요소에 삽입
             document.getElementById('content2').innerHTML = xhr.responseText;
 
-            // 드롭다운 메뉴를 클릭할 때 show 클래스를 토글하는 함수
-            function toggleDropdown(event) {
-
-                const dropdownToggle = event.target.closest('.dropdown-toggle');
-                if (!dropdownToggle) return;
-
-                // dropdownToggle과 같은 부모 요소를 공유하는 dropdown-menu를 찾기
-                const dropdownMenu = dropdownToggle.nextElementSibling;
-                console.log(dropdownMenu);
-
-                // dropdownMenu가 존재하고, classList를 사용할 수 있는지 확인
-                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-
-                    // dropdownMenu.classList.add('show');
-
-                } else {
-                    console.error('Dropdown menu not found or does not have the correct class.');
-                }
-
-            }
-
-            // 모든 .dropdown-toggle 요소에 클릭 이벤트 리스너 추가
-            document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
-                toggle.addEventListener('click', toggleDropdown);
-            });
-
-            // 드롭다운 외부 클릭 시 열려있는 모든 드롭다운 닫기
-        //    document.addEventListener('click', function (event) {
-        //        if (!event.target.closest('.dropdown')) {
-        //            document.querySelectorAll('.dropdown-menu.show').forEach(function (menu) {
-        //                menu.classList.remove('show');
-        //            });
-        //        }
-        //    });
-
-            // 드롭다운 항목 클릭 시 선택된 텍스트로 업데이트하는 코드
-            document.querySelectorAll('.dropdown-item').forEach(function(item) {
-
-                item.addEventListener('click', function() {
-                    var selectedText = this.getAttribute('data-value');
-                    var parentDropdown = this.closest('.dropdown-content').previousElementSibling;
-                    parentDropdown.querySelector('span').textContent = selectedText;
-
-
-
-                    if (parentDropdown.querySelector('span').textContent !== "선택"){
-                        if (selectedText=="음료"){
-                            document.getElementById('categoryInput').value="BEVERAGE";
-                        }
-                        else if(selectedText=="베이커리"){
-                           document.getElementById('categoryInput').value="BAKERY";
-                        }
-                        else if(selectedText=="케이크"){
-                           document.getElementById('categoryInput').value="CAKE";
-                        }
-                        else if(selectedText=="세트상품"){
-                           document.getElementById('categoryInput').value="SET";
-                        }
-                        else if(selectedText=="5분 간격"){
-                           document.getElementById('intervalInput').value=5;
-                        }
-                        else if(selectedText=="10분 간격"){
-                           document.getElementById('intervalInput').value=10;
-                        }
-                        else if(selectedText=="15분 간격"){
-                           document.getElementById('intervalInput').value=15;
-                        }
-                        else if(selectedText=="20분 간격"){
-                           document.getElementById('intervalInput').value=20;
-                        }
-                        else if(selectedText=="30분 간격"){
-                           document.getElementById('intervalInput').value=30;
-                        }
-
-                    }
-                });
-            });
-
-            testFunc();
-
-            document.getElementById('startDate').addEventListener('change', function() {
-                var startDateVal = this.value;
-                var endDateInput = document.getElementById('endDate');
-
-                console.log(startDateVal);
-
-                endDateInput.min = startDateVal;
-
-                if (endDateInput.value < startDateVal) {
-                    endDateInput.value = startDateVal;
-                }
-            });
-
-          
-
-            // 검색 input 박스에 입력된 값으로 리스트를 필터링합니다.
-            function filterProductList(query) {
-                // 모든 리스트 항목을 선택합니다.
-                var items = document.querySelectorAll('#itemList li');
-                // 각 항목을 반복하면서 필터링합니다.
-                for (var i = 0; i < items.length; i++) {
-                    var item = items[i];
-                    var productNameId = 'productName' + item.id.replace('item', '');
-                    var productName = document.getElementById(productNameId).innerText;
-                    // 검색어가 없으면 모든 항목을 표시합니다.
-                    if (query === '') {
-                        item.style.display = '';
-                    } else if (productName.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
-                        // 제품명이 입력된 값과 일치하면 항목을 표시합니다.
-                        item.style.display = '';
-                    } else {
-                        // 일치하지 않으면 항목을 숨깁니다.
-                        item.style.display = 'none';
-                    }
-                }
-            }
-
-
-
-        }else{
+            // HTML 로드 후 공통 기능 초기화
+            initializePageFunctions();
+        } else {
             console.error("제품할인 수정 화면 페이지 로드에 실패하였습니다");
         }
     };
 
-    // 요청 에러가 날 경우 onerror 설정
     xhr.onerror = function() {
         console.error("Connection error");
     };
+
     xhr.send();
 }
+
+
+
+function loadRegisterpage(lang) {
+    const url = `/api/promotion-discount/registerpage?lang=${lang}`;
+
+    fetch(url, {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.text(); // JSP 페이지의 HTML을 텍스트로 받아옴
+    })
+    .then(html => {
+        // 로드한 HTML을 특정 요소에 삽입 (예: id가 'content2'인 요소)
+        document.getElementById('content2').innerHTML = html;
+
+        // 로드 후 추가 작업 실행
+        initializePageFunctions();
+    })
+    .catch(error => {
+        console.error("페이지 로드 중 오류 발생:", error);
+    });
+}
+
+// 페이지 로드 후 초기화하는 함수(contentUpdate, content2에 사용)
+function initializePageFunctions() {
+    // 드롭다운 메뉴 클릭 시 show 클래스를 토글
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(event) {
+            const dropdownMenu = this.nextElementSibling;
+            if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                dropdownMenu.classList.toggle('show');
+            }
+        });
+    });
+
+    // 드롭다운 외부 클릭 시 열려있는 드롭다운 닫기
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+    });
+
+    // 드롭다운 항목 클릭 시 선택된 텍스트 업데이트 및 값 설정
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const selectedText = this.getAttribute('data-value');
+            const parentDropdown = this.closest('.dropdown-content').previousElementSibling;
+            parentDropdown.querySelector('span').textContent = selectedText;
+
+            if (selectedText) {
+                updateInputValues(selectedText);
+            }
+        });
+    });
+
+    // 날짜 선택 시 범위 제한 설정
+    document.getElementById('startDate').addEventListener('change', function() {
+        const startDateVal = this.value;
+        const endDateInput = document.getElementById('endDate');
+        endDateInput.min = startDateVal;
+        if (endDateInput.value < startDateVal) {
+            endDateInput.value = startDateVal;
+        }
+    });
+
+    // 검색 input 박스에 입력된 값으로 리스트를 필터링
+    const searchInput = document.getElementById('searchInput');
+    if(searchInput){
+        searchInput.addEventListener('input', function() {
+            filterProductList(this.value);
+        });
+    }
+    
+}
+
+//입력한 값으로 업데이트
+function updateInputValues(selectedText) {
+
+    if (selectedText=="음료"){
+        document.getElementById('categoryInput').value="BEVERAGE";
+    }
+    else if(selectedText=="베이커리"){
+       document.getElementById('categoryInput').value="BAKERY";
+    }
+    else if(selectedText=="케이크"){
+       document.getElementById('categoryInput').value="CAKE";
+    }
+    else if(selectedText=="세트상품"){
+       document.getElementById('categoryInput').value="SET";
+    }
+    else if(selectedText=="5분 간격"){
+    document.getElementById('intervalInput').value=5;
+    }
+    else if(selectedText=="10분 간격" || selectedText=="10-min Interval"){
+    document.getElementById('intervalInput').value=10;
+    }
+    else if(selectedText=="15분 간격"){
+    document.getElementById('intervalInput').value=15;
+    }
+    else if(selectedText=="20분 간격" || selectedText=="20-min Interval"){
+    document.getElementById('intervalInput').value=20;
+    }
+    else if(selectedText=="30분 간격" || selectedText=="30-min Interval"){
+    document.getElementById('intervalInput').value=30;
+    }
+}
+
+
+function filterProductList(query) {
+    const items = document.querySelectorAll('#itemList li');
+    items.forEach(item => {
+        const productNameId = 'productName' + item.id.replace('item', '');
+        const productName = document.getElementById(productNameId).innerText;
+
+        item.style.display = productName.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+    });
+}
+
+
+
+
+
 
 
 /* 제품할인 리스트를 전부 보여주는 모달창 띄우는 함수 */
@@ -957,7 +988,23 @@ function createMent(lang){
             document.getElementById("ment-textarea").value=response.ment;
         },
         error: function () {
-            alert('검색 중 오류가 발생했습니다.');
+
+            if(lang == 'en'){
+                Swal.fire({
+                    title: "There is an error while searching!",
+                    text: "complete all entries except discount conditions!",
+                    position: 'top', // 원하는 위치로 설정
+                    confirmButtonText: 'confirm'
+                });
+
+            }else{
+                Swal.fire({
+                    title: "검색 중 오류가 발생했습니다!",
+                    text: "할인 조건을 제외한 모든 입력을 완료해주세요!",
+                    position: 'top', // 원하는 위치로 설정
+                    confirmButtonText: '확인'
+                });
+            }
         }
     });
 
@@ -993,7 +1040,7 @@ function mentTest() {
 /*  제품 등록 시 유효성을 검사하는 함수   */
 
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('promotionForm');
+    const form = document.getElementById('promotionFormKor');
 
     form.addEventListener('submit', function (event) {
         // 필수 입력 요소들 (name으로 접근)
@@ -1009,7 +1056,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 검증 로직
         if (!category || !menu || !discPrice || !startTime || !endTime || !mentStartTime || !mentEndTime || !interval || !ment || !discVal) {
-            alert("제출 양식을 지켜주세요! 모든 필수 항목을 입력해야 합니다.");
+            Swal.fire({
+                title: "제출 양식을 지켜주세요!",
+                text: "할인 조건을 제외한 모든 정보를 입력하세요!",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+            });
             event.preventDefault(); // 제출을 막음
             return;
         }
@@ -1018,4 +1070,34 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('promotionFormEng');
+
+    form.addEventListener('submit', function (event) {
+        // 필수 입력 요소들 (name으로 접근)
+        const category = document.querySelector('input[name="category"]').value;
+        const menu = document.querySelector('input[name="menu"]').value;
+        const discPrice = document.querySelector('input[name="discPrice"]').value;  //할인하려는 가격
+        const startTime = document.querySelector('input[name="startTime"]').value;
+        const endTime = document.querySelector('input[name="endTime"]').value;
+        const mentStartTime = document.querySelector('input[name="mentStartTime"]').value;
+        const mentEndTime = document.querySelector('input[name="mentEndTime"]').value;
+        const interval = document.querySelector('input[name="interval"]').value;
+        const discVal = document.querySelector('input[name="discVal"]').value;
+
+        // 검증 로직
+        if (!category || !menu || !discPrice || !startTime || !endTime || !mentStartTime || !mentEndTime || !interval || !ment || !discVal) {
+            Swal.fire({
+                title: "Please follow the form!",
+                text: "Please enter all information except discount conditions!",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'Confirm'
+            });
+            event.preventDefault(); // 제출을 막음
+            return;
+        }
+
+        // 추가적인 검증이 필요한 경우 여기에 추가 가능
+    });
+});
 

@@ -26,9 +26,14 @@ import java.util.Date;
 
 
 
+/**
+ * Menu Promotion 테이블의 엔티티 (Store, Menu와 연결)
+ */
 @Entity
 @Table(name = "MENU_PROMOTIONS")
 @Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder	
@@ -131,12 +136,12 @@ public class MenuPromotion extends BaseEntity {
     @Column(name = "MENT", columnDefinition = "TEXT")
     private String ment;
 
-    // 매장
+    // 매장과 연결(필요시 promotion.getStore 로 연결된 매장 정보 얻음)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STORE_ID")
     private Store store;
 
-    // 메뉴
+    // 메뉴와 연결(필요시 promotion.getMenu 로 연결된 메뉴 정보 얻음)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MENU_ID")
     private Menu menu;

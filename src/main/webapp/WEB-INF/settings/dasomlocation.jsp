@@ -25,6 +25,10 @@
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- 알림창 관련 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -109,84 +113,87 @@
                             <ul class="location-info dropdown-options hidden" id="settings${robot_location.id}">
                                 <h5><strong>${robot_location.location}</strong></h5>
                                 <br>
-
-                             
                                 
                                 <!-- 활성화 선택을 위한 radio 버튼 -->
-                                <label style="display: inline-block; margin-right: 10px;">
+                                <label style="display: inline-block;">
                                     위치 활성화
                                 </label>
-
+                        
                                 <input type="radio" name="locationToggle" id="toggleOn${status.index}"
                                         <c:if test="${robot_location.use eq 'true'}">checked</c:if>
                                         onclick="confirmToggleClick('${status.index}', '${robot_location.id}', 'kor')">
                               
                                 <br><br>
-
-                                <label style="display: inline-block; margin-right: 10px;">왼쪽</label>
+                                
+                                
+                                <label style="display: inline-block; margin:10px 5px 10px 0;">① 왼쪽</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftSide}">
-                                        <ul style="display: inline-block; padding-left: 0; list-style: none;">
+                                        <ul style="display: inline-block; padding-left: 0; list-style: none; min-height: 30px; max-height: 15vh;">
                                             <c:forEach items="${robot_location.leftSide}" var="lse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${lse}</span></li>
+                                                <li style="display: inline-block; font-size: 0.7rem; margin: 0;"><span>${lse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
+                                
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">왼쪽 앞</label>
+                                <label style="display: inline-block; margin:10px 5px 10px 0;">② 왼쪽 앞</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.leftFront}">
-                                        <ul style="display: inline-block; padding-left: 0; list-style: none;">
+                                        <ul style="display: inline-block; padding-left: 0; list-style: none; min-height: 30px; max-height: 15vh;">
                                             <c:forEach items="${robot_location.leftFront}" var="lfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${lfe}</span></li>
+                                                <li style="display: inline-block; font-size: 0.7rem; margin: 0;"><span>${lfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
+                                
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">앞</label>
+                                <label style="display: inline-block; margin:10px 5px 10px 0;">③ 앞쪽</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.front}">
-                                        <ul style="display: inline-block; padding-left: 0; list-style: none;">
+                                        <ul style="display: inline-block; padding-left: 0; list-style: none; min-height: 30px; max-height: 15vh;">
                                             <c:forEach items="${robot_location.front}" var="fe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${fe}</span></li>
+                                                <li style="display: inline-block; font-size: 0.7rem; margin: 0;"><span>${fe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
+                                
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">오른쪽</label>
+                                <label style="display: inline-block; margin:10px 5px 10px 0;">④ 오른쪽</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightSide}">
-                                        <ul style="display: inline-block; padding-left: 0; list-style: none;">
+                                        <ul style="display: inline-block; list-style: none; padding-left: 0; min-height: 30px; max-height: 15vh;">
                                             <c:forEach items="${robot_location.rightSide}" var="rse" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${rse}</span></li>
+                                                <li style="display: inline-block; font-size: 0.7rem; margin: 0;"><span>${rse}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
+                                
                                 <br>
-                                <label style="display: inline-block; margin-right: 10px;">오른쪽 앞</label>
+                                <label style="display: inline-block; margin:10px 5px 10px 0;">⑤ 오른쪽 앞</label>
                                 <c:choose>
                                     <c:when test="${not empty robot_location.rightFront}">
-                                        <ul style="display: inline-block; padding-left: 0; list-style: none;">
+                                        <ul style="display: inline-block; list-style: none; padding-left: 0; min-height: 30px; max-height: 15vh;">
                                             <c:forEach items="${robot_location.rightFront}" var="rfe" varStatus="status">
-                                                <li style="display: inline-block; margin-right: 10px;"><span>${rfe}</span></li>
+                                                <li style="display: inline-block; font-size: 0.7rem; margin: 0;"><span>${rfe}</span></li>
                                             </c:forEach>
                                         </ul>
                                     </c:when>
                                 </c:choose>
+                                
                                 <br>
-                                <button class="btn-primary edit-location    " onclick="loadUpdateLocationContent(${robot_location.id},'kor')">
+                                <button class="btn-primary edit-location" onclick="loadUpdateLocationContent(${robot_location.id},'kor')">
                                     <i class="material-symbols-outlined">pin_drop</i>
                                     위치수정
                                 </button>
                                 <br>
-                              
-                                
                             </ul>
                         </c:forEach>
+                        
                     <span><button id="nextButton" class="hidden" onclick="showNextItems()" style="border: none; background-color:white;"><image style="width: 40px; height: 100%" src="${pageContext.request.contextPath}/assets/images/free-icon-arrow-right-6423875.svg"/></button></span>
                 </div>
             </div>
@@ -228,24 +235,42 @@
     <% String message = (String) request.getAttribute("message"); %>
     <% if ("register".equals(message)) { %>
         <script>
-            alert("메뉴가 등록되었습니다.");
+            Swal.fire({
+                text: "위치가 등록되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+             });
         </script>
     <% } else if ("update".equals(message)) { %>
         <script>
-            alert("메뉴가 수정되었습니다.");
+            Swal.fire({
+                text: "위치가 수정되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+             });
         </script>
     <% } else if ("delete".equals(message)) { %>
         <script>
-            alert("메뉴가 삭제되었습니다.");
+            Swal.fire({
+                text: "위치가 삭제되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+             });
         </script>
     <% }  else if ("location".equals(message)) { %>
         <script>
-            alert("위치가 변경되었습니다.");
+           Swal.fire({
+                text: "위치가 변경되었습니다.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: '확인'
+             });
         </script>
     <% } else { %>
 
     <% } %>
 
+
+   
 
 
 <!-- content-wrapper ends -->

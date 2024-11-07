@@ -69,12 +69,12 @@
                     <c:choose>
 
                         <c:when test="${sessionScope.userId == null}"> 
-                            <a class="nav-link" href="/page/user/login">로그인</a>
-                            <a class="nav-link" href="/page/user/register">회원가입</a>
+                            <a class="nav-link" id="login" href="/page/user/login">로그인</a>
+                            <a class="nav-link" id="signIn" href="/page/user/register">회원가입</a>
                         </c:when>
 
                         <c:when test="${sessionScope.userId != null}">
-                            <a class="nav-link" href="/api/user/logout">로그아웃</a>
+                            <a class="nav-link" id="logout" href="/api/user/logout">로그아웃</a>
                         </c:when>
                     </c:choose>
 

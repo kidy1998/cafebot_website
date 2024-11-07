@@ -20,7 +20,7 @@
                         <th>행사기간</th>
                         <th>행사시간</th>
                         <th>멘트발화시간</th>
-                        <th>빈도수</th>
+                        <th>발화 간격</th>
                         <th>조건 및 멘트</th>
                         <th>편집</th>
                     </tr>
@@ -37,7 +37,7 @@
                                 <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                 <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                 <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
-                                <td>${promotion.freq}회</td>
+                                <td>${promotion.interval}분</td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">보기</button></td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `kor`)">편집</button></td>
                             </tr>

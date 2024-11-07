@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="card-body">
-        <h4 class="card-title">제품할인 수정</h4>
+        <h4 class="card-title">제품홍보 수정</h4>
 
         <form action="/api/promotion-discount/update?lang=kor" method="post">
             <div class="table-responsive first-table">
@@ -169,7 +169,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>할인 조건 추가</th>
+                            <th>할인 조건 추가(선택)</th>
                             <th>제품 소개</th>
                         </tr>
                     </thead>
@@ -256,17 +256,30 @@
                 </table>
             </div>
             <div class="form-buttons">
-                
-                <button type="submit" class="btn btn-primary">
-                    수정
-                </button>
 
-                <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
-                    <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=kor" 
-                        onclick="return confirm('이 프로모션을 정말 삭제하시겠습니까?');" style="text-decoration: none; ">
-                        삭제
-                    </a>
-                </button>
+            
+                <div style="align-items: center;">
+
+                
+                    <button type="button" class="btn btn-outline-primary" id="returnButton" onclick="loadRegistrationPage('kor')">
+                        이전
+                    </button>
+                
+                    
+                    
+                    <button type="submit" class="btn btn-primary">
+                        수정
+                    </button>
+
+                    <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
+                        <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=kor" 
+                            onclick="return confirm('이 프로모션을 정말 삭제하시겠습니까?');" style="text-decoration: none; ">
+                            삭제
+                        </a>
+                    </button>
+
+                </div>
+
 
             </div>
         </form>

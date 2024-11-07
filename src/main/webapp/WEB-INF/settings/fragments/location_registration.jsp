@@ -93,10 +93,10 @@
                                         <li class="nav-item dropdown" data-value="디저트">디저트</li>
                                         <li class="nav-item dropdown" data-value="샌드위치">샌드위치</li>
                                         <li class="nav-item dropdown" data-value="샐러드">샐러드</li>
-                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
+                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
                                         <li class="nav-item dropdown" data-value="유제품">유제품</li>
                                         <li class="nav-item dropdown" data-value="병음료">병음료</li>
-                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
+                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
                                         <li class="nav-item dropdown" data-value="창가자리">창가자리</li>
                                         <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">직접입력</li>
                                     </ul>
@@ -119,10 +119,10 @@
                                         <li class="nav-item dropdown" data-value="디저트">디저트</li>
                                         <li class="nav-item dropdown" data-value="샌드위치">샌드위치</li>
                                         <li class="nav-item dropdown" data-value="샐러드">샐러드</li>
-                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
+                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
                                         <li class="nav-item dropdown" data-value="유제품">유제품</li>
                                         <li class="nav-item dropdown" data-value="병음료">병음료</li>
-                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
+                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
                                         <li class="nav-item dropdown" data-value="창가자리">창가자리</li>
                                         <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">직접입력</li>
                                     </ul>
@@ -145,10 +145,10 @@
                                         <li class="nav-item dropdown" data-value="디저트">디저트</li>
                                         <li class="nav-item dropdown" data-value="샌드위치">샌드위치</li>
                                         <li class="nav-item dropdown" data-value="샐러드">샐러드</li>
-                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
+                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
                                         <li class="nav-item dropdown" data-value="유제품">유제품</li>
                                         <li class="nav-item dropdown" data-value="병음료">병음료</li>
-                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
+                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
                                         <li class="nav-item dropdown" data-value="창가자리">창가자리</li>
                                         <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">직접입력</li>
                                     </ul>
@@ -171,10 +171,10 @@
                                         <li class="nav-item dropdown" data-value="디저트">디저트</li>
                                         <li class="nav-item dropdown" data-value="샌드위치">샌드위치</li>
                                         <li class="nav-item dropdown" data-value="샐러드">샐러드</li>
-                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
+                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
                                         <li class="nav-item dropdown" data-value="유제품">유제품</li>
                                         <li class="nav-item dropdown" data-value="병음료">병음료</li>
-                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
+                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
                                         <li class="nav-item dropdown" data-value="창가자리">창가자리</li>
                                         <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">직접입력</li>
                                     </ul>
@@ -198,10 +198,10 @@
                                         <li class="nav-item dropdown" data-value="디저트">디저트</li>
                                         <li class="nav-item dropdown" data-value="샌드위치">샌드위치</li>
                                         <li class="nav-item dropdown" data-value="샐러드">샐러드</li>
-                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
+                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
                                         <li class="nav-item dropdown" data-value="유제품">유제품</li>
                                         <li class="nav-item dropdown" data-value="병음료">병음료</li>
-                                        <li class="nav-item dropdown" data-value="케이크">케이크</li>
+                                        <li class="nav-item dropdown" data-value="계산대">계산대</li>
                                         <li class="nav-item dropdown" data-value="창가자리">창가자리</li>
                                         <li class="nav-item dropdown" data-value="직접입력" onclick="openAdditionalContent()">직접입력</li>
                                     </ul>

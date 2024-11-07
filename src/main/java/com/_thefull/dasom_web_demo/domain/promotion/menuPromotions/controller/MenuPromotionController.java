@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
-/**
+/** 홍보 메뉴와 관련된 CRUD 처리
  * 
  */
 @Controller
@@ -68,7 +68,7 @@ public class MenuPromotionController {
         HttpSession session = request.getSession(false);
        
         Long storeId= (Long)session.getAttribute("storeId");
-       // System.out.println("storeID : " + storeId);
+        //System.out.println("storeID : " + storeId);
 
         List<MenuPromotionResponseDTO> allPromotionList = menuPromotionService.findAllPromotionList(storeId);
         model.addAttribute("all_promotion_list",allPromotionList);
@@ -82,7 +82,7 @@ public class MenuPromotionController {
         model.addAttribute("menu_list",menuList);
 
         List<MenuPromotionResponseDTO> completedPromotionList = menuPromotionService.findCompletedPromotionList(storeId);
-        model.addAttribute("completed_promotion_list",completedPromotionList);
+        model.addAttribute("completed_promotion_list",completedPromotionList); // 홍보기간 끝난 메뉴들 따로 조회
         
         if (message != null) {
             model.addAttribute("message", message);
@@ -163,6 +163,20 @@ public class MenuPromotionController {
         }
         
     }
+    
+    @GetMapping("/registerpage")
+    public String loadRegisterPage(@RequestParam(value = "lang", required = false, defaultValue = "kor") String lang) {
+    	
+    	if ("eng".equals(lang)) {
+            // 영어 페이지 반환
+        	return "promotion/fragments/content2_eng";
+        } else {
+            // 기본값으로 한국어 페이지 반환
+      
+        	return "promotion/fragments/content2";
+        }
+    	
+    }
 
     
     /**
@@ -227,13 +241,13 @@ public class MenuPromotionController {
 
     }
 
-
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class testDto{
-        private String testText;
-    }
+//
+//    @Data
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class testDto{
+//        private String testText;
+//    }
 
 //    @PostMapping("/test")
 //    public String testpage(@ModelAttribute testDto dto,

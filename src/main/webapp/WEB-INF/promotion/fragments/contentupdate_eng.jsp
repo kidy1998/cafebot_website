@@ -163,7 +163,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Add Discount Condition</th>
+                            <th>Add Discount Condition(Optional)</th>
                             <th>Product Description</th>
                         </tr>
                     </thead>
@@ -249,17 +249,27 @@
                 </table>
             </div>
             <div class="form-buttons">
-                
-                <button type="submit" class="btn btn-primary">
-                    Edit
-                </button>
 
-                <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
-                    <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=eng" 
-                        onclick="return confirm('Are you sure you want to delete this promotion?');" style="text-decoration: none;">
-                        Delete
-                    </a>
-                </button>
+                <div style="align-items: center;">
+
+
+                    <button type="button" class="btn btn-outline-primary" id="returnButton" onclick="loadRegisterpage('eng')">
+                        Previous
+                    </button>
+                
+                
+                    <button type="submit" class="btn btn-primary">
+                        Edit
+                    </button>
+
+                    <button type="button" id="menupromotion-delete-btn" class="btn btn-outline-primary">
+                        <a href="/api/promotion-discount/delete?id=${thepromo.menuPromoId}&lang=eng" 
+                            onclick="return confirm('Are you sure you want to delete this promotion?');" style="text-decoration: none;">
+                            Delete
+                        </a>
+                    </button>
+
+                </div>
 
             </div>
         </form>

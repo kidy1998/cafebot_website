@@ -53,7 +53,7 @@
                                 <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                 <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                 <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
-                                <td>${promotion.freq} times</td>
+                                <td>${promotion.interval} min</td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">View</button></td>
                                 <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `eng`)">Edit</button></td>
                             </tr>
@@ -66,7 +66,8 @@
             <div style="text-align: center;" >
                 <c:if test="${listSize > 3}">
                     <button class="rotated-arrow" id="all_list_btn" type="button">
-                        <image style="width: 20px; height: 100%" src="${pageContext.request.contextPath}/assets/images/pngwing.com.svg"/>
+                        <p style="width: 50px; height: 100%;">More</p>
+                        <!-- <image style="width: 20px; height: 100%" src="${pageContext.request.contextPath}/assets/images/pngwing.com.svg"/> -->
                     </button>
                 </c:if>
             </div>
@@ -121,7 +122,7 @@
                                     <td>${promotion.startDate} ~ ${promotion.endDate}</td>
                                     <td>${promotion.startTime} ~ ${promotion.endTime}</td>
                                     <td>${promotion.mentStartTime} ~ ${promotion.mentEndTime}</td>
-                                    <td>${promotion.freq} times</td>
+                                    <td>${promotion.interval} min</td>
                                     <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="openAdditionalContent(${promotion.boolAddCond},${promotion.boolAddDesc},'${promotion.addDiscCond}','${promotion.addMenuDesc}','${promotion.ment}')">View</button></td>
                                     <td><button type="button" class="btn btn-outline-primary btn-sm" onclick="loadUpdateContent(${promotion.menuPromoId}, `eng`)">Edit</button></td>
                                 </tr>

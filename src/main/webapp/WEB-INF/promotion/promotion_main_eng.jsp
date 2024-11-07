@@ -25,6 +25,7 @@
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -74,15 +75,27 @@
     <% String message = (String) request.getAttribute("message"); %>
     <% if ("register".equals(message)) { %>
         <script>
-            alert("Menu has been registered.");
+            Swal.fire({
+                text: "Menu has been registered.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+             });
         </script>
     <% } else if ("update".equals(message)) { %>
         <script>
-            alert("Menu has been updated.");
+            Swal.fire({
+                text: "Menu has been updated.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% } else if ("delete".equals(message)) { %>
         <script>
-            alert("Menu has been deleted.");
+           Swal.fire({
+                text: "Menu has been deleted.",
+                position: 'top', // 원하는 위치로 설정
+                confirmButtonText: 'confirm'
+            });
         </script>
     <% } else { %>
 
